@@ -15,6 +15,14 @@
 #define    EXCEPTION_LENGTH_UNSUPPORTED  (char)-1
 #define    EXCEPTION_BUG_IN_CHOSEN_VERSION  (char)-2
 
+#define LOG(format, ...){\
+    log = fopen("debug.txt", "a");\
+    if (!log) \
+     log = fopen("debug.txt", "w");\
+    fprintf(log, format,## __VA_ARGS__);\
+    fclose(log);\
+}
+
 
 typedef struct {
     int qtBitsMode;
@@ -28,10 +36,11 @@ typedef struct {
     char strBinMode4Bits[4], indicadorDecontagemDeCaracteres[10];
     char error;
     char *strbits;
-    int  numeroDePalavrasChave_cd6;
+    int tamanhoDaStrbits;
+    int numeroDePalavrasChave_cd6;
 } QRCODE;
 QRCODE qrcode = {0};
-
+FILE *log;
 void freeqr() {
     free(qrcode.strbits);
 }

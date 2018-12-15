@@ -64,15 +64,10 @@ void CODF_ETAPA1() {
 
     }
 
-    FILE *log;
-    log = fopen("debug.txt", "a");
-    if (!log) {
-        log = fopen("debug.txt", "w");
-    }
-    fprintf(log, "CODIFICACAO ETAPA1\nMensagem: %s\nmodo: %s %d\n\n", qrcode.mensagemAserCriptografada,
-            qrcode.MODE == MODO_NUMERICO ? "MODO_NUMERICO" : qrcode.MODE ==
-                                                             MODO_ALPHANUMERICO ? "MODO_ALPHANUMERICO" : "MODO_BYTE", qrcode.MODE);
-    fclose(log);
+
+    LOG("CODIFICACAO ETAPA1\nMensagem: %s\nmodo: %s %d\n\n", qrcode.mensagemAserCriptografada,
+        qrcode.MODE == MODO_NUMERICO ? "MODO_NUMERICO" : qrcode.MODE ==
+                                                         MODO_ALPHANUMERICO ? "MODO_ALPHANUMERICO" : "MODO_BYTE", qrcode.MODE)
 }
 
 void CODF_ETAPA2() {
@@ -247,22 +242,12 @@ void CODF_ETAPA2() {
         }
 
     } else {
-        FILE *log;
-        log = fopen("debug.txt", "a");
-        if (!log) {
-            log = fopen("debug.txt", "w");
-        }
-        fprintf(log, "CODIFICACAO ETAPA2\nmodo: %d\nversao: %d\n Modo erro: %c\n\n", qrcode.MODE, qrcode.versao, qrcode.MODE_correcaoDeErro);
-        fclose(log);
+        LOG("CODIFICACAO ETAPA2\nmodo: %d\nversao: %d\n Modo erro: %c\n\n", qrcode.MODE, qrcode.versao, qrcode.MODE_correcaoDeErro)
+
     }
     if (qrcode.error < 0) {
-        FILE *log;
-        log = fopen("debug.txt", "a");
-        if (!log) {
-            log = fopen("debug.txt", "w");
-        }
-        fprintf(log, "~ERROR  %d:CODIFICACAO ETAPA2\n ", qrcode.error);
-        fclose(log);
+
+        LOG("~ERROR  %d:CODIFICACAO ETAPA2\n ", qrcode.error)
     }
 
 }
@@ -278,13 +263,8 @@ void CODF_ETAPA3() {
     // 0100 para MODO_BYTE
 
     converterParaBinario(qrcode.strBinMode4Bits, qrcode.MODE, 4);
-    FILE *log;
-    log = fopen("debug.txt", "a");
-    if (!log) {
-        log = fopen("debug.txt", "w");
-    }
-    fprintf(log, "CODIFICACAO ETAPA3 \nindicador de modo: %s\n", qrcode.strBinMode4Bits);
-    fclose(log);
+    LOG("CODIFICACAO ETAPA3 \nindicador de modo: %s\n", qrcode.strBinMode4Bits)
+
 }
 
 void CODF_ETAPA4() {
@@ -321,21 +301,13 @@ void CODF_ETAPA4() {
 
 void CODF_ETAPA5() {
 // Encode Using the Selected Mode
-    FILE *log;
-    log = fopen("debug.txt", "a");
-    if (!log) {
-        log = fopen("debug.txt", "w");
-    }
-    if (qrcode.error < 0) {
-        fprintf(log, "~ERROR  %d:CODIFICACAO ETAPA5\n ", qrcode.error);
-        fclose(log);
-        return;
-    }
-    fprintf(log, "CODIFICACAO ETAPA5\n");
-    fclose(log);
+    LOG("~ERROR  %d:CODIFICACAO ETAPA5\n ", qrcode.error)
+    LOG("CODIFICACAO ETAPA5\n")
     switch (qrcode.MODE) {
         case MODO_NUMERICO:
             modoNumerico();
+            break;
+        default:
             break;
     }
 
@@ -345,7 +317,6 @@ void CODF_ETAPA6() {
     if (qrcode.error < 0)
         return;
     //determinar numero de bits necessarios
-
     switch (qrcode.versao) {
         case 1: ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_CORRECAO_AUTOMATICO, 19, 16, 13, 9);
             break;
@@ -356,6 +327,14 @@ void CODF_ETAPA6() {
         default:
             qrcode.error = EXCEPTION_BUG_IN_CHOSEN_VERSION;
     }
+//deixar multiplo de 8
+    while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) % 8 != 0) {
+        qrcode.strbits = realloc(qrcode.strbits, ++qrcode.tamanhoDaStrbits);
+        qrcode.strbits[qrcode.tamanhoDaStrbits - 1] = 0;
+
+    }
+
+
 }
 
 void modoNumerico() {
