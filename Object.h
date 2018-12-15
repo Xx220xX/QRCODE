@@ -27,20 +27,22 @@ typedef struct {
     char strBinMode4Bits[4], indicadorDecontagemDeCaracteres[10];
     char error;
     char *strbits;
+    int  numeroDePalavrasChave_cd6;
 } QRCODE;
 QRCODE qrcode = {0};
 
-void freeqr(){
-	free(qrcode.strbits);
+void freeqr() {
+    free(qrcode.strbits);
 }
 
-void integerValueOf(char *str_init , char  *str_fim,char *str_max,int *n){
-    if(str_init <str_max&& str_init<str_fim){
-        if(*str_init>='0'&&*str_init<='9')
-            *n=*n*10+((*str_init-'0'));
-        integerValueOf((str_init+1),str_fim,str_max, n);
+void integerValueOf(char *str_init, char *str_fim, char *str_max, int *n) {
+    if (str_init < str_max && str_init < str_fim) {
+        if (*str_init >= '0' && *str_init <= '9')
+            *n = *n * 10 + ((*str_init - '0'));
+        integerValueOf((str_init + 1), str_fim, str_max, n);
     }
 }
+
 void converterParaBinario(char *buff, int decimal, int bits) {
     buff[bits] = '\0';
     bits--;
@@ -57,4 +59,5 @@ int contaLetras(char *str) {
     }
     return 0;
 }
+
 #endif
