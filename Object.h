@@ -16,11 +16,11 @@
 #define    EXCEPTION_BUG_IN_CHOSEN_VERSION  (char)-2
 
 #define LOG(format, ...){\
-    log = fopen("debug.txt", "a");\
-    if (!log) \
-     log = fopen("debug.txt", "w");\
-    fprintf(log, format,## __VA_ARGS__);\
-    fclose(log);\
+    logFile = fopen("debug.txt", "a");\
+    if (!logFile) \
+     logFile = fopen("debug.txt", "w");\
+    fprintf(logFile, format,## __VA_ARGS__);\
+    fclose(logFile);\
 }
 
 
@@ -40,7 +40,7 @@ typedef struct {
     int numeroDePalavrasChave_cd6;
 } QRCODE;
 QRCODE qrcode = {0};
-FILE *log;
+FILE *logFile;
 void freeqr() {
     free(qrcode.strbits);
 }

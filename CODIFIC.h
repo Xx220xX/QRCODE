@@ -58,7 +58,7 @@ void CODF_ETAPA1() {
             printf("else if \n");
         } else {
             qrcode.MODE = MODO_BYTE;
-            printf(" else  \n");
+            printf(" else  \n"); 
             break;
         }
 
@@ -316,6 +316,7 @@ void CODF_ETAPA5() {
 void CODF_ETAPA6() {
     if (qrcode.error < 0)
         return;
+    LOG("ETAPA 6\n")
     //determinar numero de bits necessarios
     switch (qrcode.versao) {
         case 1: ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_CORRECAO_AUTOMATICO, 19, 16, 13, 9);
@@ -331,8 +332,8 @@ void CODF_ETAPA6() {
     while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) % 8 != 0) {
         qrcode.strbits = realloc(qrcode.strbits, ++qrcode.tamanhoDaStrbits);
         qrcode.strbits[qrcode.tamanhoDaStrbits - 1] = 0;
-
     }
+    LOG("")
 
 
 }
