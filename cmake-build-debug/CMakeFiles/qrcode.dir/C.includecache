@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/MORADIA082663/CLionProjects/qrcode/CODIFIC.h
+stdlib.h
+-
+stdio.h
+-
+Object.h
+C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+
 C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
 stdlib.h
 -
@@ -13,18 +21,12 @@ stdlib.h
 C:/Users/MORADIA082663/CLionProjects/qrcode/main.c
 stdio.h
 -
-Object.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
-qr.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/qr.h
-stdlib.h
--
-
-C:/Users/MORADIA082663/CLionProjects/qrcode/qr.h
-stdlib.h
--
-stdio.h
+locale.h
 -
 Object.h
 C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+CODIFIC.h
+C:/Users/MORADIA082663/CLionProjects/qrcode/CODIFIC.h
+stdlib.h
+-
 

@@ -13,6 +13,7 @@
 #define CORRECAO_MODO_H 'H'
 
 #define    EXCEPTION_LENGTH_UNSUPPORTED  (char)-1
+#define    EXCEPTION_BUG_IN_CHOSEN_VERSION  (char)-2
 
 
 typedef struct {

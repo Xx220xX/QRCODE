@@ -342,6 +342,8 @@ void CODF_ETAPA5() {
 }
 
 void CODF_ETAPA6() {
+    if (qrcode.error < 0)
+        return;
     //determinar numero de bits necessarios
 
     switch (qrcode.versao) {
@@ -349,9 +351,10 @@ void CODF_ETAPA6() {
             break;
         case 2: ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_CORRECAO_AUTOMATICO, 34, 28, 22, 16);
             break;
-        case 2: ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_CORRECAO_AUTOMATICO, 55, 44, 34, 26);
+        case 3: ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_CORRECAO_AUTOMATICO, 55, 44, 34, 26);
             break;
-
+        default:
+            qrcode.error = EXCEPTION_BUG_IN_CHOSEN_VERSION;
     }
 }
 
