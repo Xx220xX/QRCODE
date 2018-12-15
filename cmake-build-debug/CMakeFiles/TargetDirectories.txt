@@ -1,0 +1,3 @@
+C:/Users/MORADIA082663/CLionProjects/qrcode/cmake-build-debug/CMakeFiles/qrcode.dir
+C:/Users/MORADIA082663/CLionProjects/qrcode/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/MORADIA082663/CLionProjects/qrcode/cmake-build-debug/CMakeFiles/rebuild_cache.dir
