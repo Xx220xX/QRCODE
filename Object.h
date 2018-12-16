@@ -23,10 +23,9 @@
     fclose(logFile)
 
 
-
 typedef struct {
-    unsigned int qtBitsMode;
-    unsigned int caracteres;
+    int qtBitsMode;
+    int caracteres;
     char *mensagemAserCriptografada;
     char MODE_OF_TXT;
     char MODE_correcaoDeErro;
@@ -36,12 +35,13 @@ typedef struct {
     char strBinMode4Bits[4], indicadorDecontagemDeCaracteres[10];
     char error;
     char *strbits;
-    unsigned int tamanhoDaStrbits;
-    unsigned int numeroDePalavrasChave_cd6;
+    int tamanhoDaStrbits;
+    int numeroDePalavrasChave_cd6;
 } QRCODE;
 
 QRCODE qrcode = {0};
 FILE *logFile;
+
 void freeqr() {
     free(qrcode.strbits);
 }

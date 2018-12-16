@@ -5,9 +5,11 @@
 #include <stdio.h>
 #include "Object.h"
 
-#define ESCOLHER_NIVEL(x, y, v1, v2, v3, v4){\
-    x = (y==CORRECAO_MODO_L)*v1+(y==CORRECAO_MODO_M)*v2+(y==CORRECAO_MODO_Q)*v3+(y==CORRECAO_MODO_H)*v4; \
-}
+#define ESCOLHER_NIVEL(x, y, v1, v2, v3, v4)\
+    x = 0;\
+    x = ((y=='L')*v1 + (y=='M')*v2 + (y=='Q')*v3 + (y == 'H')*v4);\
+    printf("%c",y)
+
 
 void modoNumerico();
 
@@ -242,11 +244,10 @@ void CODF_ETAPA2() {
         }
 
     } else {
-        LOG("CODIFICACAO ETAPA2\nmodo: %d\nversao: %d\n Modo erro: %c\n\n", qrcode.MODE_OF_TXT, qrcode.versao, qrcode.MODE_correcaoDeErro);
+        LOG("CODIFICACAO ETAPA2\nModo erro: %c\nVersion %d\n", qrcode.MODE_correcaoDeErro, qrcode.versao);
 
     }
     if (qrcode.error < 0) {
-
         LOG("~ERROR  %d:CODIFICACAO ETAPA2\n ", qrcode.error);
     }
 
@@ -294,7 +295,10 @@ void CODF_ETAPA4() {
 
 void CODF_ETAPA5() {
 // Encode Using the Selected Mode
-    LOG("~ERROR  %d:CODIFICACAO ETAPA5\n ", qrcode.error);
+    if (qrcode.error < 0) {
+        LOG("~ERROR  %d:CODIFICACAO ETAPA5\n ", qrcode.error);
+        return;
+    }
     LOG("CODIFICACAO ETAPA5\n");
     switch (qrcode.MODE_OF_TXT) {
         case MODO_NUMERICO:
@@ -309,25 +313,44 @@ void CODF_ETAPA5() {
 void CODF_ETAPA6() {
     if (qrcode.error < 0)
         return;
+    int add = 1;
     LOG("ETAPA 6\n");
     //determinar numero de bits necessarios
     switch (qrcode.versao) {
-        case 1: ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_CORRECAO_AUTOMATICO, 19, 16, 13, 9);
+        case 1:
+        ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 19, 16, 13, 9);
             break;
-        case 2: ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_CORRECAO_AUTOMATICO, 34, 28, 22, 16);
+        case 2:
+        ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 34, 28, 22, 16);
             break;
-        case 3: ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_CORRECAO_AUTOMATICO, 55, 44, 34, 26);
+        case 3:
+        ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 55, 44, 34, 26);
             break;
         default:
             qrcode.error = EXCEPTION_BUG_IN_CHOSEN_VERSION;
     }
+    LOG("N de palavras chaves: %d\n", qrcode.numeroDePalavrasChave_cd6);
 //deixar multiplo de 8
     while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) % 8 != 0) {
-        qrcode.strbits = realloc(qrcode.strbits, ++qrcode.tamanhoDaStrbits);
-        qrcode.strbits[qrcode.tamanhoDaStrbits - 1] = 0;
+        qrcode.strbits = realloc(qrcode.strbits, 2 + qrcode.tamanhoDaStrbits);//1230*
+        printf("tamnaho %d   %s\n", qrcode.tamanhoDaStrbits, qrcode.strbits);
+        qrcode.strbits[qrcode.tamanhoDaStrbits] = '0';
+        qrcode.strbits[qrcode.tamanhoDaStrbits + 1] = 0;
     }
     LOG("strbits : %s\ntamanho : %d\n", qrcode.strbits, qrcode.tamanhoDaStrbits);
-
+    //multiplica o numero de palavras chave por 8
+    qrcode.numeroDePalavrasChave_cd6 *= 8;
+    while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) < qrcode.numeroDePalavrasChave_cd6) {
+        qrcode.strbits = realloc(qrcode.strbits, 9 + qrcode.tamanhoDaStrbits);
+        if (add) {
+            converterParaBinario(qrcode.strbits + qrcode.tamanhoDaStrbits, 236, 8);
+            add = 0;
+        } else {
+            converterParaBinario(qrcode.strbits + qrcode.tamanhoDaStrbits, 17, 8);
+            add = 1;
+        }
+    }
+    LOG("adicionando 236 17 , strbits : %s\n", qrcode.strbits, qrcode.tamanhoDaStrbits);
 
 }
 
