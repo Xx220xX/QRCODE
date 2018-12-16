@@ -23,6 +23,10 @@
     fprintf(logFile, format,## __VA_ARGS__);\
     fclose(logFile)
 
+#define COMPARE_MODO_CORRECAO(result, MODO_ATUAL, v1, v2, v3, v4)\
+    result = 0;\
+    result = ((MODO_ATUAL==CORRECAO_MODO_L)*v1 + (MODO_ATUAL==CORRECAO_MODO_M)*v2 + (MODO_ATUAL==CORRECAO_MODO_Q)*v3 + (MODO_ATUAL == CORRECAO_MODO_H)*v4)
+
 
 typedef struct {
     int qtBitsMode;
@@ -37,7 +41,8 @@ typedef struct {
     char error;
     char *strbits;
     int tamanhoDaStrbits;
-    int numeroDePalavrasChave_cd6;
+    int numeroDePalavrasChave;
+    int numeroDePalavrasCodigoCorrecaoDeErro;
 } QRCODE;
 
 QRCODE qrcode = {0};

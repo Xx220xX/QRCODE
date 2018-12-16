@@ -5,9 +5,6 @@
 #include <stdio.h>
 #include "Object.h"
 
-#define ESCOLHER_NIVEL(x, y, v1, v2, v3, v4)\
-    x = 0;\
-    x = ((y=='L')*v1 + (y=='M')*v2 + (y=='Q')*v3 + (y == 'H')*v4)
 
 
 
@@ -313,13 +310,13 @@ void CODF_ETAPA6() {
     //determinar numero de bits necessarios
     switch (qrcode.versao) {
         case 1:
-        ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 19, 16, 13, 9);
+        COMPARE_MODO_CORRECAO(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 19, 16, 13, 9);
             break;
         case 2:
-        ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 34, 28, 22, 16);
+        COMPARE_MODO_CORRECAO(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 34, 28, 22, 16);
             break;
         case 3:
-        ESCOLHER_NIVEL(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 55, 44, 34, 26);
+        COMPARE_MODO_CORRECAO(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 55, 44, 34, 26);
             break;
         default:
             qrcode.error = EXCEPTION_BUG_IN_CHOSEN_VERSION;

@@ -16,14 +16,9 @@
       <change beforePath="$PROJECT_DIR$/CODIFIC.h" beforeDir="false" afterPath="$PROJECT_DIR$/CODIFIC.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORRECAO_DE_ERROS.h" beforeDir="false" afterPath="$PROJECT_DIR$/CORRECAO_DE_ERROS.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Object.h" beforeDir="false" afterPath="$PROJECT_DIR$/Object.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/main.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/objects.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/debug.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/debug.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/qrcode.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,17 +42,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="17" selection-start-column="17" selection-end-column="17" />
+            <state relative-caret-position="255">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#17#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CODIFIC.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+              <folding>
+                <element signature="e#41#60#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cmake-build-debug/debug.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="26" column="15" lean-forward="true" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="15" />
+            <state relative-caret-position="102">
+              <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -65,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Object.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="81" column="1" lean-forward="true" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
+            <state relative-caret-position="136">
+              <caret line="44" column="38" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="38" />
               <folding>
                 <element signature="e#39#57#0" expanded="true" />
               </folding>
@@ -74,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CORRECAO_DE_ERROS.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="208">
-              <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+              <caret line="27" column="116" selection-start-line="27" selection-start-column="116" selection-end-line="27" selection-end-column="116" />
             </state>
           </provider>
         </entry>
@@ -109,9 +119,9 @@
       <list>
         <option value="$PROJECT_DIR$/main (2).c" />
         <option value="$PROJECT_DIR$/qr.h" />
-        <option value="$PROJECT_DIR$/CODIFIC.h" />
         <option value="$PROJECT_DIR$/cmake-build-debug/debug.txt" />
         <option value="$PROJECT_DIR$/main.c" />
+        <option value="$PROJECT_DIR$/CODIFIC.h" />
         <option value="$PROJECT_DIR$/Object.h" />
         <option value="$PROJECT_DIR$/CORRECAO_DE_ERROS.h" />
       </list>
@@ -119,7 +129,8 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="720" />
+    <option name="x" value="271" />
+    <option name="y" value="16" />
     <option name="width" value="720" />
     <option name="height" value="860" />
   </component>
@@ -183,7 +194,8 @@
       <workItem from="1544721705851" duration="11509000" />
       <workItem from="1544898744779" duration="1317000" />
       <workItem from="1544901616158" duration="8677000" />
-      <workItem from="1544933120210" duration="3508000" />
+      <workItem from="1544933120210" duration="3972000" />
+      <workItem from="1544965084295" duration="934000" />
     </task>
     <task id="LOCAL-00001" summary="no msg">
       <created>1544900433045</created>
@@ -213,22 +225,29 @@
       <option name="project" value="LOCAL" />
       <updated>1544911047727</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feita etaapa 8">
+      <created>1544936687725</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1544936687725</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25026000" />
+    <option name="totallyTimeSpent" value="26424000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49888143" weight="0.1769341" />
-      <window_info id="Structure" order="1" sideWeight="0.50111854" side_tool="true" visible="true" weight="0.1769341" />
+      <window_info id="Structure" order="1" sideWeight="0.50111854" side_tool="true" weight="0.1769341" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3293011" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.4045699" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4045699" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39919356" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -244,6 +263,28 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49888143" weight="0.1769341" />
+      <window_info id="Structure" order="1" sideWeight="0.50111854" side_tool="true" weight="0.1769341" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3293011" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4045699" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39919356" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3360215" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007163" side_tool="true" weight="0.3293011" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49928367" weight="0.3293011" />
+      <window_info anchor="bottom" id="CMake" order="11" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.31989247" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -302,7 +343,8 @@
     <MESSAGE value="no msg" />
     <MESSAGE value="criar funcao MACRO LOG(format,...)" />
     <MESSAGE value="rename log to logFile" />
-    <option name="LAST_COMMIT_MESSAGE" value="rename log to logFile" />
+    <MESSAGE value="feita etaapa 8" />
+    <option name="LAST_COMMIT_MESSAGE" value="feita etaapa 8" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
@@ -317,27 +359,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/debug.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CODIFIC.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="e#41#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="17" selection-start-column="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Object.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="81" column="1" lean-forward="true" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
+        <state relative-caret-position="136">
+          <caret line="44" column="38" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="38" />
           <folding>
             <element signature="e#39#57#0" expanded="true" />
           </folding>
@@ -347,14 +399,7 @@
     <entry file="file://$PROJECT_DIR$/CORRECAO_DE_ERROS.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
-          <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/debug.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="26" column="15" lean-forward="true" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="15" />
+          <caret line="27" column="116" selection-start-line="27" selection-start-column="116" selection-end-line="27" selection-end-column="116" />
         </state>
       </provider>
     </entry>
