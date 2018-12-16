@@ -46,11 +46,11 @@ void freeqr() {
     free(qrcode.strbits);
 }
 
-void integerValueOf(char *str_init, char *str_fim, char *str_max, int *n) {
-    if (str_init < str_max && str_init < str_fim) {
+void integerValueOf(char *str_init, char *str_intervalo_fim, char *str_final_maximo, int *n) {
+    if (str_init < str_final_maximo && str_init < str_intervalo_fim) {
         if (*str_init >= '0' && *str_init <= '9')
             *n = *n * 10 + ((*str_init - '0'));
-        integerValueOf((str_init + 1), str_fim, str_max, n);
+        integerValueOf((str_init + 1), str_intervalo_fim, str_final_maximo, n);
     }
 }
 
@@ -65,10 +65,11 @@ void converterParaBinario(char *buff, int decimal, int bits) {
 }
 
 int contaLetras(char *str) {
-    if (str[0]) {
-        return 1 + contaLetras(str + 1);
+    int i = 0;
+    while (str[i]) {
+        i++;
     }
-    return 0;
+    return i;
 }
 
 #endif
