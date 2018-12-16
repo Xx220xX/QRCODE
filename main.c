@@ -2,6 +2,7 @@
 #include<locale.h>
 #include"Object.h"
 #include "CODIFIC.h"
+#include "CORRECAO_DE_ERROS.h"
 #include<stdlib.h>
 
 void printa(char *str) {
@@ -19,14 +20,8 @@ int main(){
     char vet[] = "8";
     qrcode.mensagemAserCriptografada = vet;
     qrcode.MODE_CORRECAO_AUTOMATICO = 1;
-    qrcode.MODE_correcaoDeErro = CORRECAO_MODO_H;
-    CODF_ETAPA1();
-    CODF_ETAPA2();
-    CODF_ETAPA3();
-    CODF_ETAPA4();
-    CODF_ETAPA5();
-    CODF_ETAPA6();
-    printa(qrcode.strbits);
+    CODF_ALL_STEPS();
+    //CORREC_ETAPA8();
     freeqr();
     printf("\nfim");
 return 0;
