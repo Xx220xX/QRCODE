@@ -44,6 +44,7 @@ typedef struct {
     int tamanhoDaStrbits;
     int numeroDePalavrasChave_cd6;
     int numeroDePalavrasCodigoCorrecaoDeErro;
+    unsigned  short *msgNumbers;
 } QRCODE;
 
 QRCODE qrcode = {0};
