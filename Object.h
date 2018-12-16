@@ -2,6 +2,7 @@
 #define OBJECT_H_H
 
 #include<stdlib.h>
+#include <math.h>
 
 #define MODO_NUMERICO 1
 #define MODO_ALPHANUMERICO 2
@@ -27,7 +28,7 @@ typedef struct {
     int qtBitsMode;
     int caracteres;
     char *mensagemAserCriptografada;
-    char MODE_OF_TXT;
+    char MODE_TYPE;//numerico alphanumerico ou byte
     char MODE_correcaoDeErro;
     char MODE_CORRECAO_AUTOMATICO;
     unsigned int numeroDoUltimoArquivo;
@@ -54,6 +55,15 @@ void integerValueOf(char *str_init, char *str_intervalo_fim, char *str_final_max
     }
 }
 
+unsigned short binaryToDec(char *str_init, char *str_fim, char *str_max) {
+    int i = 7;
+    unsigned short soma = 0;
+    int j = 0;
+    for (; i >= 0; i--) {
+        soma += (str_init[i] - 48) * pow(2, j++);
+    }
+    return soma;
+}
 void converterParaBinario(char *buff, int decimal, int bits) {
     buff[bits] = '\0';
     bits--;
@@ -70,6 +80,16 @@ int contaLetras(char *str) {
         i++;
     }
     return i;
+}
+
+void printa8Bits(FILE *f, char *str) {
+    int i, j, k = 0;
+    for (i = 0; str[k]; ++i) {
+        for (j = 0; str[k] && j < 8; j++) {
+            fprintf(f, "%c", str[k++]);
+        }
+        fprintf(f, " ");
+    }
 }
 
 #endif

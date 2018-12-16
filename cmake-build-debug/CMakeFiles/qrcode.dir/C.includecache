@@ -14,8 +14,16 @@ stdio.h
 Object.h
 C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
 
+C:/Users/MORADIA082663/CLionProjects/qrcode/CORRECAO_DE_ERROS.h
+stdio.h
+-
+Object.h
+C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+
 C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
 stdlib.h
+-
+math.h
 -
 
 C:/Users/MORADIA082663/CLionProjects/qrcode/main.c
@@ -27,6 +35,8 @@ Object.h
 C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
 CODIFIC.h
 C:/Users/MORADIA082663/CLionProjects/qrcode/CODIFIC.h
+CORRECAO_DE_ERROS.h
+C:/Users/MORADIA082663/CLionProjects/qrcode/CORRECAO_DE_ERROS.h
 stdlib.h
 -
 

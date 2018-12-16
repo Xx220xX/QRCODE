@@ -4,13 +4,6 @@
 #include <stdio.h>
 #include "Object.h"
 
-void shortValueOf(char *str_init, char *str_intervalo_fim, char *str_final_maximo, unsigned short *n) {
-    if (str_init < str_final_maximo && str_init < str_intervalo_fim) {
-        if (*str_init >= '0' && *str_init <= '9')
-            *n = *n * 10 + ((*str_init - '0'));
-        shortValueOf((str_init + 1), str_intervalo_fim, str_final_maximo, n);
-    }
-}
 
 void CORREC_ETAPA8() {
     if (qrcode.error < 0)
@@ -18,18 +11,23 @@ void CORREC_ETAPA8() {
     //converter a strbits em decimal
     unsigned short *dec = 0;
     int bytes = 0, i;
-    qrcode.tamanhoDaStrbits /= 8;
-    printf("ola\n");
-    while (bytes < qrcode.tamanhoDaStrbits) {
-        dec = realloc(dec, bytes + 1);
-        shortValueOf(
+
+    qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits);
+    while ((bytes) * 8 < qrcode.tamanhoDaStrbits) {
+        dec = realloc(dec, (bytes + 1) * 8);
+        dec[bytes] = binaryToDec(
                 qrcode.strbits + (bytes * 8),
-                qrcode.strbits + ((1 + bytes) * 8), qrcode.strbits + qrcode.tamanhoDaStrbits * 8 + 1, dec + bytes);
+                qrcode.strbits + ((1 + bytes) * 8), qrcode.strbits + qrcode.tamanhoDaStrbits * 8);
         bytes++;
     }
+    LOG("CORRECAO_ETAPA8\n   bytes: %d\n   ", bytes);
+    logFile = fopen("debug.txt", "a");
     for (i = 0; i < bytes; ++i) {
-        printf("%d ", dec[i]);
+        fprintf(logFile, "%d ", dec[i]);
     }
+    fprintf(logFile, "\n   ");
+    printa8Bits(logFile, qrcode.strbits);
+    fclose(logFile);
     free(dec);
 }
 

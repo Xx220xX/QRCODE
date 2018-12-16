@@ -42,12 +42,10 @@ void modoNumerico();
  */
 void CODF_ETAPA1() {
     int i = 0;
-    qrcode.MODE_correcaoDeErro = CORRECAO_MODO_H;
-    qrcode.MODE_OF_TXT = 0;
     for (; qrcode.mensagemAserCriptografada[i]; i++) {
         if (qrcode.mensagemAserCriptografada[i] >= '0' && qrcode.mensagemAserCriptografada[i] <= '9' &&
-            qrcode.MODE_OF_TXT != MODO_ALPHANUMERICO) {
-            qrcode.MODE_OF_TXT = MODO_NUMERICO;
+            qrcode.MODE_TYPE != MODO_ALPHANUMERICO) {
+            qrcode.MODE_TYPE = MODO_NUMERICO;
         } else if ((qrcode.mensagemAserCriptografada[i] >= 'A' && qrcode.mensagemAserCriptografada[i] <= 'Z') ||
                    qrcode.mensagemAserCriptografada[i] == '$' || qrcode.mensagemAserCriptografada[i] == '%' ||
                    qrcode.mensagemAserCriptografada[i] == '*' || qrcode.mensagemAserCriptografada[i] == '+' ||
@@ -55,9 +53,9 @@ void CODF_ETAPA1() {
                    qrcode.mensagemAserCriptografada[i] == '/' || qrcode.mensagemAserCriptografada[i] == ':' ||
                    qrcode.mensagemAserCriptografada[i] == ' ' ||
                    (qrcode.mensagemAserCriptografada[i] >= '0' && qrcode.mensagemAserCriptografada[i] <= '9')) {
-            qrcode.MODE_OF_TXT = MODO_ALPHANUMERICO;
+            qrcode.MODE_TYPE = MODO_ALPHANUMERICO;
         } else {
-            qrcode.MODE_OF_TXT = MODO_BYTE;
+            qrcode.MODE_TYPE = MODO_BYTE;
             break;
         }
 
@@ -65,8 +63,8 @@ void CODF_ETAPA1() {
 
 
     LOG("CODIFICACAO ETAPA1\n   Mensagem: %s\n   modo: %s %d\n\n", qrcode.mensagemAserCriptografada,
-        qrcode.MODE_OF_TXT == MODO_NUMERICO ? "MODO_NUMERICO" : qrcode.MODE_OF_TXT ==
-                                                                MODO_ALPHANUMERICO ? "MODO_ALPHANUMERICO" : "MODO_BYTE", qrcode.MODE_OF_TXT);
+        qrcode.MODE_TYPE == MODO_NUMERICO ? "MODO_NUMERICO" : qrcode.MODE_TYPE ==
+                                                              MODO_ALPHANUMERICO ? "MODO_ALPHANUMERICO" : "MODO_BYTE", qrcode.MODE_TYPE);
 }
 
 void CODF_ETAPA2() {
@@ -75,7 +73,7 @@ void CODF_ETAPA2() {
     //determine qual � a menor vers�o que pode conter esse n�mero de caracteres para o modo de codifica��o e o n�vel de corre��o
     for (qrcode.caracteres = 0; qrcode.mensagemAserCriptografada[qrcode.caracteres]; qrcode.caracteres++) {}
     qrcode.error = 0;
-    switch (qrcode.MODE_OF_TXT) {
+    switch (qrcode.MODE_TYPE) {
         case MODO_NUMERICO:
             switch (qrcode.MODE_correcaoDeErro) {
                 case CORRECAO_MODO_L:
@@ -260,7 +258,7 @@ void CODF_ETAPA3() {
     // 0010 para MODO_ALPHANUMERICO
     // 0100 para MODO_BYTE
 
-    converterParaBinario(qrcode.strBinMode4Bits, qrcode.MODE_OF_TXT, 4);
+    converterParaBinario(qrcode.strBinMode4Bits, qrcode.MODE_TYPE, 4);
     LOG("CODIFICACAO ETAPA3 \n   indicador de modo: %s\n\n", qrcode.strBinMode4Bits);
 
 }
@@ -275,8 +273,8 @@ void CODF_ETAPA4() {
     // 8 bits para MODO_BYTE
     //converter o numero de caracteres para binario
     int i, j;
-    qrcode.qtBitsMode = (qrcode.MODE_OF_TXT == MODO_NUMERICO) * 10 + (qrcode.MODE_OF_TXT == MODO_ALPHANUMERICO) * 9 +
-                        (qrcode.MODE_OF_TXT == MODO_BYTE) * 8;
+    qrcode.qtBitsMode = (qrcode.MODE_TYPE == MODO_NUMERICO) * 10 + (qrcode.MODE_TYPE == MODO_ALPHANUMERICO) * 9 +
+                        (qrcode.MODE_TYPE == MODO_BYTE) * 8;
     converterParaBinario(qrcode.indicadorDecontagemDeCaracteres, qrcode.caracteres, qrcode.qtBitsMode);
     // unir a seq de 4 bits da etapa anterior com a sequencia de bits atual(numero de letras em binario)
     qrcode.strbits = (char *) calloc(qrcode.qtBitsMode + 4 + 1, sizeof(char));
@@ -297,7 +295,7 @@ void CODF_ETAPA5() {
         return;
     }
     LOG("CODIFICACAO ETAPA5\n");
-    switch (qrcode.MODE_OF_TXT) {
+    switch (qrcode.MODE_TYPE) {
         case MODO_NUMERICO:
             modoNumerico();
             break;
@@ -409,10 +407,8 @@ void CODF_ALL_STEPS() {
     CODF_ETAPA3();
     CODF_ETAPA4();
     CODF_ETAPA5();
-//    CODF_ETAPA6();
+    CODF_ETAPA6();
     LOG("__________________________________________________________________________________________________\n\n\n");
-
-
 }
 
 #endif
