@@ -7,8 +7,8 @@
 
 #define ESCOLHER_NIVEL(x, y, v1, v2, v3, v4)\
     x = 0;\
-    x = ((y=='L')*v1 + (y=='M')*v2 + (y=='Q')*v3 + (y == 'H')*v4);\
-    printf("%c",y)
+    x = ((y=='L')*v1 + (y=='M')*v2 + (y=='Q')*v3 + (y == 'H')*v4)
+
 
 
 void modoNumerico();
@@ -42,13 +42,12 @@ void modoNumerico();
  */
 void CODF_ETAPA1() {
     int i = 0;
+    qrcode.MODE_correcaoDeErro = CORRECAO_MODO_H;
     qrcode.MODE_OF_TXT = 0;
     for (; qrcode.mensagemAserCriptografada[i]; i++) {
-        printf("%c  ", qrcode.mensagemAserCriptografada[i]);
         if (qrcode.mensagemAserCriptografada[i] >= '0' && qrcode.mensagemAserCriptografada[i] <= '9' &&
             qrcode.MODE_OF_TXT != MODO_ALPHANUMERICO) {
             qrcode.MODE_OF_TXT = MODO_NUMERICO;
-            printf(" if \n");
         } else if ((qrcode.mensagemAserCriptografada[i] >= 'A' && qrcode.mensagemAserCriptografada[i] <= 'Z') ||
                    qrcode.mensagemAserCriptografada[i] == '$' || qrcode.mensagemAserCriptografada[i] == '%' ||
                    qrcode.mensagemAserCriptografada[i] == '*' || qrcode.mensagemAserCriptografada[i] == '+' ||
@@ -57,17 +56,15 @@ void CODF_ETAPA1() {
                    qrcode.mensagemAserCriptografada[i] == ' ' ||
                    (qrcode.mensagemAserCriptografada[i] >= '0' && qrcode.mensagemAserCriptografada[i] <= '9')) {
             qrcode.MODE_OF_TXT = MODO_ALPHANUMERICO;
-            printf("else if \n");
         } else {
             qrcode.MODE_OF_TXT = MODO_BYTE;
-            printf(" else  \n");
             break;
         }
 
     }
 
 
-    LOG("CODIFICACAO ETAPA1\nMensagem: %s\nmodo: %s %d\n\n", qrcode.mensagemAserCriptografada,
+    LOG("CODIFICACAO ETAPA1\n   Mensagem: %s\n   modo: %s %d\n\n", qrcode.mensagemAserCriptografada,
         qrcode.MODE_OF_TXT == MODO_NUMERICO ? "MODO_NUMERICO" : qrcode.MODE_OF_TXT ==
                                                                 MODO_ALPHANUMERICO ? "MODO_ALPHANUMERICO" : "MODO_BYTE", qrcode.MODE_OF_TXT);
 }
@@ -244,7 +241,7 @@ void CODF_ETAPA2() {
         }
 
     } else {
-        LOG("CODIFICACAO ETAPA2\nModo erro: %c\nVersion %d\n", qrcode.MODE_correcaoDeErro, qrcode.versao);
+        LOG("CODIFICACAO ETAPA2\n   Modo erro: %c\n   Version %d\n\n", qrcode.MODE_correcaoDeErro, qrcode.versao);
 
     }
     if (qrcode.error < 0) {
@@ -264,7 +261,7 @@ void CODF_ETAPA3() {
     // 0100 para MODO_BYTE
 
     converterParaBinario(qrcode.strBinMode4Bits, qrcode.MODE_OF_TXT, 4);
-    LOG("CODIFICACAO ETAPA3 \nindicador de modo: %s\n", qrcode.strBinMode4Bits);
+    LOG("CODIFICACAO ETAPA3 \n   indicador de modo: %s\n\n", qrcode.strBinMode4Bits);
 
 }
 
@@ -290,7 +287,7 @@ void CODF_ETAPA4() {
         qrcode.strbits[i] = qrcode.indicadorDecontagemDeCaracteres[j];
     }
     qrcode.strbits[i] = 0;
-    LOG("CODIFICACAO ETAPA4 \nquantidade de bits :%d   %s\nstrings concatendas: %s\n\n", qrcode.qtBitsMode, qrcode.indicadorDecontagemDeCaracteres, qrcode.strbits);
+    LOG("CODIFICACAO ETAPA4 \n   quantidade de bits :%d   %s\n   strings concatendas: %s\n\n", qrcode.qtBitsMode, qrcode.indicadorDecontagemDeCaracteres, qrcode.strbits);
 }
 
 void CODF_ETAPA5() {
@@ -307,7 +304,7 @@ void CODF_ETAPA5() {
         default:
             break;
     }
-
+    LOG("\n");
 }
 
 void CODF_ETAPA6() {
@@ -329,16 +326,15 @@ void CODF_ETAPA6() {
         default:
             qrcode.error = EXCEPTION_BUG_IN_CHOSEN_VERSION;
     }
-    LOG("N de palavras chaves: %d\n", qrcode.numeroDePalavrasChave_cd6);
+    LOG("   N de palavras chaves: %d\n", qrcode.numeroDePalavrasChave_cd6);
 //deixar multiplo de 8
     while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) % 8 != 0) {
         qrcode.strbits = realloc(qrcode.strbits, 2 + qrcode.tamanhoDaStrbits);//1230*
-        printf("tamnaho %d   %s\n", qrcode.tamanhoDaStrbits, qrcode.strbits);
         qrcode.strbits[qrcode.tamanhoDaStrbits] = '0';
         qrcode.strbits[qrcode.tamanhoDaStrbits + 1] = 0;
     }
-    LOG("strbits : %s\ntamanho : %d\n", qrcode.strbits, qrcode.tamanhoDaStrbits);
-    //multiplica o numero de palavras chave por 8
+    LOG("   strbits : %s\n   tamanho : %d\n", qrcode.strbits, qrcode.tamanhoDaStrbits);
+    //multiplica o numero de palavras chave por  8
     qrcode.numeroDePalavrasChave_cd6 *= 8;
     while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) < qrcode.numeroDePalavrasChave_cd6) {
         qrcode.strbits = realloc(qrcode.strbits, 9 + qrcode.tamanhoDaStrbits);
@@ -350,7 +346,7 @@ void CODF_ETAPA6() {
             add = 1;
         }
     }
-    LOG("adicionando 236 17 , strbits : %s\n", qrcode.strbits, qrcode.tamanhoDaStrbits);
+    LOG("   adicionando 236 17 , strbits : %s\n\n", qrcode.strbits, qrcode.tamanhoDaStrbits);
 
 }
 
@@ -366,8 +362,6 @@ void modoNumerico() {
     tamanhoDastfin++;
     stfin = (char *) calloc(tamanhoDastfin, sizeof(char));
     qrcode.caracteres = contaLetras(qrcode.mensagemAserCriptografada);
-
-
     logFile = fopen("debug.txt", "a");
     if (!logFile) {
         logFile = fopen("debug.txt", "w");
@@ -378,9 +372,8 @@ void modoNumerico() {
                 qrcode.mensagemAserCriptografada + i,
                 qrcode.mensagemAserCriptografada + (i / coluna) * coluna + coluna,
                 qrcode.mensagemAserCriptografada + qrcode.caracteres, &a);
-        fprintf(logFile, "    %d     ", a);
+        fprintf(logFile, "   %d     ", a);
         if (a < 10) {
-
             converterParaBinario(stfin + bits - 1, a, 4);
             fprintf(logFile, "%s\n", stfin + bits - 1);
             bits += 4;
@@ -393,7 +386,7 @@ void modoNumerico() {
             fprintf(logFile, "%s\n", stfin + bits - 1);
             bits += 10;
         }
-        stfin[bits] = 0;
+
         a = 0;
     }
     qrcode.strbits = (char *) realloc(qrcode.strbits, bits + 4 + qrcode.qtBitsMode);
@@ -402,13 +395,24 @@ void modoNumerico() {
     }
     qrcode.strbits[i] = 0;
 
-    fprintf(logFile, "numeros convertidos %s\n", stfin);
-    fprintf(logFile, "str bits %s\n", qrcode.strbits);
-
+    fprintf(logFile, "   numeros convertidos %s\n", stfin);
+    fprintf(logFile, "   str bits %s\n", qrcode.strbits);
     fclose(logFile);
-    printf("fechou\n");
     free(stfin);
-    printf("liberou\n");
+
+}
+
+void CODF_ALL_STEPS() {
+    LOG("########################## CODIFICACAO ##########################\n");
+    CODF_ETAPA1();
+    CODF_ETAPA2();
+    CODF_ETAPA3();
+    CODF_ETAPA4();
+    CODF_ETAPA5();
+//    CODF_ETAPA6();
+    LOG("__________________________________________________________________________________________________\n\n\n");
+
+
 }
 
 #endif
