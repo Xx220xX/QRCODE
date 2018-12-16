@@ -3,4 +3,4 @@ project(qrcode C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(qrcode main.c)
+add_executable(qrcode main.c CORRECAO_DE_ERROS.h)
