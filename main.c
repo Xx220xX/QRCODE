@@ -16,6 +16,7 @@ int main(){
     CODF_ETAPA3();
     CODF_ETAPA4();
     CODF_ETAPA5();
+    // CODF_ETAPA6();
     freeqr();
     printf("fim");
 return 0;

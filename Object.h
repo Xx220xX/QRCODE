@@ -15,30 +15,31 @@
 #define    EXCEPTION_LENGTH_UNSUPPORTED  (char)-1
 #define    EXCEPTION_BUG_IN_CHOSEN_VERSION  (char)-2
 
-#define LOG(format, ...){\
+#define LOG(format, ...)\
     logFile = fopen("debug.txt", "a");\
     if (!logFile) \
      logFile = fopen("debug.txt", "w");\
     fprintf(logFile, format,## __VA_ARGS__);\
-    fclose(logFile);\
-}
+    fclose(logFile)
+
 
 
 typedef struct {
-    int qtBitsMode;
-    int caracteres;
+    unsigned int qtBitsMode;
+    unsigned int caracteres;
     char *mensagemAserCriptografada;
-    char MODE;
+    char MODE_OF_TXT;
     char MODE_correcaoDeErro;
     char MODE_CORRECAO_AUTOMATICO;
-    int numeroDoUltimoArquivo;
+    unsigned int numeroDoUltimoArquivo;
     char versao;
     char strBinMode4Bits[4], indicadorDecontagemDeCaracteres[10];
     char error;
     char *strbits;
-    int tamanhoDaStrbits;
-    int numeroDePalavrasChave_cd6;
+    unsigned int tamanhoDaStrbits;
+    unsigned int numeroDePalavrasChave_cd6;
 } QRCODE;
+
 QRCODE qrcode = {0};
 FILE *logFile;
 void freeqr() {
