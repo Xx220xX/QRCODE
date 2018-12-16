@@ -41,7 +41,7 @@ typedef struct {
     char error;
     char *strbits;
     int tamanhoDaStrbits;
-    int numeroDePalavrasChave;
+    int numeroDePalavrasChave_cd6;
     int numeroDePalavrasCodigoCorrecaoDeErro;
 } QRCODE;
 

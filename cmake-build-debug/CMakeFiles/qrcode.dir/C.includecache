@@ -19,12 +19,16 @@ stdio.h
 -
 Object.h
 C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+QRCode.h
+C:/Users/MORADIA082663/CLionProjects/qrcode/QRCode.h
 
 C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
 stdlib.h
 -
 math.h
 -
+
+C:/Users/MORADIA082663/CLionProjects/qrcode/QRCode.h
 
 C:/Users/MORADIA082663/CLionProjects/qrcode/main.c
 stdio.h

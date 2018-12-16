@@ -6,9 +6,9 @@
 #include<stdlib.h>
 
 
-int main(){
-    setlocale(LC_ALL,"pt-br");
-    fclose(fopen("debug.txt","w"));
+int main() {
+    setlocale(LC_ALL, "pt-br");
+    fclose(fopen("debug.txt", "w"));
     char vet[] = "8675309";
     qrcode.mensagemAserCriptografada = vet;
     qrcode.MODE_CORRECAO_AUTOMATICO = 0;
@@ -17,5 +17,5 @@ int main(){
     CORREC_ETAPA8();
     freeqr();
     printf("\nfim");
-return 0;
+    return 0;
 }

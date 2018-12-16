@@ -78,6 +78,7 @@ qrcode_EXTERNAL_OBJECTS =
 
 qrcode.exe: CMakeFiles/qrcode.dir/main.c.obj
 qrcode.exe: CMakeFiles/qrcode.dir/build.make
+qrcode.exe: ../libQRCode.a
 qrcode.exe: CMakeFiles/qrcode.dir/linklibs.rsp
 qrcode.exe: CMakeFiles/qrcode.dir/objects1.rsp
 qrcode.exe: CMakeFiles/qrcode.dir/link.txt
