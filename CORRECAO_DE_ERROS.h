@@ -49,7 +49,6 @@ void CORREC_ETAPA8() {
 // Programa que mostra exemplo de como utilizar a biblioteca QRCode.h para determinar os Error Correction Codewords
 
 
-#include "QRCode.h"
 
 void imprimeVetor(unsigned char v[], unsigned short N);
 

@@ -3,6 +3,7 @@
 
 #include<stdlib.h>
 #include <math.h>
+#include "QRCode.h"
 
 #define MODO_NUMERICO 1
 #define MODO_ALPHANUMERICO 2
