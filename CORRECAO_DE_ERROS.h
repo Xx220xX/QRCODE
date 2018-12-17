@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include "Object.h"
 
+#define CAST (unsigned short)
+
+void imprimeVetor(unsigned char v[], unsigned short N);
+
 
 void CORREC_ETAPA8() {
     if (qrcode.error < 0)
@@ -33,7 +37,8 @@ void CORREC_ETAPA8() {
         default:
             break;
     }
-
+    qrcode.msgNumbers = dec;
+    qrcode.tamanhoDa_msgNumbers = bytes;
     LOG("CORRECAO_ETAPA8\n   bytes: %d\n   ", bytes);
     logFile = fopen("debug.txt", "a");
     printa8Bits(logFile, qrcode.strbits);
@@ -43,14 +48,18 @@ void CORREC_ETAPA8() {
     }
 
     fclose(logFile);
-    free(dec);
+}
+
+void CORREC_CORRIGIR() {
+    unsigned char *codigo = CodigosCorretores(qrcode.msgNumbers, CAST qrcode.tamanhoDa_msgNumbers, CAST qrcode.numeroDePalavrasCodigoCorrecaoDeErro);
+    LOG("\ncodigos corretores : ", codigo);
+    imprimeVetor(codigo, CAST qrcode.numeroDePalavrasCodigoCorrecaoDeErro);
+    free(codigo);
 }
 
 // Programa que mostra exemplo de como utilizar a biblioteca QRCode.h para determinar os Error Correction Codewords
 
 
-
-void imprimeVetor(unsigned char v[], unsigned short N);
 
 int test() {
     unsigned short mens1[15] = {67, 85, 70, 134, 87, 38, 85, 194, 119, 50, 6, 18, 6, 103, 38};
@@ -87,11 +96,13 @@ int test() {
 
 void imprimeVetor(unsigned char v[], unsigned short N) {
     unsigned short i;
-
+    logFile = fopen("debug.txt", "a");
     for (i = 0; i < N; i++) {
-        printf("%d ", v[i]);
+        fprintf(logFile, "%d ", v[i]);
     }
+    fprintf(logFile, "\n");
+    fclose(logFile);
 }
 
-
+#undef CAST
 #endif //QRCODE_CORRECAO_DE_ERROS_H_H

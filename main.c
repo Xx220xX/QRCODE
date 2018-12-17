@@ -15,6 +15,8 @@ int main() {
     qrcode.MODE_correcaoDeErro = CORRECAO_MODO_M;
     CODF_ALL_STEPS();
     CORREC_ETAPA8();
+
+    CORREC_CORRIGIR();
     freeqr();
     printf("\nfim");
     return 0;
