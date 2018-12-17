@@ -13,6 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="28f3c102-a2ca-45e1-8d95-5c9ac85a9f5a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORRECAO_DE_ERROS.h" beforeDir="false" afterPath="$PROJECT_DIR$/CORRECAO_DE_ERROS.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CODIFIC.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="315" column="1" selection-start-line="315" selection-start-column="1" selection-end-line="315" selection-end-column="1" />
+            <state relative-caret-position="-98">
+              <caret line="309" column="32" lean-forward="true" selection-start-line="309" selection-start-column="32" selection-end-line="309" selection-end-column="32" />
               <folding>
                 <element signature="e#41#60#0" expanded="true" />
               </folding>
@@ -84,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CORRECAO_DE_ERROS.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="52" column="20" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="20" />
+            <state relative-caret-position="850">
+              <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
               <folding>
                 <element signature="e#75#93#0" expanded="true" />
               </folding>
@@ -128,8 +129,8 @@
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Object.h" />
         <option value="$PROJECT_DIR$/main.c" />
-        <option value="$PROJECT_DIR$/CORRECAO_DE_ERROS.h" />
         <option value="$PROJECT_DIR$/CODIFIC.h" />
+        <option value="$PROJECT_DIR$/CORRECAO_DE_ERROS.h" />
       </list>
     </option>
   </component>
@@ -208,7 +209,7 @@
       <workItem from="1544933120210" duration="3972000" />
       <workItem from="1544965084295" duration="8256000" />
       <workItem from="1545082831589" duration="32000" />
-      <workItem from="1545083155814" duration="1735000" />
+      <workItem from="1545083155814" duration="1831000" />
     </task>
     <task id="LOCAL-00001" summary="no msg">
       <created>1544900433045</created>
@@ -280,16 +281,24 @@
       <option name="project" value="LOCAL" />
       <updated>1545087510449</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="remove function 'test'">
+      <created>1545089411913</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1545089411913</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35513000" />
+    <option name="totallyTimeSpent" value="35609000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49888143" visible="true" weight="0.1812321" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49888143" visible="true" weight="0.1812321" />
       <window_info id="Structure" order="1" sideWeight="0.50111854" side_tool="true" weight="0.1769341" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -300,7 +309,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3360215" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3360215" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007163" side_tool="true" weight="0.3293011" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49928367" weight="0.3293011" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.3293011" />
@@ -395,7 +404,8 @@
     <MESSAGE value="add librarie of dush" />
     <MESSAGE value="move  librarie of dush" />
     <MESSAGE value="also" />
-    <option name="LAST_COMMIT_MESSAGE" value="also" />
+    <MESSAGE value="remove function 'test'" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove function 'test'" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
@@ -440,16 +450,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CORRECAO_DE_ERROS.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="52" column="20" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="20" />
-          <folding>
-            <element signature="e#75#93#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/QRCode.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
@@ -459,10 +459,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CODIFIC.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="315" column="1" selection-start-line="315" selection-start-column="1" selection-end-line="315" selection-end-column="1" />
+        <state relative-caret-position="-98">
+          <caret line="309" column="32" lean-forward="true" selection-start-line="309" selection-start-column="32" selection-end-line="309" selection-end-column="32" />
           <folding>
             <element signature="e#41#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CORRECAO_DE_ERROS.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
+          <folding>
+            <element signature="e#75#93#0" expanded="true" />
           </folding>
         </state>
       </provider>

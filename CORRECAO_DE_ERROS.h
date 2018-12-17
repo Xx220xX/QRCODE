@@ -58,10 +58,6 @@ void CORREC_CORRIGIR() {
 }
 
 // Programa que mostra exemplo de como utilizar a biblioteca QRCode.h para determinar os Error Correction Codewords
-
-
-
-
 void imprimeVetor(unsigned char v[], unsigned short N) {
     unsigned short i;
     logFile = fopen("debug.txt", "a");
@@ -71,5 +67,6 @@ void imprimeVetor(unsigned char v[], unsigned short N) {
     fprintf(logFile, "\n");
     fclose(logFile);
 }
+
 #undef CAST
 #endif //QRCODE_CORRECAO_DE_ERROS_H_H
