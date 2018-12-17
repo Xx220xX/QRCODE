@@ -285,6 +285,17 @@ void CODF_ETAPA4() {
     LOG("CODIFICACAO ETAPA4 \n   quantidade de bits :%d   %s\n   strings concatendas: %s\n\n", qrcode.qtBitsMode, qrcode.indicadorDecontagemDeCaracteres, qrcode.strbits);
 }
 
+int alphaValue(int x1,int x2){
+
+}
+void modoAlphanumerico(){
+    int coluna = 2;
+    //HELO
+    int i, valor;
+    for(i=0; i < qrcode.caracteres/coluna; i++){
+        valor = alphaValue(qrcode.mensagemAserCriptografada[i*coluna],qrcode.mensagemAserCriptografada[i*coluna+1]);
+    }
+}
 void CODF_ETAPA5() {
 // Encode Using the Selected Mode
     if (qrcode.error < 0) {
@@ -296,12 +307,13 @@ void CODF_ETAPA5() {
         case MODO_NUMERICO:
             modoNumerico();
             break;
+        case MODO_ALPHANUMERICO:
+            modoAlphanumerico();
         default:
             break;
     }
     LOG("\n");
 }
-
 void CODF_ETAPA6() {
     if (qrcode.error < 0)
         return;
