@@ -2,6 +2,7 @@
 #define OBJECT_H_H
 
 #include<stdlib.h>
+#include<stdio.h>
 #include <math.h>
 #include "QRCode.h"
 
@@ -41,19 +42,19 @@ typedef struct {
 typedef struct {
     Table tabela;
     int qtBitsMode;
-    
+
     int tamanhoDa_mensagemAserCriptografada;
     char *mensagemAserCriptografada;
-    
+
     char MODE_TYPE;//numerico alphanumerico ou byte
     char MODE_CORRECAO_AUTOMATICO;
-    
+
     unsigned int numeroDoUltimoArquivo;
     char strBinMode4Bits[4], indicadorDecontagemDeCaracteres[10];
     char error;
     char *strbits;
     int tamanhoDaStrbits;
-    
+
     unsigned short *msgNumbers;
     int tamanhoDa_msgNumbers;
 } QRCODE;
@@ -71,21 +72,24 @@ void integerValueOf(char *str_init, char *str_intervalo_fim, char *str_final_max
         integerValueOf((str_init + 1), str_intervalo_fim, str_final_maximo, n);
     }
 }
-int alphaValue(int x1,int x2){
+
+int alphaValue(int x1, int x2) {
     int valor;
-    if(x1 >= '0' && x1 <= '9')
+    if (x1 >= '0' && x1 <= '9')
         x1 = x1 - '0';
-    else if(x1 >= 'A' && x1<= 'Z')
+    else if (x1 >= 'A' && x1 <= 'Z')
         x1 = x1 - 'A' + 10;
     else
-        x1 = ((x1 == ' ')*36 + (x1 == '$')*37 + (x1 == '%')*38 + (x1 == '*')*39 + (x1 == '+')*40 + (x1 == '-')*41 + (x1 == '.')*42 + (x1 == '/')*43 + (x1 == ':')*44);
-    if(x2 >= '0' && x2 <= '9')
+        x1 = ((x1 == ' ') * 36 + (x1 == '$') * 37 + (x1 == '%') * 38 + (x1 == '*') * 39 + (x1 == '+') * 40 +
+              (x1 == '-') * 41 + (x1 == '.') * 42 + (x1 == '/') * 43 + (x1 == ':') * 44);
+    if (x2 >= '0' && x2 <= '9')
         x2 = x2 - '0';
-    else if(x2 >= 'A' && x2<= 'Z')
+    else if (x2 >= 'A' && x2 <= 'Z')
         x2 = x2 - 'A' + 10;
     else
-        x2 = ((x2 == ' ')*36 + (x2 == '$')*37 + (x2 == '%')*38 + (x2 == '*')*39 + (x2 == '+')*40 + (x2 == '-')*41 + (x2 == '.')*42 + (x2 == '/')*43 + (x2 == ':')*44);
-    valor = ((x1*45) +x2);
+        x2 = ((x2 == ' ') * 36 + (x2 == '$') * 37 + (x2 == '%') * 38 + (x2 == '*') * 39 + (x2 == '+') * 40 +
+              (x2 == '-') * 41 + (x2 == '.') * 42 + (x2 == '/') * 43 + (x2 == ':') * 44);
+    valor = ((x1 * 45) + x2);
     return valor;
 }
 
@@ -126,5 +130,6 @@ void printa8Bits(FILE *f, char *str) {
         fprintf(f, " ");
     }
 }
+
 
 #endif
