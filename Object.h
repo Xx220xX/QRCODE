@@ -28,27 +28,35 @@
     result = 0;\
     result = ((MODO_ATUAL==CORRECAO_MODO_L)*v1 + (MODO_ATUAL==CORRECAO_MODO_M)*v2 + (MODO_ATUAL==CORRECAO_MODO_Q)*v3 + (MODO_ATUAL == CORRECAO_MODO_H)*v4)
 
-
 typedef struct {
+    int version;
+    int nivelCorrecaoErro;
+    int numeroTotaldePalavrasChavedeDados;
+    int bytesCorretoresPorBloco;
+    int qtBlocosGrupo_1;
+    int qtDeBytesGrupo_1;
+    int qtBlocosGrupo_2;
+    int qtDeBytesGrupo_2;
+} Table;
+typedef struct {
+    Table tabela;
     int qtBitsMode;
-    int caracteres;
+    
+    int tamanhoDa_mensagemAserCriptografada;
     char *mensagemAserCriptografada;
+    
     char MODE_TYPE;//numerico alphanumerico ou byte
-    char MODE_correcaoDeErro;
     char MODE_CORRECAO_AUTOMATICO;
+    
     unsigned int numeroDoUltimoArquivo;
-    char versao;
     char strBinMode4Bits[4], indicadorDecontagemDeCaracteres[10];
     char error;
     char *strbits;
     int tamanhoDaStrbits;
-    int numeroDePalavrasChave_cd6;
-    int numeroDePalavrasCodigoCorrecaoDeErro;
-    unsigned  short *msgNumbers;
+    
+    unsigned short *msgNumbers;
     int tamanhoDa_msgNumbers;
-    int numeroDeBlocos;
 } QRCODE;
-
 QRCODE qrcode = {0};
 FILE *logFile;
 
@@ -73,6 +81,7 @@ unsigned short binaryToDec(char *str_init, char *str_fim, char *str_max) {
     }
     return soma;
 }
+
 void converterParaBinario(char *buff, int decimal, int bits) {
     buff[bits] = '\0';
     bits--;
