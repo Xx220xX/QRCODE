@@ -5,7 +5,15 @@
 #include <stdio.h>
 #include "Object.h"
 
-
+#define ESCOLHER_VERSAO(v1, v2, v3)\
+       if (qrcode.tamanhoDa_mensagemAserCriptografada < v1) {\
+        qrcode.tabela.version = 1;\
+     }else if (qrcode.tamanhoDa_mensagemAserCriptografada < v2) {\
+            qrcode.tabela.version = 2;\
+     }else if (qrcode.tamanhoDa_mensagemAserCriptografada < v3) {\
+            qrcode.tabela.version = 3;\
+     }else \
+        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED
 
 
 void modoNumerico();
@@ -14,9 +22,9 @@ void modoNumerico();
  * Etapa de codificao:
  ~concluido~*   ETAPA 2:
  *                  ***obs: o usuario escolhe a correcao de erro
- *                  conte o n�mero de caracteres a serem codificados
+ *                  conte o n�mero de tamanhoDa_mensagemAserCriptografada a serem codificados
  *                  determinar modo a ser crptografado
- *                  determine qual � a menor vers�o que pode conter esse n�mero de caracteres para o modo de codifica��o e o n�vel de corre��o
+ *                  determine qual � a menor vers�o que pode conter esse n�mero de tamanhoDa_mensagemAserCriptografada para o modo de codifica��o e o n�vel de corre��o
  *
  ~concluido~ *  ETAPA 3:
  *                  converter para string de 4 bytes o indicador de modo
@@ -24,12 +32,12 @@ void modoNumerico();
  *                  0010 para MODO_ALPHANUMERICO
  *                  0100 para MODO_BYTE
   ~concluido~*  ETAPA 4:
- *                  contar os caracteres da frase a ser criptografada
+ *                  contar os tamanhoDa_mensagemAserCriptografada da frase a ser criptografada
  *                  antes de converter defina a quantidade de bits que seu binario tera
  *                  10 bits para MODO_NUMERICO
  *                  9 bits para MODO_ALPHANUMERICO
  *                  8 bits para MODO_BYTE
- *                  converter o numero de caracteres para binario
+ *                  converter o numero de tamanhoDa_mensagemAserCriptografada para binario
  *                  unir a seq de 4 bits da etapa anterior com a sequencia de bits atual(numero de letras em binario)
  *              ETAPA 5:
  *
@@ -55,194 +63,89 @@ void CODF_ETAPA1() {
             qrcode.MODE_TYPE = MODO_BYTE;
             break;
         }
-
+        
     }
-
-
+    
+    
     LOG("CODIFICACAO ETAPA1\n   Mensagem: %s\n   modo: %s %d\n\n", qrcode.mensagemAserCriptografada,
         qrcode.MODE_TYPE == MODO_NUMERICO ? "MODO_NUMERICO" : qrcode.MODE_TYPE ==
                                                               MODO_ALPHANUMERICO ? "MODO_ALPHANUMERICO" : "MODO_BYTE", qrcode.MODE_TYPE);
 }
 
 void CODF_ETAPA2() {
-    //conte o n�mero de caracteres a serem codificados
+    //conte o n�mero de tamanhoDa_mensagemAserCriptografada a serem codificados
     //determinar modo a ser crptografado
-    //determine qual � a menor vers�o que pode conter esse n�mero de caracteres para o modo de codifica��o e o n�vel de corre��o
-    for (qrcode.caracteres = 0; qrcode.mensagemAserCriptografada[qrcode.caracteres]; qrcode.caracteres++) {}
+    //determine qual � a menor vers�o que pode conter esse n�mero de tamanhoDa_mensagemAserCriptografada para o modo de codifica��o e o n�vel de corre��o
+    for (qrcode.tamanhoDa_mensagemAserCriptografada = 0; qrcode.mensagemAserCriptografada[qrcode.tamanhoDa_mensagemAserCriptografada]; qrcode.tamanhoDa_mensagemAserCriptografada++) {}
     qrcode.error = 0;
     switch (qrcode.MODE_TYPE) {
         case MODO_NUMERICO:
-            switch (qrcode.MODE_correcaoDeErro) {
-                case CORRECAO_MODO_L:
-                    if (qrcode.caracteres < 41) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 77) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 127) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+            switch (qrcode.tabela.nivelCorrecaoErro) {
+                case CORRECAO_MODO_L:ESCOLHER_VERSAO(41, 77, 127);
                     break;
-                case CORRECAO_MODO_M:
-                    if (qrcode.caracteres < 34) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 63) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 101) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+                case CORRECAO_MODO_M:ESCOLHER_VERSAO(34, 63, 101);
                     break;
-                case CORRECAO_MODO_Q:
-                    if (qrcode.caracteres < 27) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 48) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 77) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+                case CORRECAO_MODO_Q:ESCOLHER_VERSAO(27, 48, 77);
                     break;
-                case CORRECAO_MODO_H:
-                    if (qrcode.caracteres < 17) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 34) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 58) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+                case CORRECAO_MODO_H:ESCOLHER_VERSAO(17, 34, 58);
+                    break;
+                default:qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
                     break;
             }
             break;
         case MODO_ALPHANUMERICO:
-            switch (qrcode.MODE_correcaoDeErro) {
-                case CORRECAO_MODO_L:
-                    if (qrcode.caracteres < 25) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 47) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 77) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+            switch (qrcode.tabela.nivelCorrecaoErro) {
+                case CORRECAO_MODO_L:ESCOLHER_VERSAO(25, 47, 77);
                     break;
-                case CORRECAO_MODO_M:
-                    if (qrcode.caracteres < 20) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 38) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 61) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+                case CORRECAO_MODO_M:ESCOLHER_VERSAO(20, 38, 61);
                     break;
-                case CORRECAO_MODO_Q:
-                    if (qrcode.caracteres < 16) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 29) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 47) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+                case CORRECAO_MODO_Q:ESCOLHER_VERSAO(16, 29, 47);
                     break;
-                case CORRECAO_MODO_H:
-                    if (qrcode.caracteres < 10) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 20) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 35) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+                case CORRECAO_MODO_H:ESCOLHER_VERSAO(10, 20, 35);
+                    break;
+                default:qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
                     break;
             }
             break;
-
+        
         case MODO_BYTE:
-            switch (qrcode.MODE_correcaoDeErro) {
-                case CORRECAO_MODO_L:
-                    if (qrcode.caracteres < 17) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 32) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 53) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+            switch (qrcode.tabela.nivelCorrecaoErro) {
+                case CORRECAO_MODO_L:ESCOLHER_VERSAO(17, 32, 53);
                     break;
-                case CORRECAO_MODO_M:
-                    if (qrcode.caracteres < 14) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 26) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 42) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+                case CORRECAO_MODO_M:ESCOLHER_VERSAO(14, 26, 42);
                     break;
-                case CORRECAO_MODO_Q:
-                    if (qrcode.caracteres < 11) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 20) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 32) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+                case CORRECAO_MODO_Q:ESCOLHER_VERSAO(11, 20, 32);
                     break;
-                case CORRECAO_MODO_H:
-                    if (qrcode.caracteres < 7) {
-                        qrcode.versao = 1;
-                    } else if (qrcode.caracteres < 53) {
-                        qrcode.versao = 2;
-                    } else if (qrcode.caracteres < 24) {
-                        qrcode.versao = 3;
-                    } else {
-                        qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED;
-                    }
+                case CORRECAO_MODO_H:ESCOLHER_VERSAO(7, 14, 24);
                     break;
-
+                default:qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
+                    break;
             }
+        default:break;
     }
     if (qrcode.error == EXCEPTION_LENGTH_UNSUPPORTED && qrcode.MODE_CORRECAO_AUTOMATICO == 1) {
-
-        switch (qrcode.MODE_correcaoDeErro) {
-            case CORRECAO_MODO_H:
-                qrcode.MODE_correcaoDeErro = CORRECAO_MODO_Q;
+        switch (qrcode.tabela.nivelCorrecaoErro) {
+            case CORRECAO_MODO_H:qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_Q;
                 CODF_ETAPA2();
                 break;
-            case CORRECAO_MODO_Q:
-                qrcode.MODE_correcaoDeErro = CORRECAO_MODO_M;
+            case CORRECAO_MODO_Q:qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_M;
                 CODF_ETAPA2();
                 break;
-            case CORRECAO_MODO_M:
-                qrcode.MODE_correcaoDeErro = CORRECAO_MODO_L;
+            case CORRECAO_MODO_M:qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_L;
                 CODF_ETAPA2();
                 break;
-
+            default:break;
+            
         }
-
+        
     } else {
-        LOG("CODIFICACAO ETAPA2\n   Modo erro: %c\n   Version %d\n\n", qrcode.MODE_correcaoDeErro, qrcode.versao);
-
+        LOG("CODIFICACAO ETAPA2\n   Modo erro: %c\n   Version %d\n\n", qrcode.tabela.nivelCorrecaoErro, qrcode.tabela.version);
+        
     }
     if (qrcode.error < 0) {
         LOG("~ERROR  %d:CODIFICACAO ETAPA2\n ", qrcode.error);
     }
-
+    
 }
 // o usuario escolhe a correcao de erro
 
@@ -254,25 +157,25 @@ void CODF_ETAPA3() {
     // 0001 para MODO_NUMERICO
     // 0010 para MODO_ALPHANUMERICO
     // 0100 para MODO_BYTE
-
+    
     converterParaBinario(qrcode.strBinMode4Bits, qrcode.MODE_TYPE, 4);
     LOG("CODIFICACAO ETAPA3 \n   indicador de modo: %s\n\n", qrcode.strBinMode4Bits);
-
+    
 }
 
 void CODF_ETAPA4() {
     // if (qrcode.error < 0)
     //   return;
-    //contar os caracteres da frase a ser criptografada
+    //contar os tamanhoDa_mensagemAserCriptografada da frase a ser criptografada
     // antes de converter defina a quantidade de bits que seu binario tera
     // 10 bits para MODO_NUMERICO
     // 9 bits para MODO_ALPHANUMERICO
     // 8 bits para MODO_BYTE
-    //converter o numero de caracteres para binario
+    //converter o numero de tamanhoDa_mensagemAserCriptografada para binario
     int i, j;
     qrcode.qtBitsMode = (qrcode.MODE_TYPE == MODO_NUMERICO) * 10 + (qrcode.MODE_TYPE == MODO_ALPHANUMERICO) * 9 +
                         (qrcode.MODE_TYPE == MODO_BYTE) * 8;
-    converterParaBinario(qrcode.indicadorDecontagemDeCaracteres, qrcode.caracteres, qrcode.qtBitsMode);
+    converterParaBinario(qrcode.indicadorDecontagemDeCaracteres, qrcode.tamanhoDa_mensagemAserCriptografada, qrcode.qtBitsMode);
     // unir a seq de 4 bits da etapa anterior com a sequencia de bits atual(numero de letras em binario)
     qrcode.strbits = (char *) calloc(qrcode.qtBitsMode + 4 + 1, sizeof(char));
     for (i = 0; i < 4; i++) {
@@ -285,17 +188,51 @@ void CODF_ETAPA4() {
     LOG("CODIFICACAO ETAPA4 \n   quantidade de bits :%d   %s\n   strings concatendas: %s\n\n", qrcode.qtBitsMode, qrcode.indicadorDecontagemDeCaracteres, qrcode.strbits);
 }
 
-int alphaValue(int x1,int x2){
 
-}
-void modoAlphanumerico(){
-    int coluna = 2;
-    //HELO
-    int i, valor;
-    for(i=0; i < qrcode.caracteres/coluna; i++){
-        valor = alphaValue(qrcode.mensagemAserCriptografada[i*coluna],qrcode.mensagemAserCriptografada[i*coluna+1]);
+
+void modoAlphanumerico() {
+    int coluna = 2, i, valor, tamanhoDastfin, bits = 1, j;
+    char *stfin;
+    
+    if (qrcode.tamanhoDa_mensagemAserCriptografada % 2) {
+        tamanhoDastfin = ((qrcode.tamanhoDa_mensagemAserCriptografada - 1) / 2) * 11 + 6;
+    } else
+        tamanhoDastfin = ((qrcode.tamanhoDa_mensagemAserCriptografada) / 2) * 11;
+    tamanhoDastfin++;
+    
+    stfin = (char *) calloc(tamanhoDastfin, sizeof(char));
+    qrcode.tamanhoDa_mensagemAserCriptografada = contaLetras(qrcode.mensagemAserCriptografada);
+    logFile = fopen("debug.txt", "a");
+    if (!logFile) {
+        logFile = fopen("debug.txt", "w");
     }
+    
+    for (i = 0; i < qrcode.tamanhoDa_mensagemAserCriptografada / coluna; i++) {
+        valor = alphaValue(qrcode.mensagemAserCriptografada[i * coluna], qrcode.mensagemAserCriptografada[i * coluna +
+                                                                                                          1]);
+        converterParaBinario(stfin + bits - 1, valor, 11);
+        fprintf(logFile, "%s\n", stfin + bits - 1);
+        bits += 11;
+    }
+    if (qrcode.tamanhoDa_mensagemAserCriptografada % 2) {
+        valor = alphaValue('0', qrcode.mensagemAserCriptografada[qrcode.tamanhoDa_mensagemAserCriptografada - 1]);
+        converterParaBinario(stfin + bits - 1, valor, 6);
+        fprintf(logFile, "%s\n", stfin + bits - 1);
+        bits += 6;
+    }
+    
+    qrcode.strbits = (char *) realloc(qrcode.strbits, bits + 4 + qrcode.qtBitsMode);
+    for (i = qrcode.qtBitsMode + 4, j = 0; stfin[j]; i++, j++) {
+        qrcode.strbits[i] = stfin[j];
+    }
+    qrcode.strbits[i] = 0;
+    
+    fprintf(logFile, "   numeros convertidos %s\n", stfin);
+    fprintf(logFile, "   str bits %s\n", qrcode.strbits);
+    fclose(logFile);
+    free(stfin);
 }
+
 void CODF_ETAPA5() {
 // Encode Using the Selected Mode
     if (qrcode.error < 0) {
@@ -304,36 +241,30 @@ void CODF_ETAPA5() {
     }
     LOG("CODIFICACAO ETAPA5\n");
     switch (qrcode.MODE_TYPE) {
-        case MODO_NUMERICO:
-            modoNumerico();
+        case MODO_NUMERICO:modoNumerico();
             break;
-        case MODO_ALPHANUMERICO:
-            modoAlphanumerico();
-        default:
-            break;
+        case MODO_ALPHANUMERICO:modoAlphanumerico();
+        default:break;
     }
     LOG("\n");
 }
+
 void CODF_ETAPA6() {
     if (qrcode.error < 0)
         return;
     int add = 1;
     LOG("ETAPA 6\n");
     //determinar numero de bits necessarios
-    switch (qrcode.versao) {
-        case 1:
-        COMPARE_MODO_CORRECAO(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 19, 16, 13, 9);
+    switch (qrcode.tabela.version) {
+        case 1:COMPARE_MODO_CORRECAO(qrcode.tabela.numeroTotaldePalavrasChavedeDados, qrcode.tabela.nivelCorrecaoErro, 19, 16, 13, 9);
             break;
-        case 2:
-        COMPARE_MODO_CORRECAO(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 34, 28, 22, 16);
+        case 2:COMPARE_MODO_CORRECAO(qrcode.tabela.numeroTotaldePalavrasChavedeDados, qrcode.tabela.nivelCorrecaoErro, 34, 28, 22, 16);
             break;
-        case 3:
-        COMPARE_MODO_CORRECAO(qrcode.numeroDePalavrasChave_cd6, qrcode.MODE_correcaoDeErro, 55, 44, 34, 26);
+        case 3:COMPARE_MODO_CORRECAO(qrcode.tabela.numeroTotaldePalavrasChavedeDados, qrcode.tabela.nivelCorrecaoErro, 55, 44, 34, 26);
             break;
-        default:
-            qrcode.error = EXCEPTION_BUG_IN_CHOSEN_VERSION;
+        default:qrcode.error = EXCEPTION_BUG_IN_CHOSEN_VERSION;
     }
-    LOG("   N de palavras chaves: %d\n", qrcode.numeroDePalavrasChave_cd6);
+    LOG("   N de palavras chaves: %d\n", qrcode.tabela.numeroTotaldePalavrasChavedeDados);
 //deixar multiplo de 8
     while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) % 8 != 0) {
         qrcode.strbits = realloc(qrcode.strbits, 2 + qrcode.tamanhoDaStrbits);//1230*
@@ -342,8 +273,8 @@ void CODF_ETAPA6() {
     }
     LOG("   strbits : %s\n   tamanho : %d\n", qrcode.strbits, qrcode.tamanhoDaStrbits);
     //multiplica o numero de palavras chave por  8
-    qrcode.numeroDePalavrasChave_cd6 *= 8;
-    while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) < qrcode.numeroDePalavrasChave_cd6) {
+    qrcode.tabela.numeroTotaldePalavrasChavedeDados *= 8;
+    while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) < qrcode.tabela.numeroTotaldePalavrasChavedeDados) {
         qrcode.strbits = realloc(qrcode.strbits, 9 + qrcode.tamanhoDaStrbits);
         if (add) {
             converterParaBinario(qrcode.strbits + qrcode.tamanhoDaStrbits, 236, 8);
@@ -354,31 +285,31 @@ void CODF_ETAPA6() {
         }
     }
     LOG("   adicionando 236 17 , strbits : %s\n\n", qrcode.strbits, qrcode.tamanhoDaStrbits);
-
+    
 }
 
 void modoNumerico() {
     char *stfin;
     int coluna = 3;
-    int i, j, a = 0, bits = 1, tamanhoDastfin = (qrcode.caracteres / 3) * 10;
-    if ((j = qrcode.caracteres % 3) == 2) {
+    int i, j, a = 0, bits = 1, tamanhoDastfin = (qrcode.tamanhoDa_mensagemAserCriptografada / 3) * 10;
+    if ((j = qrcode.tamanhoDa_mensagemAserCriptografada % 3) == 2) {
         tamanhoDastfin += 7;
     } else if (j == 1) {
         tamanhoDastfin += 4;
     }
     tamanhoDastfin++;
     stfin = (char *) calloc(tamanhoDastfin, sizeof(char));
-    qrcode.caracteres = contaLetras(qrcode.mensagemAserCriptografada);
+    qrcode.tamanhoDa_mensagemAserCriptografada = contaLetras(qrcode.mensagemAserCriptografada);
     logFile = fopen("debug.txt", "a");
     if (!logFile) {
         logFile = fopen("debug.txt", "w");
     }
-
-    for (i = 0; i < qrcode.caracteres; i += coluna) {
+    
+    for (i = 0; i < qrcode.tamanhoDa_mensagemAserCriptografada; i += coluna) {
         integerValueOf(
                 qrcode.mensagemAserCriptografada + i,
                 qrcode.mensagemAserCriptografada + (i / coluna) * coluna + coluna,
-                qrcode.mensagemAserCriptografada + qrcode.caracteres, &a);
+                qrcode.mensagemAserCriptografada + qrcode.tamanhoDa_mensagemAserCriptografada, &a);
         fprintf(logFile, "   %d     ", a);
         if (a < 10) {
             converterParaBinario(stfin + bits - 1, a, 4);
@@ -393,7 +324,7 @@ void modoNumerico() {
             fprintf(logFile, "%s\n", stfin + bits - 1);
             bits += 10;
         }
-
+        
         a = 0;
     }
     qrcode.strbits = (char *) realloc(qrcode.strbits, bits + 4 + qrcode.qtBitsMode);
@@ -401,12 +332,12 @@ void modoNumerico() {
         qrcode.strbits[i] = stfin[j];
     }
     qrcode.strbits[i] = 0;
-
+    
     fprintf(logFile, "   numeros convertidos %s\n", stfin);
     fprintf(logFile, "   str bits %s\n", qrcode.strbits);
     fclose(logFile);
     free(stfin);
-
+    
 }
 
 void CODF_ALL_STEPS() {
