@@ -9,10 +9,10 @@
 int main() {
     setlocale(LC_ALL, "pt-br");
     fclose(fopen("debug.txt", "w"));
-    char vet[] = "8675309";
+    char vet[] = "HELLO WORD";
     qrcode.mensagemAserCriptografada = vet;
     qrcode.MODE_CORRECAO_AUTOMATICO = 0;
-    qrcode.MODE_correcaoDeErro = CORRECAO_MODO_M;
+    qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_M;
     CODF_ALL_STEPS();
     CORREC_ETAPA8();
 
