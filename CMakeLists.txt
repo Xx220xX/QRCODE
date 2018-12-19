@@ -3,4 +3,4 @@ project(qrcode C)
 
 set(CMAKE_C_STANDARD 99)
 link_libraries(C:\\Users\\MORADIA082663\\CLionProjects\\qrcode\\libQRCode.a)
-add_executable(qrcode main.c FINAL_MENSAGE.h)
+add_executable(qrcode main.c)
