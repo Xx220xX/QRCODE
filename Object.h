@@ -47,7 +47,7 @@ typedef struct {
     int bitsdeRemanescenteRequeridos;
 } Table;
 typedef struct {
-    char *mat;
+    int *mat;
     int m, n;
     
 } Matriz;
@@ -174,7 +174,7 @@ void printa8Bits(FILE *f, char *str, int tam) {
     }
 }
 
-void printaQRIMG(char *mat, int m, int n) {
+void printaQRIMG(int *mat, int m, int n) {
     int i, j;
     logFile = fopen("debug.txt", "a");
     FILE *img = fopen("qrcod.pbm", "w");
@@ -189,7 +189,6 @@ void printaQRIMG(char *mat, int m, int n) {
     }
     fclose(logFile);
     fclose(img);
-    system("start qrcod.pbm");
 }
 
 #endif

@@ -12,7 +12,8 @@
         LOG("\n  i = %d, j =  %d \n",i,j);\
         return;\
     }
-void fazerQuadrado(int i0, int j0, int tamanhoI, int tamanhoJ, char *mat, int m, int n, char value) {
+
+void fazerQuadrado(int i0, int j0, int tamanhoI, int tamanhoJ, int *mat, int m, int n, char value) {
     int i, j;
     if (mat == 0) {
         qrcode.error = NULLPoiterException;
@@ -38,7 +39,7 @@ void fazerQuadrado(int i0, int j0, int tamanhoI, int tamanhoJ, char *mat, int m,
     }
 }
 
-void printMatchar(char *mat, int m, int n) {
+void printMatchar(int *mat, int m, int n) {
     int i, j;
     logFile = fopen("debug.txt", "a");
     for (i = 0; i < m; ++i) {
@@ -58,7 +59,7 @@ void Posicionar_ETAPA1() {
     int m = 21, n;
     m += (qrcode.tabela.version - 1) * 4;
     n = m;
-    char *mat = calloc(m * n, sizeof(char));
+    int *mat = calloc(m * n, sizeof(int));
     //externo preto 7x7
     fazerQuadrado(0, 0, 7, 7, mat, m, n, fixosPretos);
     fazerQuadrado(0, n - 7, 7, 7, mat, m, n, fixosPretos);
@@ -183,7 +184,7 @@ void Posicionar_ETAPA6() {
     int ordem = i + 1;
     for (k = 0; k < qrcode.tamanhoDaStrbits;) {
         testeERROR()
-        printf("eae man k = %d de %d\n", k, qrcode.tamanhoDaStrbits);
+        //  printf("eae man k = %d de %d\n", k, qrcode.tamanhoDaStrbits);
         
         testeERROR()
         if (!qrcode.QRImagem.mat[i * ordem + j]) {

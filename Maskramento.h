@@ -7,15 +7,15 @@
 
 #include "Object.h"
 
-int temBloco_Aux_A2(int i0, int j0, char *mat, int m, int n);
+int temBloco_Aux_A2(int i0, int j0, int *mat, int m, int n);
 
-int padrao_Aux_A3(int i0, int j0, char *mat, int m, int n);
+int padrao_Aux_A3(int i0, int j0, int *mat, int m, int n);
 
-int fiveEqualBlocksColuns_Aux_A1(int i0, int j0, char *mat, int m, int n);
+int fiveEqualBlocksColuns_Aux_A1(int i0, int j0, int *mat, int m, int n);
 
-int fiveEqualBlocksLines_Aux_A1(int i0, int j0, char *mat, int m, int n);
+int fiveEqualBlocksLines_Aux_A1(int i0, int j0, int *mat, int m, int n);
 
-int Penalidade_A1(char *mat, int m, int n) {
+int Penalidade_A1(int *mat, int m, int n) {
     int i, j;
     int pontuacao = 0;
     int aux;
@@ -45,7 +45,7 @@ int Penalidade_A1(char *mat, int m, int n) {
     }
 }
 
-int Penalidade_A2(char *mat, int m, int n) {
+int Penalidade_A2(int *mat, int m, int n) {
     int i, j;
     int blocos = 0;
     for (i = 0; i < m; i++) {
@@ -57,7 +57,7 @@ int Penalidade_A2(char *mat, int m, int n) {
     return (blocos * 3);
 }
 
-int Penalidade_A3(char *mat, int m, int n) {
+int Penalidade_A3(int *mat, int m, int n) {
     //procurar o padrão
     //10111010000 ou 00001011101 (cores), Cada vez que esse padrão é encontrado, adicione 40 à pontuação de penalidade
     int i, j;
@@ -71,7 +71,7 @@ int Penalidade_A3(char *mat, int m, int n) {
 }
 
 
-int Penalidade_A4(char *mat, int m, int n) {
+int Penalidade_A4(int *mat, int m, int n) {
     int i, j, pretas = 0, total;
     int porcentagem, multiplo_ant, multiplo_seg, penalidade;
     total = m * n;
@@ -96,7 +96,7 @@ int Penalidade_A4(char *mat, int m, int n) {
     return penalidade;
 }
 
-int penalidadeMax(char *mat, int m, int n) {
+int penalidadeMax(int *mat, int m, int n) {
     int pontuacao = 0, aux;
     aux = Penalidade_A1(mat, m, n);
     LOG("    Penalidade 1: %d\n", aux);
@@ -115,56 +115,69 @@ int penalidadeMax(char *mat, int m, int n) {
 }
 
 
-void aplicando_Masc(int num_mascara, char *origin, char *buff, int m, int n) {
+void aplicando_Masc(int num_mascara, int *origin, int *buff, int m, int n) {
     int i, j;
+    LOG("\n\n modulo2\n");
+    printaQRIMG(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+    LOG("\n\n");
+    
     for (i = 0; i < m; i++) {
         for (j = 0; j < m; j++) {
-            if (origin[i * n + j] != '0' || origin[i * n + j] != '1') {
-                buff[i * n + j] = origin[i * n + j] % 2;
-                continue;
-            }
-            switch (num_mascara) {
-                case 0:
-                    if ((i + j) % 2 == 0) {
-                        buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
-                    }
-                    break;
-                case 1:
-                    if (i % 2 == 0) {
-                        buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
-                    }
-                    break;
-                case 2:
-                    if (j % 3 == 0) {
-                        buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
-                    }
-                    break;
-                case 3:
-                    if ((i + j) % 3 == 0) {
-                        buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
-                    }
-                    break;
-                case 4:
-                    if (((i / 2) + (j / 3)) % 2 == 0) {
-                        buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
-                    }
-                    break;
-                case 5:
-                    if (((i * j) % 2) + ((i * j) % 3) == 0) {
-                        buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
-                    }
-                    break;
-                case 6:
-                    if ((((i * j) % 2) + ((i * j) % 3)) % 2 == 0) {
-                        buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
-                    }
-                    break;
-                case 7:
-                    if ((((i + j) % 2) + ((i * j) % 3)) % 2 == 0) {
-                        buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
-                    }
-                    break;
-                default: return;
+            if (origin[i * n + j] < 20) {
+                buff[i * n + j] = (origin[i * n + j] % 2);
+                if (num_mascara == 0) {
+                    printf("i : %d, j : %d __ %d, mat = %d\n", i, j, origin[i * n + j], buff[i * n + j]);
+                }
+            } else {
+                buff[i * n + j] = (origin[i * n + j] % 2);
+                switch (num_mascara) {
+                    case 0:
+                        if ((i + j) % 2 == 0) {
+                            buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
+                            printf("+");
+                        }
+                        break;
+                    case 1:
+                        if (i % 2 == 0) {
+                            buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
+                        }
+                        break;
+                    case 2:
+                        if (j % 3 == 0) {
+                            buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
+                        }
+                        break;
+                    case 3:
+                        if ((i + j) % 3 == 0) {
+                            buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
+                        }
+                        break;
+                    case 4:
+                        if (((i / 2) + (j / 3)) % 2 == 0) {
+                            buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
+                        }
+                        break;
+                    case 5:
+                        if (((i * j) % 2) + ((i * j) % 3) == 0) {
+                            buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
+                        }
+                        break;
+                    case 6:
+                        if ((((i * j) % 2) + ((i * j) % 3)) % 2 == 0) {
+                            buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
+                        }
+                        break;
+                    case 7:
+                        if ((((i + j) % 2) + ((i * j) % 3)) % 2 == 0) {
+                            buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
+                        }
+                        break;
+                    default:break;
+                }
+                if (num_mascara == 0) {
+                    printf("----------->i : %d, j : %d __ %d, mat = %d\n", i, j, origin[i * n + j], buff[i * n + j]);
+                }
+    
             }
         }
     }
@@ -176,26 +189,25 @@ void MASK_ETAPA_MASCARAR() {
     int pontuacao1, pontuacao2;
     int i = 0;
     int melhorMask = 0;
-    char *mat = calloc(qrcode.QRImagem.m * qrcode.QRImagem.n, sizeof(char));
-    for (int i = 0; i < 8; ++i) {
+    int *mat = calloc(qrcode.QRImagem.m * qrcode.QRImagem.n, sizeof(int));
+    for (int i = 0; i < 8; i++) {
         LOG("\n   Mascara %d\n", i);
         aplicando_Masc(i, qrcode.QRImagem.mat, mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
         printaQRIMG(mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
         if (i == 0) {
             pontuacao1 = penalidadeMax(mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
-            melhorMask = 0;
-            continue;
-        }
-        pontuacao2 = penalidadeMax(mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
-        if (pontuacao1 > pontuacao2) {
-            pontuacao1 = pontuacao2;
-            melhorMask = i;
+        } else {
+            pontuacao2 = penalidadeMax(mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+            if (pontuacao1 > pontuacao2) {
+                pontuacao1 = pontuacao2;
+                melhorMask = i;
+            }
         }
     }
     free(mat);
 }
 
-int temBloco_Aux_A2(int i0, int j0, char *mat, int m, int n) {
+int temBloco_Aux_A2(int i0, int j0, int *mat, int m, int n) {
     int a;
     if (i0 >= 0 && i0 < m && i0 + 1 < m) {
         if (j0 >= 0 && j0 < n && j0 + 1 < n) {
@@ -208,7 +220,7 @@ int temBloco_Aux_A2(int i0, int j0, char *mat, int m, int n) {
     return 0;
 }
 
-int padrao_Aux_A3(int i0, int j0, char *mat, int m, int n) {
+int padrao_Aux_A3(int i0, int j0, int *mat, int m, int n) {
     int i = 0, k = i0;
     int vet1[11] = {1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0};
     int vet2[11] = {0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1};
@@ -253,7 +265,7 @@ int padrao_Aux_A3(int i0, int j0, char *mat, int m, int n) {
     return pontuacao;
 }
 
-int fiveEqualBlocksLines_Aux_A1(int i0, int j0, char *mat, int m, int n) {
+int fiveEqualBlocksLines_Aux_A1(int i0, int j0, int *mat, int m, int n) {
     int repetidos = 0;
     for (; j0 < n; j0++) {
         if (j0 + 1 < n) {
@@ -270,7 +282,7 @@ int fiveEqualBlocksLines_Aux_A1(int i0, int j0, char *mat, int m, int n) {
     return 0;
 }
 
-int fiveEqualBlocksColuns_Aux_A1(int i0, int j0, char *mat, int m, int n) {
+int fiveEqualBlocksColuns_Aux_A1(int i0, int j0, int *mat, int m, int n) {
     int repetidos = 0;
     for (; i0 < n; i0++) {
         if (i0 + 1 < m) {
