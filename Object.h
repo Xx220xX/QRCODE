@@ -41,6 +41,8 @@ typedef struct {
     int qtDePalavrasCodigo_Grupo_1;
     int qtBlocosGrupo_2;
     int qtDePalavrasCodigo_Grupo_2;
+    
+    int bitsdeRemanescenteRequeridos;
 } Table;
 typedef struct {
     Table tabela;

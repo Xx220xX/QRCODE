@@ -3,6 +3,7 @@
 #include"Object.h"
 #include "CODIFIC.h"
 #include "CORRECAO_DE_ERROS.h"
+#include "FINAL_MENSAGE.h"
 #include<stdlib.h>
 
 #define tamanho 127
@@ -28,6 +29,7 @@ int main() {
     qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
     CODF_ALL_STEPS();
     CORREC_ALL();
+    FINAL_ETAPA1();
     system("start debug.txt");
     freeqr();
     
