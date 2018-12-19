@@ -4,8 +4,16 @@
 #include <stdio.h>
 #include "Object.h"
 
-void imprimeVetor(unsigned char v[], int N);
+void printaVetUChar(unsigned char *v, int N);
 
+void printaUnsignedSHORT(unsigned short *numbers, int tamanho) {
+    int i;
+    logFile = fopen("debug.txt", "a");
+    for (i = 0; i < tamanho; ++i) {
+        fprintf(logFile, "%d ", numbers[i]);
+    }
+    fclose(logFile);
+}
 
 void CORREC_ETAPA1() {
     ERROR();
@@ -38,11 +46,10 @@ void CORREC_ETAPA8() {
     while ((bytes) * 8 < qrcode.tamanhoDaStrbits) {
         dec = realloc(dec, (bytes + 1) * 8);
         dec[bytes] = binaryToDec(
-                qrcode.strbits + (bytes * 8),
-                qrcode.strbits + ((1 + bytes) * 8), qrcode.strbits + qrcode.tamanhoDaStrbits * 8);
+                qrcode.strbits + (bytes * 8), qrcode.strbits + ((1 + bytes) * 8), qrcode.strbits + qrcode.tamanhoDaStrbits * 8);
         bytes++;
     }
-
+    
     //pegando numero de palavras de corretor de erro
     switch (qrcode.tabela.version) {
         case 1:COMPARE_MODO_CORRECAO(qrcode.tabela.bytesCorretoresPorBloco, qrcode.tabela.nivelCorrecaoErro, 7, 10, 13, 17);
@@ -53,17 +60,17 @@ void CORREC_ETAPA8() {
             break;
         default:break;
     }
-
+    
     qrcode.msgNumbers = dec;
     qrcode.tamanhoDa_msgNumbers = bytes;
-    LOG("CORRECAO_ETAPA8\n   bytes: %d\n   ", bytes);
+    LOG("CORRECAO_ETAPA8\n   tamanhoDa_msgNumbers: %d\n   numero de bytesCorretoresPorBloco %d\n\n str bits agr : \n     ", bytes, qrcode.tabela.bytesCorretoresPorBloco);
     logFile = fopen("debug.txt", "a");
-    printa8Bits(logFile, qrcode.strbits);
-    fprintf(logFile, "\n   ");
+    printa8Bits(logFile, qrcode.strbits, qrcode.tamanhoDaStrbits);
+    fprintf(logFile, "\n\n    msg Numbers: \n     ");
     for (i = 0; i < bytes; ++i) {
         fprintf(logFile, "%d ", dec[i]);
     }
-
+    
     fclose(logFile);
 }
 
@@ -73,80 +80,59 @@ void CORREC_CORRIGIR() {
     unsigned short *aux_paraIntercalar;
     int i, j, k = 0;
     if (qrcode.tabela.qtBlocosGrupo_1 == 1) {
+        qrcode.tamanhoDosCodigosCorretores = qrcode.tabela.bytesCorretoresPorBloco;
         codigo = CodigosCorretores(qrcode.msgNumbers, qrcode.tamanhoDa_msgNumbers, qrcode.tabela.bytesCorretoresPorBloco);
-        LOG("\ncodigos corretores : ");
-        imprimeVetor(codigo, qrcode.tabela.bytesCorretoresPorBloco);
+        LOG("\n\n\n______codigos corretores______ :\n       ");
+        printaVetUChar(codigo, qrcode.tabela.bytesCorretoresPorBloco);
     } else if (qrcode.tabela.qtBlocosGrupo_1 == 2) {
+        qrcode.tamanhoDosCodigosCorretores = qrcode.tabela.bytesCorretoresPorBloco * 2;
+        codigo = CodigosCorretores(qrcode.msgNumbers, (qrcode.tamanhoDa_msgNumbers / 2), qrcode.tabela.bytesCorretoresPorBloco);
+        codigo_aux = CodigosCorretores(qrcode.msgNumbers + (qrcode.tamanhoDa_msgNumbers / 2), (qrcode.tamanhoDa_msgNumbers / 2), qrcode.tabela.bytesCorretoresPorBloco);
+    
+        /*** INTERCALAR ***/
         aux_paraIntercalar = (unsigned short *) calloc(qrcode.tamanhoDa_msgNumbers, sizeof(unsigned short));
-        for (i = 0, j = qrcode.tamanhoDa_msgNumbers / 2; i < qrcode.tamanhoDa_msgNumbers / 2;) {
-            aux_paraIntercalar[k++] = qrcode.msgNumbers[i++];
-            aux_paraIntercalar[k++] = qrcode.msgNumbers[j++];
+        for (i = 0, j = qrcode.tamanhoDa_msgNumbers / 2; i < qrcode.tamanhoDa_msgNumbers / 2; i++, j++) {
+            aux_paraIntercalar[k] = qrcode.msgNumbers[i];
+            aux_paraIntercalar[k + 1] = qrcode.msgNumbers[j];
+            k += 2;
         }
-        free(qrcode.msgNumbers);
+        LOG("\n\n    msg INTERCALADA :\n    ");
+        printaUnsignedSHORT(aux_paraIntercalar, qrcode.tamanhoDa_msgNumbers);
+        fprintf(logFile, "    fim da intercalada\n\n");
+    
+        /*** codigo corretores 1*/
+        LOG("\n______________ BLOCO 1:\n         msgNumbers bloco 1\n                   ");
+        printaUnsignedSHORT(qrcode.msgNumbers, (qrcode.tamanhoDa_msgNumbers / 2));
+    
+        LOG("\n                    codigos corretores : \n                   ");
+        printaVetUChar(codigo, qrcode.tabela.bytesCorretoresPorBloco);
+        /*** codigo corretores 2*/
+        LOG("\n______________ BLOCO 2:\n         msgNumbers bloco 2\n                   ");
+        printaUnsignedSHORT(qrcode.msgNumbers + (qrcode.tamanhoDa_msgNumbers / 2), qrcode.tamanhoDa_msgNumbers / 2);
+    
+        LOG("\n                    codigos corretores : \n                   ");
+        printaVetUChar(codigo_aux, qrcode.tabela.bytesCorretoresPorBloco);
+        for (i = 0, k = 0, j = 0; i < qrcode.tabela.bytesCorretoresPorBloco; i++, j++) {
+            qrcode.codigosCorretores = (char *) realloc(qrcode.codigosCorretores, k + 2);
+            qrcode.codigosCorretores[k++] = codigo[i];
+            qrcode.codigosCorretores[k++] = codigo_aux[j];
+        }
+        qrcode.codigosCorretores = (char *) realloc(qrcode.codigosCorretores, k + 1);
+        qrcode.codigosCorretores[k] = 0;
+    
+        LOG("\n\n   corretores  INTERCALADos :\n    ");
+        printaVetUChar(qrcode.codigosCorretores, qrcode.tamanhoDosCodigosCorretores);
         qrcode.msgNumbers = aux_paraIntercalar;
-        LOG("\n    INTERCALADA :\n    ");
-        logFile = fopen("debug.txt", "a");
-        for (i = 0; i < qrcode.tamanhoDa_msgNumbers; ++i) {
-            fprintf(logFile, "%d ", qrcode.msgNumbers[i]);
-        }
-        
-        fclose(logFile);
-        
-        codigo = CodigosCorretores(qrcode.msgNumbers,
-                                   qrcode.tamanhoDa_msgNumbers / 2, qrcode.tabela.bytesCorretoresPorBloco);
-        codigo_aux = CodigosCorretores(
-                qrcode.msgNumbers + qrcode.tabela.bytesCorretoresPorBloco,
-                qrcode.tamanhoDa_msgNumbers / 2, qrcode.tabela.bytesCorretoresPorBloco);
-        codigo = realloc(codigo, qrcode.tabela.bytesCorretoresPorBloco * 2);
-        for (i = qrcode.tabela.bytesCorretoresPorBloco, j = 0; j < qrcode.tabela.bytesCorretoresPorBloco; j++, i++) {
-            codigo[i] = codigo_aux[j];
-        }
+        free(codigo);
+        codigo = qrcode.codigosCorretores;
         free(codigo_aux);
-        LOG("\ncodigos corretores : ", codigo);
-        imprimeVetor(codigo, qrcode.tabela.bytesCorretoresPorBloco * 2);
     }
     qrcode.codigosCorretores = codigo;
-
+    
 }
 
-// Programa que mostra exemplo de como utilizar a biblioteca QRCode.h para determinar os Error Correction Codewords
 
-
-
-int test() {
-    unsigned short mens1[15] = {67, 85, 70, 134, 87, 38, 85, 194, 119, 50, 6, 18, 6, 103, 38};
-    unsigned short mens2[15] = {246, 246, 66, 7, 118, 134, 242, 7, 38, 86, 22, 198, 199, 146, 6};
-    unsigned short mens3[16] = {182, 230, 247, 119, 50, 7, 118, 134, 87, 38, 82, 6, 134, 151, 50, 7};
-    unsigned char *cod1, *cod2, *cod3, *codStringFormat;
-    
-    printf("Codigos 1: ");
-    cod1 = CodigosCorretores(mens1, 15, 18);
-    imprimeVetor(cod1, 18);
-    printf("\n\n");
-    
-    printf("Codigos 2: ");
-    cod2 = CodigosCorretores(mens2, 15, 18);
-    imprimeVetor(cod2, 18);
-    printf("\n\n");
-    
-    printf("Codigos 3: ");
-    cod3 = CodigosCorretores(mens3, 16, 18);
-    imprimeVetor(cod3, 18);
-    printf("\n\n");
-    
-    codStringFormat = CodigosCorretoresStringFormat("01100");
-    printf("Codigos Corretores da String Format: %s\n", codStringFormat);
-    
-    // As 4 linhas seguintes libera a mem?ria alocada dinamicamente pela fun??o de c?lculos dos c?digos corretores
-    free(cod1);
-    free(cod2);
-    free(cod3);
-    free(codStringFormat);
-    
-    return 0;
-}
-
-void imprimeVetor(unsigned char v[], int N) {
+void printaVetUChar(unsigned char *v, int N) {
     unsigned short i;
     logFile = fopen("debug.txt", "a");
     for (i = 0; i < N; i++) {
@@ -157,5 +143,4 @@ void imprimeVetor(unsigned char v[], int N) {
 }
 
 
-#undef CAST
 #endif //QRCODE_CORRECAO_DE_ERROS_H_H

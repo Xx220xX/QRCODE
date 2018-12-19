@@ -23,6 +23,8 @@ C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
 C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
 stdlib.h
 -
+stdio.h
+-
 math.h
 -
 QRCode.h
