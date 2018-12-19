@@ -46,7 +46,7 @@ void printMatchar(char *mat, int m, int n) {
 
 void Posicionar_ETAPA1() {
     ERROR();
-    int m = 24, n;
+    int m = 21, n;
     m += (qrcode.tabela.version - 1) * 4;
     n = m;
     char *mat = calloc(m * n, sizeof(char));
@@ -77,12 +77,52 @@ void Posicionar_ETAPA2() {
     fazerQuadrado(-1, -1, 9, 9, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, separadores);
     fazerQuadrado(-1, qrcode.QRImagem.n - 8, 9, 9, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, separadores);
     fazerQuadrado(qrcode.QRImagem.m - 8, -1, 9, 9, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, separadores);
-    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
     
 }
 
 void Posicionar_ETAPA3() {
+//adicionar padroes de alinhamento
+    ERROR();
+    
+    if (qrcode.tabela.version == 2) {
+        fazerQuadrado(19, 19, 5, 5, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
+        fazerQuadrado(20, 20, 3, 3, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosBrancos);
+        fazerQuadrado(21, 21, 1, 1, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
+    } else if (qrcode.tabela.version == 3) {
+        fazerQuadrado(23, 23, 5, 5, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
+        fazerQuadrado(24, 24, 3, 3, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosBrancos);
+        fazerQuadrado(25, 25, 1, 1, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
+    }
+    
+}
 
+void Posicionar_ETAPA4() {
+    ERROR();
+    //padroes_tempo
+    int i, j, ordem = qrcode.QRImagem.m;
+    int add = 1; //alternar preto e branco
+    for (i = 6, j = 6; i < ordem; i++) {
+        if (!qrcode.QRImagem.mat[i * ordem + j]) {
+            if (add) {
+                qrcode.QRImagem.mat[i * ordem + j] = fixosPretos;
+            } else {
+                qrcode.QRImagem.mat[i * ordem + j] = fixosBrancos;
+            }
+            add = !add;
+        }
+    }
+    for (i = 6, j = 6, add = 1; j < ordem; j++) {
+        if (!qrcode.QRImagem.mat[i * ordem + j]) {
+            if (add) {
+                qrcode.QRImagem.mat[i * ordem + j] = fixosPretos;
+            } else {
+                qrcode.QRImagem.mat[i * ordem + j] = fixosBrancos;
+            }
+            add = !add;
+        }
+    }
+    printf("tamanha %d\n", ordem);
+    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
 }
 
 void Posicionar_ETAPA5() {
@@ -97,6 +137,7 @@ void Posicionar_ETAPA5() {
         } else
             i += ordem;
     }
+    printf("eae man");
     //baixo da esquerda superior
     i = ordem * 8;
     while (i <= ordem * 8 + 8) {
@@ -119,6 +160,7 @@ void Posicionar_ETAPA5() {
         i = i - ordem;
     }
     qrcode.QRImagem.mat[i] = 3; //modulo preto
+    
 }
 
 #endif //QRCODE_POSICIONAMENTODEMODULOEMMATRIZ_H
