@@ -1,10 +1,17 @@
 #ifndef QRCODE_POSICIONAMENTODEMODULOEMMATRIZ_H
 #define QRCODE_POSICIONAMENTODEMODULOEMMATRIZ_H
-#define separadores  1
-#define espacoReservado 4
+#define separadores  4
+#define espacoReservado 8
 #define fixosPretos 3
-#define fixosBrancos 2
-
+#define fixosBrancos 6
+#define fixosPretosTemporal 5
+#define fixosBrancosTemporal 2
+#define testeERROR()\
+    if(i * ordem + j<0 || i * ordem + j>=ordem*ordem){\
+        qrcode.error=ArrayIndexOutOfBoundsException;\
+        LOG("\n  i = %d, j =  %d \n",i,j);\
+        return;\
+    }
 void fazerQuadrado(int i0, int j0, int tamanhoI, int tamanhoJ, char *mat, int m, int n, char value) {
     int i, j;
     if (mat == 0) {
@@ -33,15 +40,17 @@ void fazerQuadrado(int i0, int j0, int tamanhoI, int tamanhoJ, char *mat, int m,
 
 void printMatchar(char *mat, int m, int n) {
     int i, j;
+    logFile = fopen("debug.txt", "a");
     for (i = 0; i < m; ++i) {
         for (j = 0; j < n; ++j) {
             if (mat[i * n + j] == 0) {
-                printf("  ");
+                fprintf(logFile, "  ");
             } else
-                printf("%d ", mat[i * n + j]);
+                fprintf(logFile, "%d ", mat[i * n + j]);
         }
-        printf("\n");
+        fprintf(logFile, "\n");
     }
+    fclose(logFile);
 }
 
 void Posicionar_ETAPA1() {
@@ -101,16 +110,17 @@ void Posicionar_ETAPA4() {
     //padroes_tempo
     int i, j, ordem = qrcode.QRImagem.m;
     int add = 1; //alternar preto e branco
+    //vertical
     for (i = 6, j = 6; i < ordem; i++) {
         if (!qrcode.QRImagem.mat[i * ordem + j]) {
             if (add) {
-                qrcode.QRImagem.mat[i * ordem + j] = fixosPretos;
+                qrcode.QRImagem.mat[i * ordem + j] = fixosPretosTemporal;
             } else {
-                qrcode.QRImagem.mat[i * ordem + j] = fixosBrancos;
+                qrcode.QRImagem.mat[i * ordem + j] = fixosBrancosTemporal;
             }
             add = !add;
         }
-    }
+    }//horizontal
     for (i = 6, j = 6, add = 1; j < ordem; j++) {
         if (!qrcode.QRImagem.mat[i * ordem + j]) {
             if (add) {
@@ -121,13 +131,11 @@ void Posicionar_ETAPA4() {
             add = !add;
         }
     }
-    printf("tamanha %d\n", ordem);
-    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
 }
 
 void Posicionar_ETAPA5() {
     //4 -> espaçoReservado
-    int i = 0, j = 9;
+    int i = 0, j = 8;
     int ordem = qrcode.QRImagem.m;
     //lateral da querda superior
     while (i <= 8) {
@@ -137,7 +145,6 @@ void Posicionar_ETAPA5() {
         } else
             i++;
     }
-    printf("eae man");
     //baixo da esquerda superior
     i = 8;
     j = 0;
@@ -162,6 +169,61 @@ void Posicionar_ETAPA5() {
         i--;
     }
     qrcode.QRImagem.mat[i * ordem + j] = fixosPretos; //modulo preto
+}
+
+void Posicionar_ETAPA6() {
+    ERROR();
+    //colocar strbits na matriz
+    int acrecimoDoI = -1;
+    int i = qrcode.QRImagem.m - 1, j = i, k;
+    int ordem = i + 1;
+    for (k = 0; k < qrcode.tamanhoDaStrbits;) {
+        testeERROR()
+        printf("eae man k = %d de %d\n", k, qrcode.tamanhoDaStrbits);
+        
+        testeERROR()
+        if (!qrcode.QRImagem.mat[i * ordem + j]) {
+            qrcode.QRImagem.mat[i * ordem + j] = qrcode.strbits[k++];
+        }
+        j--;
+        testeERROR()
+        if (!qrcode.QRImagem.mat[i * ordem + j]) {
+            qrcode.QRImagem.mat[i * ordem + j] = qrcode.strbits[k++];
+        }
+        i += acrecimoDoI;
+        j++;
+        if (i < 0) {
+            acrecimoDoI = -acrecimoDoI;
+            i = 0;
+            j -= 2;
+        } else if (i >= ordem) {
+            acrecimoDoI = -acrecimoDoI;
+            i = ordem - 1;
+            j -= 2;
+        }
+    }
+}
+
+void Posicionar_AllSTeps() {
+    ERROR();
+    LOG("\n\n________________posicionando na matriz __________________\n\n   Etapa 1: \n     ");
+    Posicionar_ETAPA1();
+    LOG("Tamanho da matriz : %d\n\n   ####saida na ETAPA1\n", qrcode.QRImagem.m);
+    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+    Posicionar_ETAPA2();
+    LOG("\n\n   ####saida na Etapa2:\n");
+    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+    Posicionar_ETAPA3();
+    LOG("\n\n   ####saida na Etapa3:\n");
+    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+    Posicionar_ETAPA4();
+    LOG("\n\n   ####saida na Etapa4:\n");
+    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+    Posicionar_ETAPA5();
+    LOG("\n\n   ####saida na Etapa5:\n");
+    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+    Posicionar_ETAPA6();
+    LOG("\n\n   ####saida na Etapa6:\n");
     printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
 }
 #endif //QRCODE_POSICIONAMENTODEMODULOEMMATRIZ_H

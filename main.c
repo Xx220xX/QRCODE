@@ -10,14 +10,6 @@
 #define tamanho 128
 
 int main() {
-    qrcode.tabela.version = 3;
-    Posicionar_ETAPA1();
-    Posicionar_ETAPA2();
-    Posicionar_ETAPA3();
-    Posicionar_ETAPA4();
-    Posicionar_ETAPA5();
-    freeqr();
-    return 0;
     system("chcp 1252");
     system("cls");
     setlocale(LC_ALL, "Portuguese");
@@ -39,9 +31,10 @@ int main() {
     CODF_ALL_STEPS();
     CORREC_ALL();
     FINAL_ETAPA1();
+    Posicionar_AllSTeps();
     system("start debug.txt");
     freeqr();
-    
+    printaERRO();
     printf("\nfim");
     return 0;
 }

@@ -46,11 +46,11 @@ typedef struct {
     
     int bitsdeRemanescenteRequeridos;
 } Table;
-    typedef struct {
-        char *mat;
-        int m, n;
-        
-    }Matriz;
+typedef struct {
+    char *mat;
+    int m, n;
+    
+} Matriz;
 typedef struct {
     Table tabela;
     int qtBitsMode;
@@ -87,7 +87,7 @@ void freeqr() {
     if (qrcode.codigosCorretores) {
         free(qrcode.codigosCorretores);
     }
-    if(qrcode.QRImagem.mat){
+    if (qrcode.QRImagem.mat) {
         free(qrcode.QRImagem.mat);
     }
 }
@@ -97,6 +97,24 @@ void integerValueOf(char *str_init, char *str_intervalo_fim, char *str_final_max
         if (*str_init >= '0' && *str_init <= '9')
             *n = *n * 10 + ((*str_init - '0'));
         integerValueOf((str_init + 1), str_intervalo_fim, str_final_maximo, n);
+    }
+}
+
+void printaERRO() {
+    char *mensage;
+    if (qrcode.error < 0) {
+        if (qrcode.error == EXCEPTION_LENGTH_UNSUPPORTED) {
+            mensage = "EXCEPTION_LENGTH_UNSUPPORTED";
+        } else if (qrcode.error == EXCEPTION_BUG_IN_CHOSEN_VERSION) {
+            mensage = "EXCEPTION_BUG_IN_CHOSEN_VERSION";
+        } else if (qrcode.error == ArrayIndexOutOfBoundsException) {
+            mensage = "ArrayIndexOutOfBoundsException";
+        } else if (qrcode.error == ArrayIndexOutOfBoundsException) {
+            mensage = "ArrayIndexOutOfBoundsException";
+        } else if (qrcode.error == NULLPoiterException) {
+            mensage = "NULLPoiterException";
+        }
+        LOG("\n\nERROR: %s", mensage);
     }
 }
 
