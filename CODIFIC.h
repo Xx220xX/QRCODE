@@ -342,7 +342,11 @@ void CODF_ETAPA6() {
             add = 1;
         }
     }
-    LOG("   adicionando 236 17 , strbits : %s\n\n", qrcode.strbits, qrcode.tamanhoDaStrbits);
+    LOG("   adicionando 236 17 , strbits : ");
+    logFile = fopen("debug.txt", "a");
+    printa8Bits(logFile, qrcode.strbits, qrcode.tamanhoDaStrbits);
+    fprintf(logFile, "\n");
+    fclose(logFile);
 
 }
 
