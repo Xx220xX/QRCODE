@@ -4,6 +4,7 @@
 #define espacoReservado 4
 #define fixosPretos 3
 #define fixosBrancos 2
+
 void fazerQuadrado(int i0, int j0, int tamanhoI, int tamanhoJ, char *mat, int m, int n, char value) {
     int i, j;
     if (mat == 0) {
@@ -54,14 +55,17 @@ void Posicionar_ETAPA1() {
     fazerQuadrado(0, n - 7, 7, 7, mat, m, n, fixosPretos);
     fazerQuadrado(m - 7, 0, 7, 7, mat, m, n, fixosPretos);
     //interno branco 5x5
-    fazerQuadrado(2, 2, 5, 5, mat, m, n, fixosBrancos);
-    fazerQuadrado(2, n - 5, 5, 5, mat, m, n, fixosBrancos);
-    fazerQuadrado(m - 5, 2, 5, 5, mat, m, n, fixosBrancos);
+    fazerQuadrado(1, 1, 5, 5, mat, m, n, fixosBrancos);
+    fazerQuadrado(1, n - 6, 5, 5, mat, m, n, fixosBrancos);
+    fazerQuadrado(m - 6, 1, 5, 5, mat, m, n, fixosBrancos);
     //interno preto 3x3
-    /*  fazerQuadrado(2, 2, 3, 3, mat, m, n, fixosPretos);
-      fazerQuadrado(2, n - 5, 3, 3, mat, m, n, fixosPretos);
-      fazerQuadrado(m - 5, 2, 3, 3, mat, m, n, fixosPretos);
-      */
+    fazerQuadrado(2, 2, 3, 3, mat, m, n, fixosPretos);
+    fazerQuadrado(2, n - 5, 3, 3, mat, m, n, fixosPretos);
+    fazerQuadrado(m - 5, 2, 3, 3, mat, m, n, fixosPretos);
+    //interno 1x1
+    fazerQuadrado(3, 3, 1, 1, mat, m, n, fixosPretos);
+    fazerQuadrado(3, n - 4, 1, 1, mat, m, n, fixosPretos);
+    fazerQuadrado(m - 4, 3, 1, 1, mat, m, n, fixosPretos);
     qrcode.QRImagem.mat = mat;
     qrcode.QRImagem.m = m;
     qrcode.QRImagem.n = n;
@@ -70,10 +74,10 @@ void Posicionar_ETAPA1() {
 void Posicionar_ETAPA2() {
     ERROR();
     //adicionar separadores
-    /* fazerQuadrado(-1, -1, 9, 9, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, separadores);
-     fazerQuadrado(-1, qrcode.QRImagem.n - 8, 9, 9, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, separadores);
-     fazerQuadrado(qrcode.QRImagem.m - 8, -1, 9, 9, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, separadores);
-    */ printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+    fazerQuadrado(-1, -1, 9, 9, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, separadores);
+    fazerQuadrado(-1, qrcode.QRImagem.n - 8, 9, 9, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, separadores);
+    fazerQuadrado(qrcode.QRImagem.m - 8, -1, 9, 9, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, separadores);
+    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
     
 }
 
