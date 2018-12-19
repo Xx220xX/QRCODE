@@ -17,6 +17,8 @@
 
 #define    EXCEPTION_LENGTH_UNSUPPORTED  (char)-1
 #define    EXCEPTION_BUG_IN_CHOSEN_VERSION  (char)-2
+#define    ArrayIndexOutOfBoundsException  (char)-3
+#define    NULLPoiterException (char)-4
 #define ERROR()\
      if(qrcode.error<0)\
         return
@@ -44,6 +46,11 @@ typedef struct {
     
     int bitsdeRemanescenteRequeridos;
 } Table;
+    typedef struct {
+        char *mat;
+        int m, n;
+        
+    }Matriz;
 typedef struct {
     Table tabela;
     int qtBitsMode;
@@ -65,6 +72,7 @@ typedef struct {
     int tamanhoDa_msgNumbers;
     char *codigosCorretores;
     int tamanhoDosCodigosCorretores;
+    Matriz QRImagem;
 } QRCODE;
 QRCODE qrcode = {0};
 FILE *logFile;
@@ -78,6 +86,9 @@ void freeqr() {
     }
     if (qrcode.codigosCorretores) {
         free(qrcode.codigosCorretores);
+    }
+    if(qrcode.QRImagem.mat){
+        free(qrcode.QRImagem.mat);
     }
 }
 
