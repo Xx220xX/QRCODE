@@ -6,11 +6,11 @@
 #include "Object.h"
 
 #define ESCOLHER_VERSAO(v1, v2, v3)\
-       if (qrcode.tamanhoDa_mensagemAserCriptografada < v1) {\
+       if (qrcode.tamanhoDa_mensagemAserCriptografada <= v1) {\
         qrcode.tabela.version = 1;\
-     }else if (qrcode.tamanhoDa_mensagemAserCriptografada < v2) {\
+     }else if (qrcode.tamanhoDa_mensagemAserCriptografada <= v2) {\
             qrcode.tabela.version = 2;\
-     }else if (qrcode.tamanhoDa_mensagemAserCriptografada < v3) {\
+     }else if (qrcode.tamanhoDa_mensagemAserCriptografada <= v3) {\
             qrcode.tabela.version = 3;\
      }else \
         qrcode.error = EXCEPTION_LENGTH_UNSUPPORTED
@@ -165,7 +165,7 @@ void CODF_ETAPA2() {
 
     }
     if (qrcode.error < 0) {
-        LOG("~ERROR  %d:CODIFICACAO ETAPA2\n ", qrcode.error);
+        LOG("~ERROR  %d:CODIFICACAO ETAPA2, TAMANHO %d, NIVEL TENTADO : %c\n ", qrcode.error, qrcode.tamanhoDa_mensagemAserCriptografada, qrcode.tabela.nivelCorrecaoErro);
     }
 
 }
@@ -173,8 +173,7 @@ void CODF_ETAPA2() {
 
 
 void CODF_ETAPA3() {
-    if (qrcode.error < 0)
-        return;
+    ERROR();
     // converter para string de 4 bytes o indicador de modo
     // 0001 para MODO_NUMERICO
     // 0010 para MODO_ALPHANUMERICO
@@ -186,8 +185,7 @@ void CODF_ETAPA3() {
 }
 
 void CODF_ETAPA4() {
-    // if (qrcode.error < 0)
-    //   return;
+    ERROR();
     //contar os tamanhoDa_mensagemAserCriptografada da frase a ser criptografada
     // antes de converter defina a quantidade de bits que seu binario tera
     // 10 bits para MODO_NUMERICO
@@ -264,7 +262,8 @@ void modoByte() {
         for(i=0;qrcode.mensagemAserCriptografada[i];i++){
             strfim =  realloc(strfim,i*8+9);
             converterParaBinario(strfim+i*8,qrcode.mensagemAserCriptografada[i],8);
-            fprintf(logFile, "   %s\n", strfim + i*8 );
+            fprintf(logFile, "   [%c  %d ] %s\n", qrcode.mensagemAserCriptografada[i], qrcode.mensagemAserCriptografada[i],
+                    strfim + i * 8);
         }
         strfim = realloc(strfim,i*8+1);
         strfim[i*8]=0;
@@ -284,10 +283,7 @@ void modoByte() {
 
 void CODF_ETAPA5() {
 // Encode Using the Selected Mode
-    if (qrcode.error < 0) {
-        LOG("~ERROR  %d:CODIFICACAO ETAPA5\n ", qrcode.error);
-        return;
-    }
+    ERROR();
     LOG("CODIFICACAO ETAPA5\n");
     switch (qrcode.MODE_TYPE) {
         case MODO_NUMERICO:
@@ -306,8 +302,7 @@ void CODF_ETAPA5() {
 }
 
 void CODF_ETAPA6() {
-    if (qrcode.error < 0)
-        return;
+    ERROR();
     int add = 1;
     LOG("ETAPA 6\n");
     //determinar numero de bits necessarios

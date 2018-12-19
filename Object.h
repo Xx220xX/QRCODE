@@ -17,6 +17,9 @@
 
 #define    EXCEPTION_LENGTH_UNSUPPORTED  (char)-1
 #define    EXCEPTION_BUG_IN_CHOSEN_VERSION  (char)-2
+#define ERROR()\
+     if(qrcode.error<0)\
+        return
 
 #define LOG(format, ...)\
     logFile = fopen("debug.txt", "a");\
@@ -35,9 +38,9 @@ typedef struct {
     int numeroTotaldePalavrasChavedeDados;
     int bytesCorretoresPorBloco;
     int qtBlocosGrupo_1;
-    int qtDeBytesGrupo_1;
+    int qtDePalavrasCodigo_Grupo_1;
     int qtBlocosGrupo_2;
-    int qtDeBytesGrupo_2;
+    int qtDePalavrasCodigo_Grupo_2;
 } Table;
 typedef struct {
     Table tabela;
@@ -56,13 +59,22 @@ typedef struct {
     int tamanhoDaStrbits;
 
     unsigned short *msgNumbers;
+    char *codigosCorretores;
     int tamanhoDa_msgNumbers;
 } QRCODE;
 QRCODE qrcode = {0};
 FILE *logFile;
 
 void freeqr() {
-    free(qrcode.strbits);
+    if (qrcode.strbits) {
+        free(qrcode.strbits);
+    }
+    if (qrcode.msgNumbers) {
+        free(qrcode.msgNumbers);
+    }
+    if (qrcode.codigosCorretores) {
+        free(qrcode.codigosCorretores);
+    }
 }
 
 void integerValueOf(char *str_init, char *str_intervalo_fim, char *str_final_maximo, int *n) {
@@ -103,7 +115,7 @@ unsigned short binaryToDec(char *str_init, char *str_fim, char *str_max) {
     return soma;
 }
 
-void converterParaBinario(char *buff, int decimal, int bits) {
+void converterParaBinario(char *buff, unsigned int decimal, int bits) {
     buff[bits] = '\0';
     bits--;
     while (bits >= 0) {

@@ -4,32 +4,33 @@
 #include <stdio.h>
 #include "Object.h"
 
-void imprimeVetor(unsigned char v[], unsigned short N);
+void imprimeVetor(unsigned char v[], int N);
 
-#define CAST (unsigned short)
 
 void CORREC_ETAPA1() {
-    //Quebrar palavras-cÃ³digo de dados em blocos, se necessÃ¡rio
+    ERROR();
+    //Quebrar palavras-código de dados em blocos, se necessário
+    LOG("ETAPA 1: pegar dados da tabela:\n");
+    COMPARE_MODO_CORRECAO(qrcode.tabela.qtBlocosGrupo_2, qrcode.tabela.nivelCorrecaoErro, 0, 0, 0, 0);
+    COMPARE_MODO_CORRECAO(qrcode.tabela.qtDePalavrasCodigo_Grupo_2, qrcode.tabela.nivelCorrecaoErro, 0, 0, 0, 0);
     switch (qrcode.tabela.version) {
         case 1:COMPARE_MODO_CORRECAO(qrcode.tabela.qtBlocosGrupo_1, qrcode.tabela.nivelCorrecaoErro, 1, 1, 1, 1);
-            COMPARE_MODO_CORRECAO(qrcode.tabela.qtBlocosGrupo_2, qrcode.tabela.nivelCorrecaoErro, 0, 0, 0, 0);
+            COMPARE_MODO_CORRECAO(qrcode.tabela.qtDePalavrasCodigo_Grupo_1, qrcode.tabela.nivelCorrecaoErro, 19, 16, 13, 9);
             break;
         case 2:COMPARE_MODO_CORRECAO(qrcode.tabela.qtBlocosGrupo_1, qrcode.tabela.nivelCorrecaoErro, 1, 1, 1, 1);
-            COMPARE_MODO_CORRECAO(qrcode.tabela.qtBlocosGrupo_2, qrcode.tabela.nivelCorrecaoErro, 0, 0, 0, 0);
-            
+            COMPARE_MODO_CORRECAO(qrcode.tabela.qtDePalavrasCodigo_Grupo_1, qrcode.tabela.nivelCorrecaoErro, 34, 28, 22, 16);
             break;
         case 3:COMPARE_MODO_CORRECAO(qrcode.tabela.qtBlocosGrupo_1, qrcode.tabela.nivelCorrecaoErro, 1, 1, 2, 2);
-            COMPARE_MODO_CORRECAO(qrcode.tabela.qtBlocosGrupo_2, qrcode.tabela.nivelCorrecaoErro, 0, 0, 0, 0);
-            
+            COMPARE_MODO_CORRECAO(qrcode.tabela.qtDePalavrasCodigo_Grupo_1, qrcode.tabela.nivelCorrecaoErro, 55, 44, 17, 13);
             break;
         default:qrcode.error = EXCEPTION_BUG_IN_CHOSEN_VERSION;
             break;
     }
+    LOG("    BLOCLOS -> Gp1: %d , Gp2: %d\n    Palavras em cada bloco ->Gp1 :%d ,Gp2 :%d\n\n", qrcode.tabela.qtBlocosGrupo_1, qrcode.tabela.qtBlocosGrupo_2, qrcode.tabela.qtDePalavrasCodigo_Grupo_1, qrcode.tabela.qtDePalavrasCodigo_Grupo_2);
 }
 
 void CORREC_ETAPA8() {
-    if (qrcode.error < 0)
-        return;
+    ERROR();
     //converter a strbits em decimal
     unsigned short *dec = 0;
     int bytes = 0, i;
@@ -41,6 +42,7 @@ void CORREC_ETAPA8() {
                 qrcode.strbits + ((1 + bytes) * 8), qrcode.strbits + qrcode.tamanhoDaStrbits * 8);
         bytes++;
     }
+
     //pegando numero de palavras de corretor de erro
     switch (qrcode.tabela.version) {
         case 1:COMPARE_MODO_CORRECAO(qrcode.tabela.bytesCorretoresPorBloco, qrcode.tabela.nivelCorrecaoErro, 7, 10, 13, 17);
@@ -51,6 +53,7 @@ void CORREC_ETAPA8() {
             break;
         default:break;
     }
+
     qrcode.msgNumbers = dec;
     qrcode.tamanhoDa_msgNumbers = bytes;
     LOG("CORRECAO_ETAPA8\n   bytes: %d\n   ", bytes);
@@ -60,15 +63,50 @@ void CORREC_ETAPA8() {
     for (i = 0; i < bytes; ++i) {
         fprintf(logFile, "%d ", dec[i]);
     }
-    
+
     fclose(logFile);
 }
 
 void CORREC_CORRIGIR() {
-    unsigned char *codigo = CodigosCorretores(qrcode.msgNumbers, CAST qrcode.tamanhoDa_msgNumbers, CAST qrcode.tabela.bytesCorretoresPorBloco);
-    LOG("\ncodigos corretores : ", codigo);
-    imprimeVetor(codigo, CAST qrcode.tabela.bytesCorretoresPorBloco);
-    free(codigo);
+    ERROR();
+    unsigned char *codigo, *codigo_aux;
+    unsigned short *aux_paraIntercalar;
+    int i, j, k = 0;
+    if (qrcode.tabela.qtBlocosGrupo_1 == 1) {
+        codigo = CodigosCorretores(qrcode.msgNumbers, qrcode.tamanhoDa_msgNumbers, qrcode.tabela.bytesCorretoresPorBloco);
+        LOG("\ncodigos corretores : ");
+        imprimeVetor(codigo, qrcode.tabela.bytesCorretoresPorBloco);
+    } else if (qrcode.tabela.qtBlocosGrupo_1 == 2) {
+        aux_paraIntercalar = (unsigned short *) calloc(qrcode.tamanhoDa_msgNumbers, sizeof(unsigned short));
+        for (i = 0, j = qrcode.tamanhoDa_msgNumbers / 2; i < qrcode.tamanhoDa_msgNumbers / 2;) {
+            aux_paraIntercalar[k++] = qrcode.msgNumbers[i++];
+            aux_paraIntercalar[k++] = qrcode.msgNumbers[j++];
+        }
+        free(qrcode.msgNumbers);
+        qrcode.msgNumbers = aux_paraIntercalar;
+        LOG("\n    INTERCALADA :\n    ");
+        logFile = fopen("debug.txt", "a");
+        for (i = 0; i < qrcode.tamanhoDa_msgNumbers; ++i) {
+            fprintf(logFile, "%d ", qrcode.msgNumbers[i]);
+        }
+        
+        fclose(logFile);
+        
+        codigo = CodigosCorretores(qrcode.msgNumbers,
+                                   qrcode.tamanhoDa_msgNumbers / 2, qrcode.tabela.bytesCorretoresPorBloco);
+        codigo_aux = CodigosCorretores(
+                qrcode.msgNumbers + qrcode.tabela.bytesCorretoresPorBloco,
+                qrcode.tamanhoDa_msgNumbers / 2, qrcode.tabela.bytesCorretoresPorBloco);
+        codigo = realloc(codigo, qrcode.tabela.bytesCorretoresPorBloco * 2);
+        for (i = qrcode.tabela.bytesCorretoresPorBloco, j = 0; j < qrcode.tabela.bytesCorretoresPorBloco; j++, i++) {
+            codigo[i] = codigo_aux[j];
+        }
+        free(codigo_aux);
+        LOG("\ncodigos corretores : ", codigo);
+        imprimeVetor(codigo, qrcode.tabela.bytesCorretoresPorBloco * 2);
+    }
+    qrcode.codigosCorretores = codigo;
+
 }
 
 // Programa que mostra exemplo de como utilizar a biblioteca QRCode.h para determinar os Error Correction Codewords
@@ -99,7 +137,7 @@ int test() {
     codStringFormat = CodigosCorretoresStringFormat("01100");
     printf("Codigos Corretores da String Format: %s\n", codStringFormat);
     
-    // As 4 linhas seguintes libera a memï¿½ria alocada dinamicamente pela funï¿½ï¿½o de cï¿½lculos dos cï¿½digos corretores
+    // As 4 linhas seguintes libera a mem?ria alocada dinamicamente pela fun??o de c?lculos dos c?digos corretores
     free(cod1);
     free(cod2);
     free(cod3);
@@ -108,7 +146,7 @@ int test() {
     return 0;
 }
 
-void imprimeVetor(unsigned char v[], unsigned short N) {
+void imprimeVetor(unsigned char v[], int N) {
     unsigned short i;
     logFile = fopen("debug.txt", "a");
     for (i = 0; i < N; i++) {

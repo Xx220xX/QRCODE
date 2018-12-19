@@ -1,14 +1,14 @@
-// Biblioteca a qual estÃ¡ implementada a funÃ§Ã£o CodigosCorretores( ) que retorna os cÃ³digos corretores utilizados
-// para a criaÃ§Ã£o de cÃ³digos QR.
+// Biblioteca a qual está implementada a função CodigosCorretores( ) que retorna os códigos corretores utilizados
+// para a criação de códigos QR.
 //
-// A funÃ§Ã£o retorna o endereÃ§o do 1Âº elemento de um vetor que contÃ©m os CÃ³digos Corretores de Erro (Error Correc-
-// tion Codewords), onde o programa (ou a funÃ§Ã£o) que chamar CodigosCorretores( ) deverÃ¡ liberar a memÃ³ria aloca-
-// da dinamicamente por CodigosCorretores( ) atravÃ©s da funÃ§Ã£o free( ).
+// A função retorna o endereço do 1º elemento de um vetor que contém os Códigos Corretores de Erro (Error Correc-
+// tion Codewords), onde o programa (ou a função) que chamar CodigosCorretores( ) deverá liberar a memória aloca-
+// da dinamicamente por CodigosCorretores( ) através da função free( ).
 //
 // Onde:
 //      mensagem: vetor que representa os coeficientes da mensagem
-//      tamMens:  nÃºmero de elementos do vetor mensagem
-//      N_corretores: nÃºmero de cÃ³digos corretores de erro (Error Correction Codewords)
+//      tamMens:  número de elementos do vetor mensagem
+//      N_corretores: número de códigos corretores de erro (Error Correction Codewords)
 
 unsigned char *CodigosCorretores(unsigned short mensagem[], unsigned short tamMens, unsigned short NumCodigos);
 
@@ -16,12 +16,12 @@ unsigned char *CodigosCorretores(unsigned short mensagem[], unsigned short tamMe
 // ----------------------------------------------------------------------------------------------------------
 
 
-// A funÃ§Ã£o CodigosCorretoresStringFormat( ) retorna o endereÃ§o do 1Âº carÃ¡cter de uma string que contÃ©m os CÃ³-
-// digos Corretores de Erro (Error Correction Codewords) da String Format, onde o trecho de cÃ³digo que chamar
-// essa funÃ§Ã£o deverÃ¡ liberar a memÃ³ria aloca.
+// A função CodigosCorretoresStringFormat( ) retorna o endereço do 1º carácter de uma string que contém os Có-
+// digos Corretores de Erro (Error Correction Codewords) da String Format, onde o trecho de código que chamar
+// essa função deverá liberar a memória aloca.
 //
 // Onde:
-//      str: string que contÃ©m 5 bits (2 primeiros bits indicam o Error Correction Level e  os 3 Ãºltimos bits
+//      str: string que contém 5 bits (2 primeiros bits indicam o Error Correction Level e  os 3 últimos bits
 //           representam o Mask Pattern bits.
 
 unsigned char *CodigosCorretoresStringFormat(char str[]);

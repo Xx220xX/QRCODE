@@ -1,37 +1,39 @@
 ########################## CODIFICACAO ##########################
 CODIFICACAO ETAPA1
-   Mensagem: 8675309
-   modo: MODO_NUMERICO 1
+   Mensagem: á
+   modo: MODO_BYTE 4
 
 CODIFICACAO ETAPA2
-   Modo erro: M
+   Modo erro: H
    Version 1
 
 CODIFICACAO ETAPA3 
-   indicador de modo: 0001
+   indicador de modo: 0100
 
 CODIFICACAO ETAPA4 
-   quantidade de bits :10   0000000111
-   strings concatendas: 00010000000111
+   quantidade de bits :8   00000001
+   strings concatendas: 010000000001
 
 CODIFICACAO ETAPA5
-   867     1101100011
-   530     1000010010
-   9     1001
-   numeros convertidos 110110001110000100101001
-   str bits 00010000000111110110001110000100101001
-
+   [á  -31 ] 11100001
+   numeros convertidos 11100001
+   str bits 01000000000111100001
+fim da etapa 5
 ETAPA 6
-   N de palavras chaves: 16
-   strbits : 0001000000011111011000111000010010100100
-   tamanho : 40
-   adicionando 236 17 , strbits : 00010000000111110110001110000100101001001110110000010001111011000001000111101100000100011110110000010001111011000001000111101100
+   N de palavras chaves: 9
+   strbits : 010000000001111000010000
+   tamanho : 24
+   adicionando 236 17 , strbits : 010000000001111000010000111011000001000111101100000100011110110000010001
 
 __________________________________________________________________________________________________
 
 
+ETAPA 1: pegar dados da tabela:
+    BLOCLOS -> Gp1: 1 , Gp2: 0
+    Palavras em cada bloco ->Gp1 :9 ,Gp2 :0
+
 CORRECAO_ETAPA8
-   bytes: 16
-   00010000 00011111 01100011 10000100 10100100 11101100 00010001 11101100 00010001 11101100 00010001 11101100 00010001 11101100 00010001 11101100 
-   16 31 99 132 164 236 17 236 17 236 17 236 17 236 17 236 
-codigos corretores : 254 184 193 35 58 118 85 56 60 228 
+   bytes: 9
+   01000000 00011110 00010000 11101100 00010001 11101100 00010001 11101100 00010001 
+   64 30 16 236 17 236 17 236 17 
+codigos corretores : 14 59 229 0 22 237 40 68 209 246 187 74 249 229 218 158 122 
