@@ -127,40 +127,41 @@ void Posicionar_ETAPA4() {
 
 void Posicionar_ETAPA5() {
     //4 -> espaçoReservado
-    int i = 8;
+    int i = 0, j = 9;
     int ordem = qrcode.QRImagem.m;
     //lateral da querda superior
-    while (i <= ordem * 8 + 8) {
-        qrcode.QRImagem.mat[i] = espacoReservado;
-        if (i = ordem * 5 + 8) {
-            i = i + 2 * ordem;
-        } else
-            i += ordem;
-    }
-    printf("eae man");
-    //baixo da esquerda superior
-    i = ordem * 8;
-    while (i <= ordem * 8 + 8) {
-        qrcode.QRImagem.mat[i] = espacoReservado;
-        if (i = ordem * 8 + 5) {
+    while (i <= 8) {
+        qrcode.QRImagem.mat[i * ordem + j] = espacoReservado;
+        if (i == 5) {
             i = i + 2;
         } else
             i++;
     }
+    printf("eae man");
+    //baixo da esquerda superior
+    i = 8;
+    j = 0;
+    while (j <= 8) {
+        qrcode.QRImagem.mat[i * ordem + j] = espacoReservado;
+        if (j == 5) {
+            j = j + 2;
+        } else
+            j++;
+    }
     //baixo da direita superior
-    i = i + ordem - 16;
-    while (i <= 9 * ordem - 1) {
-        qrcode.QRImagem.mat[i] = espacoReservado;
-        i++;
+    j = ordem - 8;
+    while (j < ordem) {
+        qrcode.QRImagem.mat[i * ordem + j] = espacoReservado;
+        j++;
     }
     //lateral esquerda inferior
-    i = ordem * (ordem - 1) + 8;
-    while (i >= (ordem * (ordem - 7) + 8)) {
-        qrcode.QRImagem.mat[i] = espacoReservado;
-        i = i - ordem;
+    i = ordem - 1;
+    j = 8;
+    while (i >= ordem - 7) {
+        qrcode.QRImagem.mat[i * ordem + j] = espacoReservado;
+        i--;
     }
-    qrcode.QRImagem.mat[i] = 3; //modulo preto
-    
+    qrcode.QRImagem.mat[i * ordem + j] = fixosPretos; //modulo preto
+    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
 }
-
 #endif //QRCODE_POSICIONAMENTODEMODULOEMMATRIZ_H

@@ -15,6 +15,8 @@ int main() {
     Posicionar_ETAPA2();
     Posicionar_ETAPA3();
     Posicionar_ETAPA4();
+    Posicionar_ETAPA5();
+    freeqr();
     return 0;
     system("chcp 1252");
     system("cls");
