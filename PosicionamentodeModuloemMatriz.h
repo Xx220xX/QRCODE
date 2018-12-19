@@ -59,7 +59,7 @@ void Posicionar_ETAPA1() {
     int m = 21, n;
     m += (qrcode.tabela.version - 1) * 4;
     n = m;
-    int *mat = calloc(m * n, sizeof(int));
+    int *mat = (int *) calloc(m * n, sizeof(int));
     //externo preto 7x7
     fazerQuadrado(0, 0, 7, 7, mat, m, n, fixosPretos);
     fazerQuadrado(0, n - 7, 7, 7, mat, m, n, fixosPretos);
