@@ -27,10 +27,7 @@ int main() {
     qrcode.MODE_CORRECAO_AUTOMATICO = 1;
     qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
     CODF_ALL_STEPS();
-    CORREC_ETAPA1();
-    CORREC_ETAPA8();
-
-    CORREC_CORRIGIR();
+    CORREC_ALL();
     system("start debug.txt");
     freeqr();
     

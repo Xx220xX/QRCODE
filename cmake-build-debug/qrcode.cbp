@@ -74,6 +74,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/MORADIA082663/CLionProjects/qrcode/FINAL_MENSAGE.h">
+			<Option target="qrcode"/>
+		</Unit>
 		<Unit filename="C:/Users/MORADIA082663/CLionProjects/qrcode/main.c">
 			<Option target="qrcode"/>
 		</Unit>

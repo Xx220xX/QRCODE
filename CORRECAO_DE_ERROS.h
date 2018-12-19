@@ -142,5 +142,10 @@ void printaVetUChar(unsigned char *v, int N) {
     fclose(logFile);
 }
 
+void CORREC_ALL() {
+    CORREC_ETAPA1();
+    CORREC_ETAPA8();
+    CORREC_CORRIGIR();
+}
 
 #endif //QRCODE_CORRECAO_DE_ERROS_H_H
