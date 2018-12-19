@@ -4,11 +4,15 @@
 #include "CODIFIC.h"
 #include "CORRECAO_DE_ERROS.h"
 #include "FINAL_MENSAGE.h"
+#include "PosicionamentodeModuloemMatriz.h"
 #include<stdlib.h>
 
 #define tamanho 127
 
 int main() {
+    Posicionar_ETAPA1();
+    Posicionar_ETAPA2();
+    return 0;
     system("chcp 1252");
     system("cls");
     setlocale(LC_ALL, "Portuguese");
