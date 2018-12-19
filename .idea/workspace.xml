@@ -12,11 +12,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28f3c102-a2ca-45e1-8d95-5c9ac85a9f5a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Maskramento.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Object.h" beforeDir="false" afterPath="$PROJECT_DIR$/Object.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h" beforeDir="false" afterPath="$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/objects.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/debug.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/debug.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,10 +41,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+            <state relative-caret-position="119">
+              <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Maskramento.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="356">
+              <caret line="150" column="26" lean-forward="true" selection-start-line="150" selection-start-column="26" selection-end-line="150" selection-end-column="26" />
               <folding>
-                <element signature="e#0#17#0" expanded="true" />
+                <element signature="e#641#1230#0" />
+                <element signature="e#633#993#0" />
+                <element signature="e#994#1373#0" />
+                <element signature="e#2255#2900#0" />
+                <element signature="e#1648#1826#0" />
+                <element signature="e#2695#3180#0" />
+                <element signature="e#5567#5952#0" />
+                <element signature="e#5566#5952#0" />
               </folding>
             </state>
           </provider>
@@ -52,16 +69,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cmake-build-debug/debug.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="66" column="27" lean-forward="true" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
+            <state relative-caret-position="527">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
+            <state relative-caret-position="186">
               <caret line="173" column="38" selection-start-line="173" selection-start-column="38" selection-end-line="173" selection-end-column="38" />
             </state>
           </provider>
@@ -75,8 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Object.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="190" column="30" lean-forward="true" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="30" />
+            <state relative-caret-position="475">
+              <caret line="191" column="30" lean-forward="true" selection-start-line="191" selection-start-column="30" selection-end-line="191" selection-end-column="30" />
               <folding>
                 <element signature="e#39#57#0" expanded="true" />
               </folding>
@@ -115,6 +132,8 @@
       <find>00100001 01010101 01011100 00111100 11001101 00000000 11101001 00101000 11001100 11100110 01110101 11010100 11010011 11101000 01101000 11011001 10000110 00101110 01001011 00000101 00110100 00010101 11000000 00000000 00100100 10001101 11101110 11101110 11000111 00011101 11100000 11101100 00010001 11101100</find>
       <find>codigo</find>
       <find>3</find>
+      <find>][</find>
+      <find>49</find>
     </findStrings>
     <replaceStrings>
       <replace>tabela</replace>
@@ -127,6 +146,8 @@
       <replace>tamanhoDa_mensagemAserCriptografada</replace>
       <replace />
       <replace>DEBUG_LOG</replace>
+      <replace>*n+</replace>
+      <replace>'1'</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -152,14 +173,16 @@
         <option value="$PROJECT_DIR$/CODIFIC.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/FINAL_MENSAGE.h" />
-        <option value="$PROJECT_DIR$/main.c" />
         <option value="$PROJECT_DIR$/Object.h" />
         <option value="$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h" />
+        <option value="$PROJECT_DIR$/main.c" />
+        <option value="$PROJECT_DIR$/Maskramento.h" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="720" />
     <option name="width" value="720" />
     <option name="height" value="860" />
   </component>
@@ -234,7 +257,7 @@
       <workItem from="1545082831589" duration="32000" />
       <workItem from="1545083155814" duration="11912000" />
       <workItem from="1545177603015" duration="21895000" />
-      <workItem from="1545228109519" duration="18541000" />
+      <workItem from="1545228109519" duration="29805000" />
     </task>
     <task id="LOCAL-00001" summary="no msg">
       <created>1544900433045</created>
@@ -397,14 +420,21 @@
       <option name="project" value="LOCAL" />
       <updated>1545243863360</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="finalizado posicionamento">
+      <created>1545247045472</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1545247045472</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86126000" />
+    <option name="totallyTimeSpent" value="97390000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <frame x="720" y="0" width="720" height="860" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49888143" weight="0.38896847" />
@@ -525,7 +555,8 @@
     <MESSAGE value="adicionado etapa4 posicionamento  da imagem,ate a 4 esta td funcionando" />
     <MESSAGE value="adicionado funcao 5 do guilherme" />
     <MESSAGE value="varios bugs corrigidos, adicionado strbits na matriz" />
-    <option name="LAST_COMMIT_MESSAGE" value="varios bugs corrigidos, adicionado strbits na matriz" />
+    <MESSAGE value="finalizado posicionamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="finalizado posicionamento" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -597,13 +628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/debug.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="66" column="27" lean-forward="true" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FINAL_MENSAGE.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -614,16 +638,6 @@
     <entry file="file://$PROJECT_DIR$/qrcod.pbm.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/qrcod.pbm">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -632,21 +646,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Object.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="190" column="30" lean-forward="true" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="30" />
+        <state relative-caret-position="475">
+          <caret line="191" column="30" lean-forward="true" selection-start-line="191" selection-start-column="30" selection-end-line="191" selection-end-column="30" />
           <folding>
             <element signature="e#39#57#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/qrcod.pbm">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/debug.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
+        <state relative-caret-position="186">
           <caret line="173" column="38" selection-start-line="173" selection-start-column="38" selection-end-line="173" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/qrcod.pbm">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Maskramento.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="150" column="26" lean-forward="true" selection-start-line="150" selection-start-column="26" selection-end-line="150" selection-end-column="26" />
+          <folding>
+            <element signature="e#641#1230#0" />
+            <element signature="e#633#993#0" />
+            <element signature="e#994#1373#0" />
+            <element signature="e#2255#2900#0" />
+            <element signature="e#1648#1826#0" />
+            <element signature="e#2695#3180#0" />
+            <element signature="e#5567#5952#0" />
+            <element signature="e#5566#5952#0" />
+          </folding>
         </state>
       </provider>
     </entry>

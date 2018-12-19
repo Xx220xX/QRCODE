@@ -5,6 +5,7 @@
 #include "CORRECAO_DE_ERROS.h"
 #include "FINAL_MENSAGE.h"
 #include "PosicionamentodeModuloemMatriz.h"
+#include "Maskramento.h"
 #include<stdlib.h>
 
 #define tamanho 128
@@ -26,12 +27,13 @@ int main() {
         }
     }
     qrcode.mensagemAserCriptografada = vet;
-    qrcode.MODE_CORRECAO_AUTOMATICO = 1;
-    qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
+    qrcode.MODE_CORRECAO_AUTOMATICO = 0;
+    qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_Q;
     CODF_ALL_STEPS();
     CORREC_ALL();
     FINAL_ETAPA1();
     Posicionar_AllSTeps();
+    MASK_ETAPA_MASCARAR();
     system("start debug.txt");
     freeqr();
     printaERRO();
