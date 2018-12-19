@@ -174,5 +174,22 @@ void printa8Bits(FILE *f, char *str, int tam) {
     }
 }
 
+void printaQRIMG(char *mat, int m, int n) {
+    int i, j;
+    logFile = fopen("debug.txt", "a");
+    FILE *img = fopen("qrcod.pbm", "w");
+    fprintf(img, "P1\n");
+    fprintf(img, "%d %d \n", qrcode.QRImagem.m, qrcode.QRImagem.n);
+    for (i = 0; i < m; ++i) {
+        for (j = 0; j < n; ++j) {
+            fprintf(logFile, "%c ", (mat[i * n + j] % 2) ? '0' : '1');
+            fprintf(img, "%c ", (mat[i * n + j] % 2) ? '0' : '1');
+        }
+        fprintf(logFile, "\n");
+    }
+    fclose(logFile);
+    fclose(img);
+    system("start qrcod.pbm");
+}
 
 #endif

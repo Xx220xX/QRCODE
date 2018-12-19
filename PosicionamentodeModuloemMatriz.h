@@ -1,7 +1,7 @@
 #ifndef QRCODE_POSICIONAMENTODEMODULOEMMATRIZ_H
 #define QRCODE_POSICIONAMENTODEMODULOEMMATRIZ_H
 #define separadores  4
-#define espacoReservado 8
+#define espacoReservado 9
 #define fixosPretos 3
 #define fixosBrancos 6
 #define fixosPretosTemporal 5
@@ -75,6 +75,9 @@ void Posicionar_ETAPA1() {
     fazerQuadrado(3, 3, 1, 1, mat, m, n, fixosPretos);
     fazerQuadrado(3, n - 4, 1, 1, mat, m, n, fixosPretos);
     fazerQuadrado(m - 4, 3, 1, 1, mat, m, n, fixosPretos);
+    
+    //fazerQuadrado(qrcode.tabela.version*4+9, 8, 1, 1, mat, m, n, fixosPretos);
+    
     qrcode.QRImagem.mat = mat;
     qrcode.QRImagem.m = m;
     qrcode.QRImagem.n = n;
@@ -134,7 +137,7 @@ void Posicionar_ETAPA4() {
 }
 
 void Posicionar_ETAPA5() {
-    //4 -> espaçoReservado
+    
     int i = 0, j = 8;
     int ordem = qrcode.QRImagem.m;
     //lateral da querda superior
@@ -169,6 +172,7 @@ void Posicionar_ETAPA5() {
         i--;
     }
     qrcode.QRImagem.mat[i * ordem + j] = fixosPretos; //modulo preto
+    
 }
 
 void Posicionar_ETAPA6() {
@@ -225,5 +229,8 @@ void Posicionar_AllSTeps() {
     Posicionar_ETAPA6();
     LOG("\n\n   ####saida na Etapa6:\n");
     printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+    LOG("\n\n   ####saida FINAL da posiconar Matriz:\n");
+    printaQRIMG(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+    
 }
 #endif //QRCODE_POSICIONAMENTODEMODULOEMMATRIZ_H
