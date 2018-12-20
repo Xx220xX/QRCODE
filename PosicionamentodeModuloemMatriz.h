@@ -98,13 +98,13 @@ void Posicionar_ETAPA3() {
     ERROR();
     
     if (qrcode.tabela.version == 2) {
-        fazerQuadrado(19, 19, 5, 5, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
-        fazerQuadrado(20, 20, 3, 3, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosBrancos);
-        fazerQuadrado(21, 21, 1, 1, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
+        fazerQuadrado(16, 16, 5, 5, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
+        fazerQuadrado(17, 17, 3, 3, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosBrancos);
+        fazerQuadrado(18, 18, 1, 1, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
     } else if (qrcode.tabela.version == 3) {
-        fazerQuadrado(23, 23, 5, 5, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
-        fazerQuadrado(24, 24, 3, 3, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosBrancos);
-        fazerQuadrado(25, 25, 1, 1, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
+        fazerQuadrado(20, 20, 5, 5, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
+        fazerQuadrado(21, 21, 3, 3, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosBrancos);
+        fazerQuadrado(22, 22, 1, 1, qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n, fixosPretos);
     }
     
 }

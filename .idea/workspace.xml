@@ -12,17 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28f3c102-a2ca-45e1-8d95-5c9ac85a9f5a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MenuWindons.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FormatoEInformacaoDaVersao.h" beforeDir="false" afterPath="$PROJECT_DIR$/FormatoEInformacaoDaVersao.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/linklibs.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/linklibs.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MenuWindons.h" beforeDir="false" afterPath="$PROJECT_DIR$/MenuWindons.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h" beforeDir="false" afterPath="$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qrcode.dir/objects.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/debug.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/debug.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,48 +32,42 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+        <entry file="file://$PROJECT_DIR$/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+            <state relative-caret-position="102">
+              <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.c">
+        <entry file="file://$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="36" column="19" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#17#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="30">
+              <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="108" selection-end-column="4" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cmake-build-debug/qrcode_(1).pbm">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MenuWindons.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-              <folding>
-                <element signature="e#60#79#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="425">
+              <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Object.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-384">
-              <caret line="46" column="37" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
+            <state relative-caret-position="1292">
+              <caret line="94" column="1" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
               <folding>
                 <element signature="e#39#57#0" expanded="true" />
               </folding>
@@ -90,17 +78,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FormatoEInformacaoDaVersao.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="20" column="33" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="33" />
+            <state relative-caret-position="234">
+              <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cmake-build-debug/qrcode_(0).pbm">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Maskramento.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="202" column="46" selection-start-line="202" selection-start-column="46" selection-end-line="202" selection-end-column="46" />
+            <state relative-caret-position="30">
+              <caret line="193" column="4" selection-start-line="193" selection-start-column="4" selection-end-line="193" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -108,7 +101,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CODIFIC.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
+            <state relative-caret-position="5100">
               <caret line="300" column="20" selection-start-line="300" selection-start-column="20" selection-end-line="300" selection-end-column="20" />
             </state>
           </provider>
@@ -117,7 +110,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CORRECAO_DE_ERROS.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
+            <state relative-caret-position="1224">
               <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
               <folding>
                 <element signature="e#75#93#0" expanded="true" />
@@ -190,14 +183,14 @@
         <option value="$PROJECT_DIR$/realResposta" />
         <option value="$PROJECT_DIR$/FINAL_MENSAGE.h" />
         <option value="$PROJECT_DIR$/CORRECAO_DE_ERROS.h" />
-        <option value="$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h" />
         <option value="$PROJECT_DIR$/CODIFIC.h" />
-        <option value="$PROJECT_DIR$/Maskramento.h" />
-        <option value="$PROJECT_DIR$/Object.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/MenuWindons.h" />
-        <option value="$PROJECT_DIR$/FormatoEInformacaoDaVersao.h" />
         <option value="$PROJECT_DIR$/main.c" />
+        <option value="$PROJECT_DIR$/FormatoEInformacaoDaVersao.h" />
+        <option value="$PROJECT_DIR$/Object.h" />
+        <option value="$PROJECT_DIR$/Maskramento.h" />
+        <option value="$PROJECT_DIR$/MenuWindons.h" />
+        <option value="$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h" />
       </list>
     </option>
   </component>
@@ -280,6 +273,7 @@
       <workItem from="1545083155814" duration="11912000" />
       <workItem from="1545177603015" duration="21895000" />
       <workItem from="1545228109519" duration="37264000" />
+      <workItem from="1545282068444" duration="1941000" />
     </task>
     <task id="LOCAL-00001" summary="no msg">
       <created>1544900433045</created>
@@ -477,16 +471,24 @@
       <option name="project" value="LOCAL" />
       <updated>1545264559496</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="qrcode terminado">
+      <created>1545283273534</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1545283273534</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104849000" />
+    <option name="totallyTimeSpent" value="106790000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49865592" visible="true" weight="0.38896847" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49865592" weight="0.83484846" />
       <window_info id="Structure" order="1" sideWeight="0.50111854" side_tool="true" weight="0.1769341" />
       <window_info id="Favorites" order="2" sideWeight="0.5013441" side_tool="true" weight="0.38896847" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -501,7 +503,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007163" side_tool="true" weight="0.3293011" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49928367" weight="0.3293011" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.3293011" />
-      <window_info anchor="bottom" auto_hide="true" x="22" y="311" width="1396" height="238" id="Messages" order="12" weight="0.9596774" />
+      <window_info anchor="bottom" auto_hide="true" x="22" y="311" width="1396" height="238" id="Messages" order="12" weight="0.81317204" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -584,7 +586,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="no msg" />
     <MESSAGE value="criar funcao MACRO LOG(format,...)" />
     <MESSAGE value="rename log to logFile" />
     <MESSAGE value="feita etaapa 8" />
@@ -609,19 +610,11 @@
     <MESSAGE value="mudados char para int" />
     <MESSAGE value="cast retorno de calloc para (int *)" />
     <MESSAGE value="maskara funcionando" />
-    <option name="LAST_COMMIT_MESSAGE" value="maskara funcionando" />
+    <MESSAGE value="qrcode terminado" />
+    <option name="LAST_COMMIT_MESSAGE" value="qrcode terminado" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.c</url>
-          <line>13</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="qrcode" language="ObjectiveC" />
@@ -654,16 +647,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/realResposta">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="42" lean-forward="true" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qrcod.pbm.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/realResposta" />
+    <entry file="file://$PROJECT_DIR$/qrcod.pbm.txt" />
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/qrcode.cbp">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -684,49 +669,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="66" column="24" lean-forward="true" selection-start-line="66" selection-start-column="24" selection-end-line="66" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qrcod.pbm">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CORRECAO_DE_ERROS.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
-          <folding>
-            <element signature="e#75#93#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CODIFIC.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="300" column="20" selection-start-line="300" selection-start-column="20" selection-end-line="300" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Maskramento.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="202" column="46" selection-start-line="202" selection-start-column="46" selection-end-line="202" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/qrcod.pbm" />
     <entry file="file://C:/MinGW/include/stdio.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="501" column="4" selection-start-line="501" selection-start-column="4" selection-end-line="501" selection-end-column="4" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -735,42 +684,76 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CODIFIC.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5100">
+          <caret line="300" column="20" selection-start-line="300" selection-start-column="20" selection-end-line="300" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CORRECAO_DE_ERROS.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
+          <folding>
+            <element signature="e#75#93#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Maskramento.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="193" column="4" selection-start-line="193" selection-start-column="4" selection-end-line="193" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MenuWindons.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        <state relative-caret-position="425">
+          <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Object.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="94" column="1" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
           <folding>
-            <element signature="e#60#79#0" expanded="true" />
+            <element signature="e#39#57#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FormatoEInformacaoDaVersao.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="33" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="33" />
+        <state relative-caret-position="234">
+          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="36" column="19" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Object.h">
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/qrcode_(1).pbm">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-384">
-          <caret line="46" column="37" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
-          <folding>
-            <element signature="e#39#57#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="108" selection-end-column="4" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/qrcode_(0).pbm">
+      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
 </project>

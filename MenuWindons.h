@@ -16,6 +16,10 @@ void selecionar(int x0, int y0) {
 
 }
 
+void fazerQUadrado(int x0, int y0) {
+
+}
+
 void menu() {
     textcolor(BLUE);
     gotoxy(90, 90);
