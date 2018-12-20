@@ -87,18 +87,25 @@ QRCODE qrcode = {0};
 FILE *logFile;
 
 void freeqr() {
+    FILE *file;
+    file = fopen("qr.config", "wb");
+    fwrite(&qrcode.config.numeroDoUltimoArquivo, 1, sizeof(unsigned int), file);
+    fclose(file);
     if (qrcode.strbits) {
         free(qrcode.strbits);
-    
+        qrcode.strbits = 0;
     }
     if (qrcode.msgNumbers) {
         free(qrcode.msgNumbers);
+        qrcode.msgNumbers = 0;
     }
     if (qrcode.codigosCorretores) {
         free(qrcode.codigosCorretores);
+        qrcode.codigosCorretores = 0;
     }
     if (qrcode.QRImagem.mat) {
         free(qrcode.QRImagem.mat);
+        qrcode.QRImagem.mat;
     }
 }
 
@@ -183,6 +190,7 @@ void printa8Bits(FILE *f, char *str, int tam) {
 }
 
 void printaQRIMG(Matriz matriz, int numero, int inverter) {
+    ERROR();
     int i, j;
     char nome[30] = "";
     snprintf(nome, 29, "qrcode_(%d).pbm", numero);
@@ -204,8 +212,8 @@ void printaQRIMG(Matriz matriz, int numero, int inverter) {
     fprintf(logFile, "\n");
     fclose(logFile);
     fclose(img);
-    snprintf(nome, 29, "start qrcode_(%d).pbm", numero);
-    system(nome);
+    /*snprintf(nome, 29, "start qrcode_(%d).pbm", numero);
+    system(nome);*/
 }
 
 #endif

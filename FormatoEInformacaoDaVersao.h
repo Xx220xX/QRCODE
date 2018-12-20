@@ -60,6 +60,7 @@ void string_format(char str[16], unsigned int numero_mascara) {
 }
 
 void insere_string_format_ETAPA_1() {
+    ERROR();
     LOG("\ninserir str FORMAT\n      nivel de correcao = %c , versao %d\n         ", qrcode.tabela.nivelCorrecaoErro, qrcode.tabela.version);
     
     int i = 0, j = 8, k = 14;

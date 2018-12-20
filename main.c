@@ -18,10 +18,13 @@ void gerarQR(char *vet) {
             break;
         }
     }
-    qrcode.config.temmsg = vet[0];
+    qrcode.config.temmsg = vet[0] != 0;
+    
     if (!qrcode.config.temmsg) {
         qrcode.error = NULLPoiterException;
+        return;
     }
+    qrcode.mensagemAserCriptografada = vet;
     CODF_ALL_STEPS();
     CORREC_ALL();
     FINAL_ETAPA1();
@@ -29,27 +32,25 @@ void gerarQR(char *vet) {
     MASK_ETAPA_MASCARAR();
     insere_string_format_ETAPA_1();
     printaQRIMG(qrcode.QRImagem, qrcode.config.numeroDoUltimoArquivo, 1);
+    
 }
-#define tamanho 128
+
 
 int main() {
+    FILE *file;
+    system("chcp 1252");
+    system("cls");
     qrcode.mensagemAserCriptografada = 0;
     qrcode.config.MODE_CORRECAO_AUTOMATICO = 1;
     qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
-    system("chcp 1252");
-    system("cls");
-    menu();
+    file = fopen("qr.config", "rb");
+    fread(&qrcode.config.numeroDoUltimoArquivo, 1, sizeof(unsigned int), file);
+    fclose(file);
     setlocale(LC_ALL, "Portuguese");
     fclose(fopen("debug.txt", "w"));
-    char vet[tamanho] = "á";
-    fflush(stdin);
-    // fgets(vet, tamanho, stdin);
-    
-    // gerarQR(vet);
-    
-    
+    menu();
+    //gerarQR("ola");
     freeqr();
-    printaERRO();
     printf("\nfim");
     return 0;
 }

@@ -138,7 +138,7 @@ void Posicionar_ETAPA4() {
 }
 
 void Posicionar_ETAPA5() {
-    
+    ERROR();
     int i = 0, j = 8;
     int ordem = qrcode.QRImagem.m;
     //lateral da querda superior

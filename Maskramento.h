@@ -173,12 +173,13 @@ void aplicando_Masc(int num_mascara, int *origin, int *buff, int m, int n) {
 }
 
 void MASK_ETAPA_MASCARAR() {
+    ERROR();
     LOG("\n\n_______________________Mascarar_____________________________ \n\n");
     int pontuacao1, pontuacao2;
     int i = 0, j;
     int melhorMask = 0;
     int *mat = (int *) calloc(qrcode.QRImagem.m * qrcode.QRImagem.n, sizeof(int));
-    for (int i = 0; i < 8; i++) {
+    for (i = 0; i < 8; i++) {
         LOG("\n   Mascara %d\n", i);
         aplicando_Masc(i, qrcode.QRImagem.mat, mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
         if (i == 0) {
