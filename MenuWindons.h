@@ -35,8 +35,28 @@ void mostraQR(int x0, int y0) {
 }
 
 void apagaArquivos() {
+    system("cls");
+    if (qrcode.config.numeroDoUltimoArquivo == 0) {
+        printf("nao tem nada para apagar!");
+    } else {
+        printf("vc rediamente deseja apagar os aquivos?\nDIGITE  '[S] para sim ou [N] para nao  ': ");
+        int c = getche();
+        switch (c) {
+            case 'S':
+            case 's':break;
+            default:printf("ok, nada apagado");
+                Sleep(1500);
+                return;
+        }
+    }
+    
+   
+    
     qrcode.config.numeroDoUltimoArquivo = 0;
     system("del *.pbm");
+    printf("APAGADO!!");
+    Sleep(1500);
+    system("cls");
 }
 
 int selecionar(int x0, int y0, char opcoes[][29], int numeroDeOp) {
@@ -97,7 +117,7 @@ void verificaErro(int x0, int y0) {
         gotoxy(x0, y0 + 1);
         if (qrcode.error == EXCEPTION_LENGTH_UNSUPPORTED) {
             printf("\n\nERROR: %s", "EXCEPTION_LENGTH_UNSUPPORTED(),Programa nao suporta tamanho da msg");
-            if (!qrcode.config.MODE_CORRECAO_AUTOMATICO) {
+            if (!qrcode.config.MODE_CORRECAO_AUTOMATICO && qrcode.tabela.nivelCorrecaoErro != CORRECAO_MODO_L) {
                 gotoxy(x0, y0 + 1);
                 printf("tente com um nivel menor de correcao :D");
             } else {
