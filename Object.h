@@ -103,20 +103,18 @@ void integerValueOf(char *str_init, char *str_intervalo_fim, char *str_final_max
 }
 
 void printaERRO() {
-    char *mensage;
     if (qrcode.error < 0) {
         if (qrcode.error == EXCEPTION_LENGTH_UNSUPPORTED) {
-            mensage = "EXCEPTION_LENGTH_UNSUPPORTED";
+            LOG("\n\nERROR: %s", "EXCEPTION_LENGTH_UNSUPPORTED");
         } else if (qrcode.error == EXCEPTION_BUG_IN_CHOSEN_VERSION) {
-            mensage = "EXCEPTION_BUG_IN_CHOSEN_VERSION";
+            LOG("\n\nERROR: %s", "EXCEPTION_BUG_IN_CHOSEN_VERSION");
         } else if (qrcode.error == ArrayIndexOutOfBoundsException) {
-            mensage = "ArrayIndexOutOfBoundsException";
+            LOG("\n\nERROR: %s", "ArrayIndexOutOfBoundsException");
         } else if (qrcode.error == ArrayIndexOutOfBoundsException) {
-            mensage = "ArrayIndexOutOfBoundsException";
+            LOG("\n\nERROR: %s", "ArrayIndexOutOfBoundsException");
         } else if (qrcode.error == NULLPoiterException) {
-            mensage = "NULLPoiterException";
+            LOG("\n\nERROR: %s", "NULLPoiterException");
         }
-        LOG("\n\nERROR: %s", mensage);
     }
 }
 
@@ -176,21 +174,30 @@ void printa8Bits(FILE *f, char *str, int tam) {
     }
 }
 
-void printaQRIMG(int *mat, int m, int n) {
+void printaQRIMG(Matriz matriz, int numero, int inverter) {
     int i, j;
+    char nome[30] = "";
+    snprintf(nome, 29, "qrcode_(%d).pbm", numero);
     logFile = fopen("debug.txt", "a");
-    FILE *img = fopen("qrcod.pbm", "w");
+    FILE *img = fopen(nome, "w");
     fprintf(img, "P1\n");
-    fprintf(img, "%d %d \n", qrcode.QRImagem.m, qrcode.QRImagem.n);
-    for (i = 0; i < m; ++i) {
-        for (j = 0; j < n; ++j) {
-            fprintf(logFile, "%c ", (mat[i * n + j] % 2) ? '1' : '0');
-            fprintf(img, "%c ", (mat[i * n + j] % 2) ? '1' : '0');
+    fprintf(img, "%d %d \n", matriz.m, matriz.n);
+    for (i = 0; i < matriz.m; ++i) {
+        for (j = 0; j < matriz.n; ++j) {
+            if (inverter) {
+                fprintf(logFile, "%c ", !(matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
+                fprintf(img, "%c ", !(matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
+            } else {
+                fprintf(logFile, "%c ", (matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
+                fprintf(img, "%c ", (matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
+            }
         }
-        fprintf(logFile, "\n");
     }
+    fprintf(logFile, "\n");
     fclose(logFile);
     fclose(img);
+    snprintf(nome, 29, "start qrcode_(%d).pbm", numero);
+    system(nome);
 }
 
 #endif

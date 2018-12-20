@@ -62,7 +62,6 @@ void CODF_ETAPA1() {
     
     }
     
-    
     LOG("CODIFICACAO ETAPA1\n   Mensagem: %s\n   modo: %s %d\n\n", qrcode.mensagemAserCriptografada, qrcode.MODE_TYPE == MODO_NUMERICO ? "MODO_NUMERICO" : qrcode.MODE_TYPE == MODO_ALPHANUMERICO ? "MODO_ALPHANUMERICO" : "MODO_BYTE", qrcode.MODE_TYPE);
 }
 
@@ -270,6 +269,9 @@ void CODF_ETAPA5() {
 void CODF_ETAPA6() {
     ERROR();
     int add = 1;
+    char *aux;
+    int tamanhoAux;
+    int i, j;
     LOG("ETAPA 6\n");
     //determinar numero de bits necessarios
     switch (qrcode.tabela.version) {
@@ -283,11 +285,18 @@ void CODF_ETAPA6() {
     }
     LOG("   N de palavras chaves: %d\n", qrcode.tabela.numeroTotaldePalavrasChavedeDados);
 //deixar multiplo de 8
-    while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) % 8 != 0) {
-        qrcode.strbits = realloc(qrcode.strbits, 3 + qrcode.tamanhoDaStrbits);//1230*
-        qrcode.strbits[qrcode.tamanhoDaStrbits] = '0';
-        qrcode.strbits[qrcode.tamanhoDaStrbits + 1] = 0;
+    qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits);
+    tamanhoAux = ((qrcode.tamanhoDaStrbits + 8) / 8) * 8;
+    aux = (char *) calloc(tamanhoAux + 1, sizeof(char));
+    for (i = 0; i < qrcode.tamanhoDaStrbits; ++i) {
+        aux[i] = qrcode.strbits[i];
     }
+    for (j = 0; i < tamanhoAux; i++, j++) {
+        aux[i] = '0';
+    }
+    free(qrcode.strbits);
+    qrcode.strbits = aux;
+    qrcode.tamanhoDaStrbits = tamanhoAux;
     LOG("   strbits : %s\n   tamanho : %d\n", qrcode.strbits, qrcode.tamanhoDaStrbits);
     //multiplica o numero de palavras chave por  8
     qrcode.tabela.numeroTotaldePalavrasChavedeDados *= 8;

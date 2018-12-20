@@ -181,7 +181,6 @@ void MASK_ETAPA_MASCARAR() {
     for (int i = 0; i < 8; i++) {
         LOG("\n   Mascara %d\n", i);
         aplicando_Masc(i, qrcode.QRImagem.mat, mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
-        printaQRIMG(mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
         if (i == 0) {
             pontuacao1 = penalidadeMax(mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
         } else {
@@ -192,6 +191,7 @@ void MASK_ETAPA_MASCARAR() {
             }
         }
     }
+    
     aplicando_Masc(melhorMask, qrcode.QRImagem.mat, mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
     for (i = 0; i < qrcode.QRImagem.m; ++i) {
         for (j = 0; j < qrcode.QRImagem.n; j++) {
@@ -200,6 +200,7 @@ void MASK_ETAPA_MASCARAR() {
             }
         }
     }
+    
     LOG("____Melhor mascara: %d", melhorMask);
     qrcode.tabela.maskara = melhorMask;
     free(mat);

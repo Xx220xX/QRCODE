@@ -30,15 +30,17 @@ int main() {
         }
     }
     qrcode.mensagemAserCriptografada = vet;
-    qrcode.MODE_CORRECAO_AUTOMATICO = 0;
-    qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_Q;
+    qrcode.MODE_CORRECAO_AUTOMATICO = 1;
+    qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
     CODF_ALL_STEPS();
     CORREC_ALL();
     FINAL_ETAPA1();
     Posicionar_AllSTeps();
     MASK_ETAPA_MASCARAR();
     insere_string_format_ETAPA_1();
-    //system("start debug.txt");
+    printaQRIMG(qrcode.QRImagem, qrcode.numeroDoUltimoArquivo, 1);
+    system("start debug.txt");
+    
     freeqr();
     printaERRO();
     printf("\nfim");

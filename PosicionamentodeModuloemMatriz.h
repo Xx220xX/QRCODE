@@ -231,7 +231,6 @@ void Posicionar_AllSTeps() {
     LOG("\n\n   ####saida na Etapa6:\n");
     printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
     LOG("\n\n   ####saida FINAL da posiconar Matriz:\n");
-    printaQRIMG(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
     
 }
 #endif //QRCODE_POSICIONAMENTODEMODULOEMMATRIZ_H
