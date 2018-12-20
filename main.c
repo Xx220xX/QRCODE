@@ -34,8 +34,6 @@ int main() {
     FINAL_ETAPA1();
     Posicionar_AllSTeps();
     MASK_ETAPA_MASCARAR();
-    LOG("\nqr original\n");
-    printMatchar(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
     system("start debug.txt");
     freeqr();
     printaERRO();

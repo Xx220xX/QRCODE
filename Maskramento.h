@@ -117,24 +117,15 @@ int penalidadeMax(int *mat, int m, int n) {
 
 void aplicando_Masc(int num_mascara, int *origin, int *buff, int m, int n) {
     int i, j;
-    LOG("\n\n modulo2\n");
-    printaQRIMG(qrcode.QRImagem.mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
-    LOG("\n\n");
-    
     for (i = 0; i < m; i++) {
         for (j = 0; j < m; j++) {
+            buff[i * n + j] = (origin[i * n + j] % 2);
             if (origin[i * n + j] < 20) {
-                buff[i * n + j] = (origin[i * n + j] % 2);
-                if (num_mascara == 0) {
-                    printf("i : %d, j : %d __ %d, mat = %d\n", i, j, origin[i * n + j], buff[i * n + j]);
-                }
             } else {
-                buff[i * n + j] = (origin[i * n + j] % 2);
                 switch (num_mascara) {
                     case 0:
                         if ((i + j) % 2 == 0) {
                             buff[i * n + j] = origin[i * n + j] == '1' ? 0 : 1;
-                            printf("+");
                         }
                         break;
                     case 1:
@@ -174,9 +165,6 @@ void aplicando_Masc(int num_mascara, int *origin, int *buff, int m, int n) {
                         break;
                     default:break;
                 }
-                if (num_mascara == 0) {
-                    printf("----------->i : %d, j : %d __ %d, mat = %d\n", i, j, origin[i * n + j], buff[i * n + j]);
-                }
     
             }
         }
@@ -187,7 +175,7 @@ void aplicando_Masc(int num_mascara, int *origin, int *buff, int m, int n) {
 void MASK_ETAPA_MASCARAR() {
     LOG("\n\n_______________________Mascarar_____________________________ \n\n");
     int pontuacao1, pontuacao2;
-    int i = 0;
+    int i = 0, j;
     int melhorMask = 0;
     int *mat = (int *) calloc(qrcode.QRImagem.m * qrcode.QRImagem.n, sizeof(int));
     for (int i = 0; i < 8; i++) {
@@ -204,6 +192,16 @@ void MASK_ETAPA_MASCARAR() {
             }
         }
     }
+    aplicando_Masc(melhorMask, qrcode.QRImagem.mat, mat, qrcode.QRImagem.m, qrcode.QRImagem.n);
+    for (i = 0; i < qrcode.QRImagem.m; ++i) {
+        for (j = 0; j < qrcode.QRImagem.n; j++) {
+            if (qrcode.QRImagem.mat[i * qrcode.QRImagem.n + j] > 20) {
+                qrcode.QRImagem.mat[i * qrcode.QRImagem.n + j] = mat[i * qrcode.QRImagem.n + j];
+            }
+        }
+    }
+    LOG("____Melhor mascara: %d", melhorMask);
+    qrcode.tabela.maskara = melhorMask;
     free(mat);
 }
 
@@ -298,6 +296,5 @@ int fiveEqualBlocksColuns_Aux_A1(int i0, int j0, int *mat, int m, int n) {
     }
     return 0;
 }
-
 
 #endif //QRCODE_MASKRAMENTO_H

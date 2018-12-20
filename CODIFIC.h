@@ -284,7 +284,7 @@ void CODF_ETAPA6() {
     LOG("   N de palavras chaves: %d\n", qrcode.tabela.numeroTotaldePalavrasChavedeDados);
 //deixar multiplo de 8
     while ((qrcode.tamanhoDaStrbits = contaLetras(qrcode.strbits)) % 8 != 0) {
-        qrcode.strbits = realloc(qrcode.strbits, 2 + qrcode.tamanhoDaStrbits);//1230*
+        qrcode.strbits = realloc(qrcode.strbits, 3 + qrcode.tamanhoDaStrbits);//1230*
         qrcode.strbits[qrcode.tamanhoDaStrbits] = '0';
         qrcode.strbits[qrcode.tamanhoDaStrbits + 1] = 0;
     }

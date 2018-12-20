@@ -45,6 +45,7 @@ typedef struct {
     int qtDePalavrasCodigo_Grupo_2;
     
     int bitsdeRemanescenteRequeridos;
+    int maskara;
 } Table;
 typedef struct {
     int *mat;
@@ -182,8 +183,8 @@ void printaQRIMG(int *mat, int m, int n) {
     fprintf(img, "%d %d \n", qrcode.QRImagem.m, qrcode.QRImagem.n);
     for (i = 0; i < m; ++i) {
         for (j = 0; j < n; ++j) {
-            fprintf(logFile, "%c ", (mat[i * n + j] % 2) ? '0' : '1');
-            fprintf(img, "%c ", (mat[i * n + j] % 2) ? '0' : '1');
+            fprintf(logFile, "%c ", (mat[i * n + j] % 2) ? '1' : '0');
+            fprintf(img, "%c ", (mat[i * n + j] % 2) ? '1' : '0');
         }
         fprintf(logFile, "\n");
     }
