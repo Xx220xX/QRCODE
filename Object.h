@@ -34,6 +34,13 @@
     result = 0;\
     result = ((MODO_ATUAL==CORRECAO_MODO_L)*v1 + (MODO_ATUAL==CORRECAO_MODO_M)*v2 + (MODO_ATUAL==CORRECAO_MODO_Q)*v3 + (MODO_ATUAL == CORRECAO_MODO_H)*v4)
 
+void gerarQR(char *vet);
+
+typedef struct {
+    unsigned int numeroDoUltimoArquivo;
+    int temmsg;
+    char MODE_CORRECAO_AUTOMATICO;
+} Configuracoes;
 typedef struct {
     int version;
     int nivelCorrecaoErro;
@@ -60,9 +67,9 @@ typedef struct {
     char *mensagemAserCriptografada;
     
     char MODE_TYPE;//numerico alphanumerico ou byte
-    char MODE_CORRECAO_AUTOMATICO;
     
-    unsigned int numeroDoUltimoArquivo;
+    
+    
     char strBinMode4Bits[4], indicadorDecontagemDeCaracteres[10];
     char error;
     
@@ -74,6 +81,7 @@ typedef struct {
     char *codigosCorretores;
     int tamanhoDosCodigosCorretores;
     Matriz QRImagem;
+    Configuracoes config;
 } QRCODE;
 QRCODE qrcode = {0};
 FILE *logFile;

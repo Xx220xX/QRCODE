@@ -116,7 +116,7 @@ void CODF_ETAPA2() {
             }
         default:break;
     }
-    if (qrcode.error == EXCEPTION_LENGTH_UNSUPPORTED && qrcode.MODE_CORRECAO_AUTOMATICO == 1) {
+    if (qrcode.error == EXCEPTION_LENGTH_UNSUPPORTED && qrcode.config.MODE_CORRECAO_AUTOMATICO == 1) {
         switch (qrcode.tabela.nivelCorrecaoErro) {
             case CORRECAO_MODO_H:qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_Q;
                 CODF_ETAPA2();

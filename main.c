@@ -10,18 +10,7 @@
 #include "MenuWindons.h"
 #include<stdlib.h>
 
-#define tamanho 128
-
-int main() {
-    system("chcp 1252");
-    system("cls");
-    //menu();
-    setlocale(LC_ALL, "Portuguese");
-    fclose(fopen("debug.txt", "w"));
-    char vet[tamanho] = "á";
-    fflush(stdin);
-    fgets(vet, tamanho, stdin);
-    printf("%s", vet);
+void gerarQR(char *vet) {
     int i = 0;
     for (; vet[i]; i++) {
         if (vet[i] == '\n') {
@@ -29,17 +18,35 @@ int main() {
             break;
         }
     }
-    qrcode.mensagemAserCriptografada = vet;
-    qrcode.MODE_CORRECAO_AUTOMATICO = 1;
-    qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
+    qrcode.config.temmsg = vet[0];
+    if (!qrcode.config.temmsg) {
+        qrcode.error = NULLPoiterException;
+    }
     CODF_ALL_STEPS();
     CORREC_ALL();
     FINAL_ETAPA1();
     Posicionar_AllSTeps();
     MASK_ETAPA_MASCARAR();
     insere_string_format_ETAPA_1();
-    printaQRIMG(qrcode.QRImagem, qrcode.numeroDoUltimoArquivo, 1);
-    system("start debug.txt");
+    printaQRIMG(qrcode.QRImagem, qrcode.config.numeroDoUltimoArquivo, 1);
+}
+#define tamanho 128
+
+int main() {
+    qrcode.mensagemAserCriptografada = 0;
+    qrcode.config.MODE_CORRECAO_AUTOMATICO = 1;
+    qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
+    system("chcp 1252");
+    system("cls");
+    menu();
+    setlocale(LC_ALL, "Portuguese");
+    fclose(fopen("debug.txt", "w"));
+    char vet[tamanho] = "á";
+    fflush(stdin);
+    // fgets(vet, tamanho, stdin);
+    
+    // gerarQR(vet);
+    
     
     freeqr();
     printaERRO();
