@@ -6,6 +6,8 @@
 #include "FINAL_MENSAGE.h"
 #include "PosicionamentodeModuloemMatriz.h"
 #include "Maskramento.h"
+#include "FormatoEInformacaoDaVersao.h"
+#include "MenuWindons.h"
 #include<stdlib.h>
 
 #define tamanho 128
@@ -13,6 +15,7 @@
 int main() {
     system("chcp 1252");
     system("cls");
+    //menu();
     setlocale(LC_ALL, "Portuguese");
     fclose(fopen("debug.txt", "w"));
     char vet[tamanho] = "á";
@@ -34,7 +37,8 @@ int main() {
     FINAL_ETAPA1();
     Posicionar_AllSTeps();
     MASK_ETAPA_MASCARAR();
-    system("start debug.txt");
+    insere_string_format_ETAPA_1();
+    //system("start debug.txt");
     freeqr();
     printaERRO();
     printf("\nfim");

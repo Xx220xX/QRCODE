@@ -81,6 +81,7 @@ FILE *logFile;
 void freeqr() {
     if (qrcode.strbits) {
         free(qrcode.strbits);
+    
     }
     if (qrcode.msgNumbers) {
         free(qrcode.msgNumbers);
