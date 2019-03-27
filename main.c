@@ -12,13 +12,14 @@
 
 void gerarQR(char *vet) {
     int i = 0;
+    FILE *file;
     for (; vet[i]; i++) {
         if (vet[i] == '\n') {
             vet[i] = 0;
             break;
         }
     }
-    qrcode.config.temmsg = vet[0] != 0;
+    qrcode.config.temmsg = (vet[0] != 0);
     
     if (!qrcode.config.temmsg) {
         qrcode.error = NULLPoiterException;
@@ -31,8 +32,14 @@ void gerarQR(char *vet) {
     Posicionar_AllSTeps();
     MASK_ETAPA_MASCARAR();
     insere_string_format_ETAPA_1();
-    printaQRIMG(qrcode.QRImagem, qrcode.config.numeroDoUltimoArquivo, 1);
+    printaQRIMG(qrcode.QRImagem, qrcode.config.numeroDoUltimoArquivo, 0);
+    snprintf(qrcode.config.ultimaMsg,300,"mensagem : %s\nMASCARA : %d\nVersao : %d,Nivel de correcao %c ",qrcode.mensagemAserCriptografada,qrcode.tabela.maskara,qrcode.tabela.version,qrcode.tabela.nivelCorrecaoErro);
+    file = fopen("qr.config", "wb");
+    fwrite(&qrcode.config.numeroDoUltimoArquivo, 1, sizeof(unsigned int), file);
+    fwrite(qrcode.config.ultimaMsg, 300, sizeof(unsigned int), file);
+   	qrcode.config.numeroDoUltimoArquivo++;
     
+    fclose(file);
 }
 
 
@@ -45,6 +52,7 @@ int main() {
     qrcode.tabela.nivelCorrecaoErro = CORRECAO_MODO_H;
     file = fopen("qr.config", "rb");
     fread(&qrcode.config.numeroDoUltimoArquivo, 1, sizeof(unsigned int), file);
+    fread(qrcode.config.ultimaMsg, 300, sizeof(unsigned int), file);
     fclose(file);
     setlocale(LC_ALL, "Portuguese");
     fclose(fopen("debug.txt", "w"));
