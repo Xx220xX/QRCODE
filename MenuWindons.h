@@ -18,9 +18,25 @@ void destacarAtual(int x0, int y0, char pString[][29], int atual, int numeroDeOp
 
 void mostraQR(int x0, int y0) {
     int i, j;
+      gotoxy( x0-2, y0  -1);
+    for (i = 0; i-3 <= qrcode.QRImagem.m; i++) {
+	 textbackground(WHITE);
+	   printf(" ");
+	}
+	 gotoxy( x0-2, y0  -2);
+    for (i = 0; i-3 <= qrcode.QRImagem.m; i++) {
+	 textbackground(WHITE);
+	   printf(" ");
+	}
     for (i = 0; i < qrcode.QRImagem.m; i++) {
         for (j = 0; j < qrcode.QRImagem.n; ++j) {
-            if (qrcode.QRImagem.mat[i * qrcode.QRImagem.n + j]) {
+        	textbackground(WHITE);
+       	 	gotoxy(x0-2,y0+i);
+        	printf("  ");
+        	gotoxy(x0+qrcode.QRImagem.n,y0+i);
+        	printf("  ");
+        
+            if (qrcode.QRImagem.mat[i * qrcode.QRImagem.n + j]%2) {
                 textbackground(BLACK);
             } else {
                 textbackground(WHITE);
@@ -29,7 +45,17 @@ void mostraQR(int x0, int y0) {
             printf(" ");
         }
     }
+    gotoxy( x0-2, y0  +j);
+      for (i = 0; i-3 <= qrcode.QRImagem.m; i++) {
+	 textbackground(WHITE);
+	   printf(" ");
+	} gotoxy( x0-2, y0  +j+1);
+      for (i = 0; i-3 <= qrcode.QRImagem.m; i++) {
+	 textbackground(WHITE);
+	   printf(" ");
+	}
     textbackground(BLACK);
+    printf("\n");
     system("pause");
     
 }
@@ -38,6 +64,8 @@ void apagaArquivos() {
     system("cls");
     if (qrcode.config.numeroDoUltimoArquivo == 0) {
         printf("nao tem nada para apagar!");
+        Sleep(1500);
+        return;
     } else {
         printf("vc rediamente deseja apagar os aquivos?\nDIGITE  '[S] para sim ou [N] para nao  ': ");
         int c = getche();
@@ -49,9 +77,7 @@ void apagaArquivos() {
                 return;
         }
     }
-    
-   
-    
+    qrcode.config.ultimaMsg[0]=0;
     qrcode.config.numeroDoUltimoArquivo = 0;
     system("del *.pbm");
     printf("APAGADO!!");
@@ -66,16 +92,17 @@ int selecionar(int x0, int y0, char opcoes[][29], int numeroDeOp) {
     textcolor(LIGHTGREEN);
     printf("___%s___", opcoes[i]);
     textcolor(WHITE);
-    destacarAtual(x0, y0, opcoes, i, numeroDeOp);
+    i=1;
+   
     for (i = 1; i < numeroDeOp; ++i) {
         gotoxy(x0, y0 + i * 2);
         printf("[%d]%s", i, opcoes[i]);
     }
+    i=1;
+      destacarAtual(x0, y0, opcoes, i, numeroDeOp);
     for (i = 1;;) {
         if (kbhit()) {
             c = getch();
-    
-    
             if (isalnum(c)) {
                 if (c - '0' >= 1 && c - '0' < numeroDeOp) {
                     i = c - '0';
@@ -135,13 +162,22 @@ void verificaErro(int x0, int y0) {
         Sleep(1500);
         return;
     }
-    qrcode.config.numeroDoUltimoArquivo++;
-    mostraQR(30, 10);
+   
+    mostraQR(40, 40);
 }
 
 void pegarMsg(char *vet, int x0, int y0) {
+    int i;
     gotoxy(x0, y0);
     fgets(vet, 128, stdin);
+    for (; vet[i]; i++) {
+        if (vet[i] == '\n') {
+            vet[i] = 0;
+            break;
+        }
+    }
+    qrcode.mensagemAserCriptografada=vet;
+    qrcode.config.temmsg = vet[0] != 0;
 }
 
 void qrConfig() {
@@ -184,6 +220,12 @@ void printaInfo(int x0, int y0) {
         printf("NIVEL DE CORRECAO : Auto");
     else
         printf("NIVEL DE CORRECAO : %c", qrcode.tabela.nivelCorrecaoErro);
+        if(qrcode.config.temmsg)
+        printf("\nnova mensagem :%s\n",qrcode.mensagemAserCriptografada);
+        if(qrcode.config.numeroDoUltimoArquivo>0){
+            printf("\n anterior  :\n%s\n",qrcode.config.ultimaMsg);
+            printf("ultimo arquivo : qrcode_(%d).pbm\n",qrcode.config.numeroDoUltimoArquivo);
+        }
 }
 
 void menu() {
@@ -198,9 +240,11 @@ void menu() {
         switch (escolha) {
             case 0:return;
             case 1:pegarMsg(vet, 35, 3);
+                printaInfo(5, 30);
                 break;
             case 2:gerarQR(vet);
                 verificaErro(10, 17);
+                vet[0]=0;
                 break;
             case 3:qrConfig();
                 break;
@@ -209,6 +253,7 @@ void menu() {
             case 5:return;
             default:break;
         }
+        
         system("cls");
     }
 }
