@@ -40,6 +40,7 @@ typedef struct {
     unsigned int numeroDoUltimoArquivo;
     int temmsg;
     char MODE_CORRECAO_AUTOMATICO;
+    char ultimaMsg[300];
 } Configuracoes;
 typedef struct {
     int version;
@@ -87,10 +88,7 @@ QRCODE qrcode = {0};
 FILE *logFile;
 
 void freeqr() {
-    FILE *file;
-    file = fopen("qr.config", "wb");
-    fwrite(&qrcode.config.numeroDoUltimoArquivo, 1, sizeof(unsigned int), file);
-    fclose(file);
+    
     if (qrcode.strbits) {
         free(qrcode.strbits);
         qrcode.strbits = 0;
@@ -189,17 +187,46 @@ void printa8Bits(FILE *f, char *str, int tam) {
     }
 }
 
-void printaQRIMG(Matriz matriz, int numero, int inverter) {
+Matriz multiplicaMatriz(Matriz cop, int scale){
+	Matriz r ={0};
+	r.m = cop.m*scale;
+	r.n = cop.n*scale;
+	r.mat = calloc(r.n*r.m,sizeof(int));
+	printf("%p    %d\n",r.mat,sizeof(r.mat)/sizeof(int));
+	int i,j;
+	int a,b;
+	int l=0,k=0;
+	for(i=0;i<cop.m;i++){
+		for( j = 0; j<cop.n ;j++){
+			for(a=l;a<l+scale;a++){
+				for(b=k;b<k+scale;b++){
+					r.mat[a*r.n+b]= cop.mat[i*cop.n+j];
+				}
+			}
+			k+=scale;	
+		}
+		l+=scale;
+		k=0;
+	}
+	return r;
+}
+void printaQRIMG(Matriz m, int numero, int inverter) {
     ERROR();
-    int i, j;
+    int i,j;
+//    rh
+    int scale = 2048/m.m;
+    if(scale < 1 ) scale = 1;
+     Matriz matriz = multiplicaMatriz(m, scale);
     char nome[30] = "";
     snprintf(nome, 29, "qrcode_(%d).pbm", numero);
     logFile = fopen("debug.txt", "a");
     FILE *img = fopen(nome, "w");
     fprintf(img, "P1\n");
-    fprintf(img, "%d %d \n", matriz.m, matriz.n);
-    for (i = 0; i < matriz.m; ++i) {
-        for (j = 0; j < matriz.n; ++j) {
+    fprintf(img, "%d %d \n", matriz.m+8*scale, matriz.n+8*scale);
+   
+    for (i = -4*scale; i < matriz.m+(4*scale); ++i) {
+        for (j = -4*scale; j < matriz.n+(4*scale); ++j) {
+        	if(i>=0&& i< matriz.m&&j>=0&& j< matriz.n){
             if (inverter) {
                 fprintf(logFile, "%c ", !(matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
                 fprintf(img, "%c ", !(matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
@@ -207,13 +234,23 @@ void printaQRIMG(Matriz matriz, int numero, int inverter) {
                 fprintf(logFile, "%c ", (matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
                 fprintf(img, "%c ", (matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
             }
-        }
+        }else{
+        		fprintf(logFile, "%c ", inverter ? '1' : '0');
+                fprintf(img, "%c ", inverter ? '1' : '0');
+		}
+		}
     }
+ 
+    
+    if(matriz.mat)
+    	free(matriz.mat);
     fprintf(logFile, "\n");
     fclose(logFile);
     fclose(img);
-    /*snprintf(nome, 29, "start qrcode_(%d).pbm", numero);
-    system(nome);*/
+    #if win32
+    snprintf(nome, 29, "start qrcode_(%d).pbm", numero);
+    system(nome);
+    #endif
 }
 
 #endif
