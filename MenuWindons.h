@@ -13,6 +13,12 @@
 #define MENU_esc 's'
 #define MENU_enter 13
 
+#define UPP 72
+#define LEF 75
+#define RIG 77
+#define DWN 80
+#define ESC 27
+
 
 void destacarAtual(int x0, int y0, char pString[][29], int atual, int numeroDeOp);
 
@@ -102,7 +108,20 @@ int selecionar(int x0, int y0, char opcoes[][29], int numeroDeOp) {
       destacarAtual(x0, y0, opcoes, i, numeroDeOp);
     for (i = 1;;) {
         if (kbhit()) {
-            c = getch();
+        	     c = getch();
+        	     if(c == ESC){
+					c = numeroDeOp-1+'0';
+				}
+                    if(c == -32|| c==224){
+            	c =  getch();
+            	if(c == UPP){
+            		c = i>1?i-1:numeroDeOp-1;
+				}else if(c==DWN){
+						c = i<numeroDeOp-1?i+1:1;
+				}
+				c =c+'0';
+			
+			}
             if (isalnum(c)) {
                 if (c - '0' >= 1 && c - '0' < numeroDeOp) {
                     i = c - '0';
