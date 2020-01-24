@@ -50,9 +50,11 @@ void modoNumerico();
  */
 void CODF_ETAPA1() {
     int i = 0;
+    qrcode.MODE_TYPE != MODO_ALPHANUMERICO;
     for (; qrcode.mensagemAserCriptografada[i]; i++) {
-        if (qrcode.mensagemAserCriptografada[i] >= '0' && qrcode.mensagemAserCriptografada[i] <= '9' && qrcode.MODE_TYPE != MODO_ALPHANUMERICO) {
-            qrcode.MODE_TYPE = MODO_NUMERICO;
+        if (qrcode.mensagemAserCriptografada[i] >= '0' && qrcode.mensagemAserCriptografada[i] <= '9') {
+
+
         } else if ((qrcode.mensagemAserCriptografada[i] >= 'A' && qrcode.mensagemAserCriptografada[i] <= 'Z') || qrcode.mensagemAserCriptografada[i] == '$' || qrcode.mensagemAserCriptografada[i] == '%' || qrcode.mensagemAserCriptografada[i] == '*' || qrcode.mensagemAserCriptografada[i] == '+' || qrcode.mensagemAserCriptografada[i] == '-' || qrcode.mensagemAserCriptografada[i] == '.' || qrcode.mensagemAserCriptografada[i] == '/' || qrcode.mensagemAserCriptografada[i] == ':' || qrcode.mensagemAserCriptografada[i] == ' ' || (qrcode.mensagemAserCriptografada[i] >= '0' && qrcode.mensagemAserCriptografada[i] <= '9')) {
             qrcode.MODE_TYPE = MODO_ALPHANUMERICO;
         } else {

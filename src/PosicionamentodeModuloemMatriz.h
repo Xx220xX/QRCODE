@@ -47,7 +47,7 @@ void printMatchar(int *mat, int m, int n) {
             if (mat[i * n + j] == 0) {
                 fprintf(logFile, "  ");
             } else
-                fprintf(logFile, "%d ", mat[i * n + j]);
+                fprintf(logFile, "%02d ", mat[i * n + j]);
         }
         fprintf(logFile, "\n");
     }

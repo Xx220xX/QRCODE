@@ -1,7 +1,8 @@
 #ifndef QRCODE_MENUWINDONS_H
 #define QRCODE_MENUWINDONS_H
 
-#include <conio2.h>
+
+#include "conio2.h"
 #include <afxres.h>
 #include <ctype.h>
 #include "Object.h"

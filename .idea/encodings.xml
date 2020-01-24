@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM">
-    <file url="file://$PROJECT_DIR$/CORRECAO_DE_ERROS.h" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/FormatoEInformacaoDaVersao.h" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Maskramento.h" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/MenuWindons.h" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/PosicionamentodeModuloemMatriz.h" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/QRCode.h" charset="windows-1252" />
+  <component name="Encoding">
     <file url="file://$PROJECT_DIR$/cmake-build-debug/debug.txt" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/main.c" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/CORRECAO_DE_ERROS.h" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/FormatoEInformacaoDaVersao.h" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/Maskramento.h" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/MenuWindons.h" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/PosicionamentodeModuloemMatriz.h" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/QRCode.h" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main.c" charset="windows-1252" />
   </component>
 </project>

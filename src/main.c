@@ -32,7 +32,7 @@ void gerarQR(char *vet) {
     Posicionar_AllSTeps();
     MASK_ETAPA_MASCARAR();
     insere_string_format_ETAPA_1();
-    printaQRIMG(qrcode.QRImagem, qrcode.config.numeroDoUltimoArquivo, 0);
+    printaQRIMG(qrcode.QRImagem, qrcode.config.numeroDoUltimoArquivo, 0,0);
     snprintf(qrcode.config.ultimaMsg,300,"mensagem : %s\nMASCARA : %d\nVersao : %d,Nivel de correcao %c ",qrcode.mensagemAserCriptografada,qrcode.tabela.maskara,qrcode.tabela.version,qrcode.tabela.nivelCorrecaoErro);
     file = fopen("qr.config", "wb");
     fwrite(&qrcode.config.numeroDoUltimoArquivo, 1, sizeof(unsigned int), file);

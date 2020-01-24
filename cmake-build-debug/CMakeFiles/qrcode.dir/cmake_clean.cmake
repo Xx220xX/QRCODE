@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/qrcode.dir/main.c.obj"
+  "CMakeFiles/qrcode.dir/src/main.c.obj"
   "qrcode.pdb"
   "qrcode.exe"
   "qrcode.exe.manifest"

@@ -51,32 +51,32 @@ typedef struct {
     int qtDePalavrasCodigo_Grupo_1;
     int qtBlocosGrupo_2;
     int qtDePalavrasCodigo_Grupo_2;
-    
+
     int bitsdeRemanescenteRequeridos;
     int maskara;
 } Table;
 typedef struct {
     int *mat;
     int m, n;
-    
+
 } Matriz;
 typedef struct {
     Table tabela;
     int qtBitsMode;
-    
+
     int tamanhoDa_mensagemAserCriptografada;
     char *mensagemAserCriptografada;
-    
+
     char MODE_TYPE;//numerico alphanumerico ou byte
-    
-    
-    
+
+
+
     char strBinMode4Bits[4], indicadorDecontagemDeCaracteres[10];
     char error;
-    
+
     char *strbits;
     int tamanhoDaStrbits;
-    
+
     unsigned short *msgNumbers;
     int tamanhoDa_msgNumbers;
     char *codigosCorretores;
@@ -88,7 +88,7 @@ QRCODE qrcode = {0};
 FILE *logFile;
 
 void freeqr() {
-    
+
     if (qrcode.strbits) {
         free(qrcode.strbits);
         qrcode.strbits = 0;
@@ -138,13 +138,15 @@ int alphaValue(int x1, int x2) {
     else if (x1 >= 'A' && x1 <= 'Z')
         x1 = x1 - 'A' + 10;
     else
-        x1 = ((x1 == ' ') * 36 + (x1 == '$') * 37 + (x1 == '%') * 38 + (x1 == '*') * 39 + (x1 == '+') * 40 + (x1 == '-') * 41 + (x1 == '.') * 42 + (x1 == '/') * 43 + (x1 == ':') * 44);
+        x1 = ((x1 == ' ') * 36 + (x1 == '$') * 37 + (x1 == '%') * 38 + (x1 == '*') * 39 + (x1 == '+') * 40 +
+              (x1 == '-') * 41 + (x1 == '.') * 42 + (x1 == '/') * 43 + (x1 == ':') * 44);
     if (x2 >= '0' && x2 <= '9')
         x2 = x2 - '0';
     else if (x2 >= 'A' && x2 <= 'Z')
         x2 = x2 - 'A' + 10;
     else
-        x2 = ((x2 == ' ') * 36 + (x2 == '$') * 37 + (x2 == '%') * 38 + (x2 == '*') * 39 + (x2 == '+') * 40 + (x2 == '-') * 41 + (x2 == '.') * 42 + (x2 == '/') * 43 + (x2 == ':') * 44);
+        x2 = ((x2 == ' ') * 36 + (x2 == '$') * 37 + (x2 == '%') * 38 + (x2 == '*') * 39 + (x2 == '+') * 40 +
+              (x2 == '-') * 41 + (x2 == '.') * 42 + (x2 == '/') * 43 + (x2 == ':') * 44);
     valor = ((x1 * 45) + x2);
     return valor;
 }
@@ -187,70 +189,78 @@ void printa8Bits(FILE *f, char *str, int tam) {
     }
 }
 
-Matriz multiplicaMatriz(Matriz cop, int scale){
-	Matriz r ={0};
-	r.m = cop.m*scale;
-	r.n = cop.n*scale;
-	r.mat = calloc(r.n*r.m,sizeof(int));
-	printf("%p    %d\n",r.mat,sizeof(r.mat)/sizeof(int));
-	int i,j;
-	int a,b;
-	int l=0,k=0;
-	for(i=0;i<cop.m;i++){
-		for( j = 0; j<cop.n ;j++){
-			for(a=l;a<l+scale;a++){
-				for(b=k;b<k+scale;b++){
-					r.mat[a*r.n+b]= cop.mat[i*cop.n+j];
-				}
-			}
-			k+=scale;	
-		}
-		l+=scale;
-		k=0;
-	}
-	return r;
+Matriz multiplicaMatriz(Matriz cop, int scale) {
+    Matriz r = {0};
+    r.m = cop.m * scale;
+    r.n = cop.n * scale;
+    r.mat = calloc(r.n * r.m, sizeof(int));
+    printf("%p    %d\n", r.mat, sizeof(r.mat) / sizeof(int));
+    int i, j;
+    int a, b;
+    int l = 0, k = 0;
+    for (i = 0; i < cop.m; i++) {
+        for (j = 0; j < cop.n; j++) {
+            for (a = l; a < l + scale; a++) {
+                for (b = k; b < k + scale; b++) {
+                    r.mat[a * r.n + b] = cop.mat[i * cop.n + j];
+                }
+            }
+            k += scale;
+        }
+        l += scale;
+        k = 0;
+    }
+    return r;
 }
-void printaQRIMG(Matriz m, int numero, int inverter) {
+
+void printaQRIMG(Matriz m, int numero, int inverter, int log) {
     ERROR();
-    int i,j;
+    int i, j;
 //    rh
-    int scale = 2048/m.m;
-    if(scale < 1 ) scale = 1;
-     Matriz matriz = multiplicaMatriz(m, scale);
+    int scale = 640 / m.m;
+    if (scale < 1) scale = 1;
+    Matriz matriz = multiplicaMatriz(m, scale);
     char nome[30] = "";
     snprintf(nome, 29, "qrcode_(%d).pbm", numero);
-    logFile = fopen("debug.txt", "a");
+    if (log)
+        logFile = fopen("debug.txt", "a");
     FILE *img = fopen(nome, "w");
     fprintf(img, "P1\n");
-    fprintf(img, "%d %d \n", matriz.m+8*scale, matriz.n+8*scale);
-   
-    for (i = -4*scale; i < matriz.m+(4*scale); ++i) {
-        for (j = -4*scale; j < matriz.n+(4*scale); ++j) {
-        	if(i>=0&& i< matriz.m&&j>=0&& j< matriz.n){
-            if (inverter) {
-                fprintf(logFile, "%c ", !(matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
-                fprintf(img, "%c ", !(matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
+    fprintf(img, "%d %d \n", matriz.m + 8 * scale, matriz.n + 8 * scale);
+    LOG("\nrescalondo imagem");
+    for (i = -4 * scale; i < matriz.m + (4 * scale); ++i) {
+        for (j = -4 * scale; j < matriz.n + (4 * scale); ++j) {
+            if (i >= 0 && i < matriz.m && j >= 0 && j < matriz.n) {
+                if (inverter) {
+                    if (log)
+                        fprintf(logFile, "%c ", !(matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
+                    fprintf(img, "%c ", !(matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
+                } else {
+                    if (log)
+                        fprintf(logFile, "%c ", (matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
+                    fprintf(img, "%c ", (matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
+                }
             } else {
-                fprintf(logFile, "%c ", (matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
-                fprintf(img, "%c ", (matriz.mat[i * matriz.n + j] % 2) ? '1' : '0');
-            }
-        }else{
-        		fprintf(logFile, "%c ", inverter ? '1' : '0');
+                if (log)
+                    fprintf(logFile, "%c ", inverter ? '1' : '0');
                 fprintf(img, "%c ", inverter ? '1' : '0');
-		}
-		}
+            }
+        }
     }
- 
-    
-    if(matriz.mat)
-    	free(matriz.mat);
+    LOG("Imagem rescalonada com sucesso!\n");
+
+
+    if (matriz.mat)
+        free(matriz.mat);
+    if (log)
     fprintf(logFile, "\n");
+    if (log)
     fclose(logFile);
     fclose(img);
-    #if win32
+#if win32
     snprintf(nome, 29, "start qrcode_(%d).pbm", numero);
     system(nome);
-    #endif
+#endif
 }
 
 #endif

@@ -6,43 +6,43 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/MORADIA082663/CLionProjects/qrcode/CODIFIC.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/CODIFIC.h
 stdlib.h
 -
 stdio.h
 -
 Object.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/Object.h
 
-C:/Users/MORADIA082663/CLionProjects/qrcode/CORRECAO_DE_ERROS.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/CORRECAO_DE_ERROS.h
 stdio.h
 -
 Object.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/Object.h
 
-C:/Users/MORADIA082663/CLionProjects/qrcode/FINAL_MENSAGE.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/FINAL_MENSAGE.h
 Object.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/Object.h
 
-C:/Users/MORADIA082663/CLionProjects/qrcode/FormatoEInformacaoDaVersao.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/FormatoEInformacaoDaVersao.h
 Object.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/Object.h
 
-C:/Users/MORADIA082663/CLionProjects/qrcode/Maskramento.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/Maskramento.h
 Object.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/Object.h
 
-C:/Users/MORADIA082663/CLionProjects/qrcode/MenuWindons.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/MenuWindons.h
 conio2.h
--
+C:/Users/PC/Desktop/HEnrique/qrcode/src/conio2.h
 afxres.h
 -
 ctype.h
 -
 Object.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/Object.h
 
-C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/Object.h
 stdlib.h
 -
 stdio.h
@@ -50,33 +50,39 @@ stdio.h
 math.h
 -
 QRCode.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/QRCode.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/QRCode.h
 
-C:/Users/MORADIA082663/CLionProjects/qrcode/PosicionamentodeModuloemMatriz.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/PosicionamentodeModuloemMatriz.h
 
-C:/Users/MORADIA082663/CLionProjects/qrcode/QRCode.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/QRCode.h
 
-C:/Users/MORADIA082663/CLionProjects/qrcode/main.c
+C:/Users/PC/Desktop/HEnrique/qrcode/src/conio2.h
+conio.h
+-
+windows.h
+-
+
+C:/Users/PC/Desktop/HEnrique/qrcode/src/main.c
 stdio.h
 -
 locale.h
 -
 Object.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/Object.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/Object.h
 CODIFIC.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/CODIFIC.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/CODIFIC.h
 CORRECAO_DE_ERROS.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/CORRECAO_DE_ERROS.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/CORRECAO_DE_ERROS.h
 FINAL_MENSAGE.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/FINAL_MENSAGE.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/FINAL_MENSAGE.h
 PosicionamentodeModuloemMatriz.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/PosicionamentodeModuloemMatriz.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/PosicionamentodeModuloemMatriz.h
 Maskramento.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/Maskramento.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/Maskramento.h
 FormatoEInformacaoDaVersao.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/FormatoEInformacaoDaVersao.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/FormatoEInformacaoDaVersao.h
 MenuWindons.h
-C:/Users/MORADIA082663/CLionProjects/qrcode/MenuWindons.h
+C:/Users/PC/Desktop/HEnrique/qrcode/src/MenuWindons.h
 stdlib.h
 -
 
